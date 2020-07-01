@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es_MX" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="comun/layout :: head"> 
+ 
+</head>
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+  <!-- Navbar -->
+ <div th:replace="comun/layout :: estructura"></div> 
+
+  <!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper"> 
+  	<section class="content">
+      <div class="container-fluid">
+      	<div class="card ">
+           <div class="card-header">
+           		<div class="mensajes"></div>
+           		
+				<div id="mensaje"></div>
+				
+           		<div class="row" >
+           			<img src="/dist/images/caja.svg" class="tamImagen"/>
+           			<h5 class="card-title" style="font-size: 30px;">Cerrar Caja</h5>	
+           		</div>
+				
+                <div class="card-tools">
+                  
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
+                      <i class="fas fa-wrench" style="color: #1682BB;"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" role="menu">
+                    	<a href="../caja/abrircaja" class="dropdown-item">Abrir Caja</a>
+                      <a href="../caja/cortex" class="dropdown-item">Corte X</a>
+                      <a href="../caja/cortez" class="dropdown-item">Corte Z</a>
+                      <a href="../caja/cerrarcaja" class="dropdown-item">Cerrar Caja</a>
+                      
+                 </div>
+              </div>
+      			<div class="card-body">
+      				<div class="row"></div>
+             	</div>
+             	<div class="card-footer">
+             		<button type="submit" class="btn btn-outline-danger" onclick="mensaje('Cancelando..')">Cancel</button>
+                  	<button type="submit" onclick="guardarCita();" class="btn btn-outline-info float-right">Guardar</button>
+                  
+                </div>
+           </div>
+           </div>
+          </div>
+                
+      </div>
+    </section>
+ </div>
+				
+        <!-- Info boxes -->
+     
+</div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+
+  <!-- Main Footer -->
+  <footer th:replace="comun/layout :: footer" class="main-footer">
+
+  </footer>
+
+</body>
+</html>

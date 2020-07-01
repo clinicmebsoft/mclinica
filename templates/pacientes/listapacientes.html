@@ -1,0 +1,65 @@
+{% extends "genericos/layout.html" %}
+{% block content %}
+    {% load static %}
+    {% csrf_token %}
+  <!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  	<section class="content">
+      <div class="container-fluid">
+      	<div class="card ">
+           <div class="card-header">
+           	<div class="row" >
+           			<img src="{% static '/dist/images/paciente.svg'%}" class="tamImagen"/>
+           			<h4 class="card-title" style="font-size: 20px">Lista Pacientes</h4>
+           		</div>
+
+
+                <div class="card-tools">
+
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-outline-primary" data-toggle="dropdown">
+                      <i class="fas fa-wrench" style="color: #1682BB;"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" role="menu">
+                        <a href="/pacientes" class="dropdown-item">Nuevo Paciente</a>
+                      	<a href="/citas/buscar" class="dropdown-item">Buscar</a>
+                      	<a href="/citas/eliminar" class="dropdown-item">Eliminar</a>
+                      	<a href="/citas/reagendar" class="dropdown-item">Reagendar</a>
+                      	<a class="dropdown-divider"></a>
+                      	<a href="../citas/listacitas" class="dropdown-item">Lista Citas</a>
+                    </div>
+                  </div>
+
+                 </div>
+              </div>
+            <div class="card-body">
+                <table id="tpacientes" class="table table-striped table-hover table-bordered gridtable" style="width: 100%">
+                    <!-- https://divtable.com/table-styler/ -->
+                    <thead>
+                        <tr>
+
+                            <th width="5%">#</th>
+                            <th width="15%">Nombre</th>
+                            <th width="15%">Apellidos</th>
+                            <th width="25%">Calle</th>
+
+                            <th width="10%">Teléfono</th>
+                            <th width="10%">Celular</th>
+                            <th width="20%">Correo</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+             <div class="modal-footer">
+
+                <button type="button" class="btn btn-outline-secondary" onclick="cargaTpacientes()" >Carga Pacientes</button>
+                <button type="button" class="btn btn-outline-primary"> Guardar </button>
+              </div>
+        </div>
+      </div>
+
+
+
+    </section>
+</div>
+{% endblock content %}

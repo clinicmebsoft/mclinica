@@ -1,0 +1,49 @@
+<div class="modal fade" id="modalCatalogoMarca" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #2980b9; color:#fff; ">
+        <h5 class="modal-title" id="exampleModalLongTitle">Marca</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <div class="container">
+                <table id="tCataMarca" class="tabla" >
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Marca</th>
+                            <th>Estatus</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+                <div class="form-group">
+                    <label for="iIdMarca">Id</label>
+                    <input type="text" id="iIdMarca" maxlength="60" readonly class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="iCataMarca">Marca</label>
+                    <input type="text" id="iCataMarca" maxlength="60" class="form-control">
+                </div>
+
+                <div class=" pull-right flex-row">
+                    <button type="button" class="btn btn-outline-primary" id="btnCatCateGuardar" onclick="guardaCatalogos('G','Marcas','iIdMarca)">Guardar</button>
+                    <button type="button" class="btn btn-outline-secondary"  onclick="guardaCatalogos('M','Marcas','iIdMarca')">Editar</button>
+                    <button type="button" class="btn btn-outline-info" onclick="guardaCatalogos('C','Marcas','iIdMarca')">Cancelar</button>
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+
+
+      </div>
+    </div>
+  </div>
+</div>

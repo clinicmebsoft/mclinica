@@ -1,0 +1,54 @@
+<div class="modal fade" id="modalCatalogoImpuesto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #2980b9; color:#fff; ">
+        <h5 class="modal-title" id="exampleModalLongTitle">Impuestos</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <div class="container">
+                <table id="tCataImpuesto" class="tabla" >
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Impuesto</th>
+                            <th>Porcentaje</th>
+                            <th>Estatus</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+                <div class="form-group">
+                    <label for="iIdImpuesto">Id</label>
+                    <input type="text" id="iIdImpuesto" name="iId" maxlength="3" readonly class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="iCataImpuesto">Impuesto</label>
+                    <input type="text" id="iCataImpuesto" maxlength="8" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="iCataImpuesto">Porcentaje</label>
+                    <input type="number" id="iCataPorcentaje" maxlength="4" class="form-control">
+                </div>
+                <div class=" pull-right flex-row">
+                    <button type="button" class="btn btn-outline-primary" id="btnCatCateGuardar" onclick="guardaCatalogos('G','Impuestos','iIdImpuesto')">Guardar</button>
+                    <button type="button" class="btn btn-outline-secondary"  onclick="guardaCatalogos('M','Impuestos','iIdImpuesto')">Editar</button>
+                    <button type="button" class="btn btn-outline-info" onclick="guardaCatalogos('C','Impuestos','iIdImpuesto')">Cancelar</button>
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+
+
+      </div>
+    </div>
+  </div>
+</div>

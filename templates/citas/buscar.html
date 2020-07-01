@@ -1,0 +1,47 @@
+{% extends "genericos/layout.html" %}
+{% block content %}
+    {% load static %}
+  	<section class="content">
+      <div class="container-fluid">
+      	<div class="card ">
+           <div class="card-header">
+           		<div class="mensajes"></div>
+           		
+				<div id="mensaje"></div>
+				
+           		<div class="row" >
+           			<img src="/dist/images/buscar.svg" class="tamImagen"/>
+           			<h5 class="card-title" style="font-size: 30px;">Buscar</h5>	
+           		</div>
+				
+                <div class="card-tools">
+                  
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
+                      <i class="fas fa-wrench" style="color: #1682BB;"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" role="menu">
+                    	<a href="../citas/cita" class="dropdown-item">Nueva</a>
+                      	<a href="buscar" class="dropdown-item">Buscar</a>
+                      	<a href="eliminar" class="dropdown-item">Eliminar</a>
+                      	<a href="reagendar" class="dropdown-item">Reagendar</a>
+                      	<a class="dropdown-divider"></a>
+                      	<a href="listacitas" class="dropdown-item">Lista Citas</a>
+                    </div>
+                  </div>
+                 
+                 </div>
+              </div>
+      			<div class="card-body">
+      				<div class="row"></div>
+             	</div>
+             	<div class="card-footer">
+             		<button type="submit" class="btn btn-outline-danger" onclick="mensaje('Cancelando..')">Cancel</button>
+                  	<button type="submit" onclick="guardarCita();" class="btn btn-outline-info">Guardar</button>
+                  
+                </div>
+           </div>
+                
+      </div>
+    </section>
+{% endblock content %}s

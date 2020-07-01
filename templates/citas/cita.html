@@ -1,0 +1,148 @@
+
+{% extends "genericos/layout.html" %}
+{% block content %}
+    {% load static %}
+    {% csrf_token %}
+  <!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper"> 
+  	<section class="content">
+      <div class="container-fluid">
+      	<div class="card ">
+           <div class="card-header">
+           	<div class="row" >
+           			<img src="{% static '/dist/images/citas2.svg'%}" class="tamImagen"/>
+           			<h5 class="card-title" style="font-size: 30px;">Citas</h5>
+           		</div>
+           	
+			
+                <div class="card-tools">
+                  
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
+                      <i class="fas fa-wrench" style="color: #1682BB;"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" role="menu">
+                        <a href="../citas/citas" class="dropdown-item">Nueva</a>
+                      	<a href="../citas/buscarcitas" class="dropdown-item">Buscar</a>
+                      	<a href="../citas/eliminar" class="dropdown-item">Eliminar</a>
+                      	<a href="../citas/reagendar" class="dropdown-item">Reagendar</a>
+                      	<a class="dropdown-divider"></a>
+                      	<a href="../citas/listacitas" class="dropdown-item">Lista Citas</a>
+                    </div>
+                  </div>
+                 
+                 </div>
+              </div>
+      			<div class="card-body">
+
+                        {% csrf_token %}
+	                	<div class="row">
+	                		<div class="col-md-5">
+	                			<div class="form-group row">
+			                    <label for="iNombreCitas" class="col-sm-4 col-form-label">Nombre</label>
+			                    <div class="col-sm-10">
+			                      <input type="text" class="form-control" maxlength="30" id="iNombreCitas" autofocus="autofocus" autocomplete="nope" placeholder="Nombre">
+			                    </div>
+			                  </div>
+	                		</div>
+	                		<div class="col-md-5">
+	                			<div class="form-group">
+			                    <label for="iApellidosCitas" class="col-sm-4 col-form-label">Apellidos</label>
+			                    <div class="col-sm-10">
+			                      <input type="text" class="form-control" maxlength="50" id="iApellidosCitas" placeholder="Apellidos">
+			                    </div>
+			                  </div>
+                                <div id="match-list"></div>
+	                		</div>
+                            <div class="col-md-2">
+                                <a class="btn btn-outline-primary"><i class="fa fa-search" aria-hidden="true"></i> Buscar</a>
+                            </div>
+
+	                	</div>
+	                	<div class="row">
+	                		<div class="col-md-6">
+	                			<div class="form-group row">
+			                    <label for="iCorreoCitas" class="col-sm-4 col-form-label">Correo</label>
+			                    <div class="col-sm-10">
+			                      <input type="email" class="form-control" maxlength="60" id="iCorreoCitas"  placeholder="Correo">
+			                    </div>
+			                  </div>
+	                		</div>
+	                		<div class="col-md-3">
+	                			<div class="form-group row">
+			                    <label for="iFechaCita" class="col-sm-4 col-form-label">Fecha</label>
+			                    <div class="col-sm-10">
+			                      <input type="date" class="form-control" maxlength="10" id="iFechaCita" >
+			                    </div>
+			                  </div>
+	                		</div>
+	                		<div class="col-md-3">
+	                			<div class="form-group row">
+			                    <label for="iHoraCitas" class="col-sm-4 col-form-label">Hora</label>
+			                    <div class="col-sm-10">
+			                      <input type="time" class="form-control" maxlength="10"  id="iHoraCitas" >
+			                    </div>
+			                  </div>
+	                		</div>
+	                	</div>
+	                	<div class="row">
+	                		<div class="col-md-3">
+	                			<div class="form-group row">
+			                    <label for="iTelefonoOficinaCitas" class="col-sm-8 col-form-label">Teléfono Oficina</label>
+			                    <div class="col-sm-10">
+			                      <input type="text" class="form-control" maxlength="14" pattern="[0-9]{10}" placeholder="(999) 999-9999" id ="iTelefonoOficinaCitas">
+			                    </div>
+			                  </div>
+	                		</div>
+	                		<div class="col-md-3">
+	                			<div class="form-group row">
+			                    <label for="iCelularCitas" class="col-sm-6 col-form-label">Celular</label>
+			                    <div class="col-sm-10">
+			                      <input type="text" class="form-control" maxlength="10" pattern="[0-9]{10}" placeholder="(999) 999-9999" id="iCelularCitas" >
+
+			                    </div>
+			                  </div>
+	                		</div>
+	                		<div class="col-md-6">
+	                			<div class="form-group row">
+			                    <label for="iComentariosCitas" class="col-sm-6 col-form-label">Motivo</label>
+			                    <div class="col-sm-10">
+			                      <textarea type="text" class="form-control" maxlength="255" id="iMotivoCitas"></textarea>
+			                    </div>
+			                  </div>
+	                		</div>
+	                	</div>
+
+             	</div>
+             	<div class="card-footer">
+                    <button  class="btn btn-outline-success" onclick="limpiaCita()">Limpiar</button>
+             		<button  class="btn btn-outline-danger" onclick="mensaje('Cancelando..')">Cancel</button>
+                  	<button  class="btn btn-outline-info" onclick="guardaCita()">Guardar</button>
+
+                </div>
+            </div>
+      </div>
+    </section>
+ </div>
+
+<!-- Modal -->
+<div class="modal fade" id="buscarPacientes" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

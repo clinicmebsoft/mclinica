@@ -1,0 +1,229 @@
+{% extends "genericos/layout.html" %}
+{% block content %}
+    {% load static %}
+    {% csrf_token %}
+  <!-- Content Wrapper. Contains page content -->
+<script>
+  window.addEventListener("load", function(event) {
+    //alert("Inicialización de productos");
+    initProductos();
+  });
+</script>
+<div class="content-wrapper">
+  	<section class="content">
+      <div class="container-fluid">
+      	<div class="card">
+           <div class="card-header">
+           	<div class="row" >
+                <div class="col-md-6">
+                    <img src="{% static '/dist/images/inventario.svg'%}" class="tamImagen"/>
+                    <h4 class="card-title" style="font-size: 20px">Artículo Nuevo</h4>
+                </div>
+                 <div class="col-md-6 text-center">
+                        <div class="card-tools">
+                      <div class="btn-group">
+                        <button style="margin-left: 50px;" type="button" class="btn btn-outline-primary" data-toggle="dropdown">
+                          <i class="fas fa-wrench" style="color: #1682BB;"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" role="menu">
+                            <a href="/inventarios/productos" class="dropdown-item">Nuevo Artículo</a>
+                            <a href="/citas/buscar" class="dropdown-item">Almacenes</a>
+                            <a href="/citas/eliminar" class="dropdown-item">Lista de Precios</a>
+                            <a href="/citas/reagendar" class="dropdown-item"></a>
+                            <a class="dropdown-divider"></a>
+                            <a href="/inventarios/lista_articulos" class="dropdown-item">Lista Artículos</a>
+                        </div>
+                      </div>
+
+                     </div>
+                </div>
+
+            </div>
+
+           </div>
+            <div class="card-body">
+                <div class="container-fluid">
+
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="row-line">
+                                <input type="radio" value="Producto" id="rProducto" name="tipo" checked>
+                                <label for="rProducto">Producto</label>
+                                <input style="margin-left: 25px" type="radio" value="Servicio" id="rServicio" name="tipo">
+                                <label  for="rServicio">Servicio</label>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6  sm-12">
+                                    <label for="iClaveProducto">Clave</label>
+                                    <input type="text" id="iClaveProducto" name="iClaveProducto" autofocus
+                                    maxlength="10" class="form-control"  />
+                                </div>
+                                <div class="col-md-6 sm-12">
+                                    <label for="iCodigoBarras">Cód Barras</label>
+                                    <input type="text" id="iCodigoBarras" name="iCodigoBarras" maxlength="30" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 ">
+                                    <label for="iDescripcionProducto">Descripción</label>
+                                     <textarea type="text" id="iDescripcionProducto" name="iDescripcionProducto" maxlength="50" class="form-control" ></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <label for="iFoto">Foto</label><br>
+
+                            <img src="{% static 'dist/images/avatarvacio.svg' %}" alt="Foto Producto" width="150" height="150" class="img-thumbnail">
+
+                            <div class="custom-file" style="margin-top: 5px;">
+                              <input type="file" class="custom-file-input" id="customFileLang" lang="es">
+                              <label class="custom-file-label" for="customFileLang">Seleccionar Imagen</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-3 ">
+                            <label for="sCategoria">Categoría</label>
+                            <div class="row">
+                                <div class="col-md-9" >
+                                    <select id="sCategoria"  name="sCategoria" class="form-control">
+                                        <option value="NA">No Aplica</option>
+                                      </select>
+                                </div>
+                                <div class="col-md-3" >
+                                    <button id="btnCategoria" class="btn btn-outline-primary">  <i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-6">
+                            <label for="sUnidad">Unidad</label>
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <select id="sUnidad" class="form-control">
+                                        <option value="NA">No Aplica</option>
+
+                                      </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <button id="btnUnidad" class="btn btn-outline-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="col-md-3 mb6">
+                            <label for="sMarca">Marca</label>
+                             <div class="row">
+                                 <div class="col-md-9">
+                                    <select id="sMarca" class="form-control">
+                                        <option value="NA">No Aplica</option>
+                                      </select>
+                                 </div>
+                                 <div class="col-md-3">
+                                    <button id="btnMarca" class="btn btn-outline-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+                                </div>
+                             </div>
+                        </div>
+                        <div class="col-md-3 mb6">
+                            <label for="sFabricante">Fabricante</label>
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <select id="sFabricante" class="form-control">
+                                        <option value="NA">No Aplica</option>
+                                      </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <button id="btnFabricante" class="btn btn-outline-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-3 mb-6">
+                            <label for="iPrecioVenta">Precio Venta</label>
+                            <input type="number" id="iPrecioVenta" name="iPrecioVenta" class="form-control">
+                        </div>
+                        <div class="col-md-3 mb-6">
+                             <label for="sImpuesto">Impuesto</label>
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <select id="sImpuesto" class="form-control">
+
+                                      </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <button id="btnImpuesto"  class="btn btn-outline-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                          <div class="col-md-3 mb-6">
+                            <label for="iPrecioVenta">Costo</label>
+                            <input type="number" id="iPrecioCosto" name="iPrecioCosto" class="form-control">
+                        </div>
+                        <div class="col-md-3 mb-6">
+                             <label for="sProveedor">Proveedor</label>
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <select id="sProveedor" class="form-control">
+                                        <option selected>Selecciona</option>
+                                        <option>...</option>
+                                      </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-outline-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+
+                        <div class="col-md-3 mb-6">
+                            <label for="iStock">Stock mín</label>
+                            <input type="number" id="iStock" name="iStock" class="form-control">
+                        </div>
+                        <div class="col-md-3 mb-6">
+                            <label for="iStock">Stock máx</label>
+                            <input type="number" id="iStock" name="iStock" class="form-control">
+                        </div>
+                        <div class="col-md-3 mb-6">
+                            <label for="iReorden">Reorden</label>
+                            <input type="number" id="iReorden" name="iReorden" class="form-control">
+                        </div>
+                        <div class="col-md-3 mb-6">
+                            <label for="iCantidad">Cantidad</label>
+                            <input type="number" maxlength="10" id="iCantidad" name="iCantidad" class="form-control">
+                        </div>
+                    </div>
+                     <div class="form-row">
+
+                        <div class="row-line mt-2">
+                            <input style="margin-left: 2px;margin-top: 5px;font-style: italic;" type="checkbox" onclick="configurarProd();" value="Compuesto" id="cCompuesto" name="cCompuesto">
+                            <label  for="cCompuesto">Compuesto</label>
+                        </div>
+
+                    </div>
+                    <div class="flex-row " >
+                            <button type="button" class="btn btn-outline-primary"> Guardar </button>
+                            <button type="button" class="btn btn-outline-secondary"> Editar </button>
+                            <button type="button" class="btn btn-outline-info"> Cancelar </button>
+                    </div>
+
+
+                </div>
+            </div>
+             <div class="modal-footer">
+
+
+              </div>
+        </div>
+      </div>
+
+
+
+    </section>
+</div>
+    {% include 'catalogo/mod_categoria.html' %}
+    {% include 'catalogo/mod_unidad.html' %}
+    {% include 'catalogo/mod_marca.html' %}
+    {% include 'catalogo/mod_fabricante.html' %}
+    {% include 'catalogo/mod_impuestos.html' %}
+{% endblock content %}

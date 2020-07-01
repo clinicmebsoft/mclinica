@@ -1,0 +1,48 @@
+
+{% extends "core/genericos/layout.html" %}
+{% block content %}
+    {% load static %}
+  <!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  	<section class="content">
+      <div class="container-fluid">
+      	<div class="card ">
+           <div class="card-header">
+           	<div class="row" >
+           			<img src="{% static '/dist/images/lista.svg'%}" class="tamImagen"/>
+           			<h5 class="card-title" style="font-size: 30px;">Dummy</h5>
+           		</div>
+
+
+                <div class="card-tools">
+
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
+                      <i class="fas fa-wrench" style="color: #1682BB;"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" role="menu">
+                        <a href="../citas/citas" class="dropdown-item">Nueva</a>
+                      	<a href="../citas/buscar" class="dropdown-item">Buscar</a>
+                      	<a href="../citas/eliminar" class="dropdown-item">Eliminar</a>
+                      	<a href="../citas/reagendar" class="dropdown-item">Reagendar</a>
+                      	<a class="dropdown-divider"></a>
+                      	<a href="../citas/listacitas" class="dropdown-item">Lista Citas</a>
+                    </div>
+                  </div>
+
+                 </div>
+              </div>
+      			<div class="card-body">
+
+             	</div>
+             	<div class="card-footer">
+             		<button type="submit" class="btn btn-outline-danger" onclick="">Cancel</button>
+                  	<button type="submit" onclick="" class="btn btn-outline-info float-right">Guardar</button>
+
+                </div>
+            </div>
+      </div>
+    </section>
+ </div>
+
+{% endblock content %}

@@ -1,0 +1,202 @@
+{% extends "genericos/layout.html" %}
+{% block content %}
+    {% load static %}
+    {% csrf_token %}
+  <!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  	<section class="content">
+      <div class="container-fluid">
+      	<div class="card ">
+           <div class="card-header">
+           	<div class="row" >
+           			<img src="{% static '/dist/images/paciente.svg'%}" class="tamImagen"/>
+           			<h5 class="card-title" style="font-size: 30px;">Pacientes</h5>
+           		</div>
+
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#tomarFotoModal">
+                            Tomar Foto
+                        </button>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-outline-primary" data-toggle="dropdown">
+                      <i class="fas fa-wrench" style="color: #1682BB;"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" role="menu">
+                        <a href="../citas/citas" class="dropdown-item">Nuevo</a>
+                      	<a href="../citas/buscar" class="dropdown-item">Buscar</a>
+                      	<a href="../citas/eliminar" class="dropdown-item">Eliminar</a>
+                      	<a href="../citas/reagendar" class="dropdown-item">Reagendar</a>
+                      	<a class="dropdown-divider"></a>
+                      	<a href="../citas/listacitas" class="dropdown-item">Lista Citas</a>
+                    </div>
+                  </div>
+
+                 </div>
+              </div>
+      			<div class="card-body">
+                    <form action="post">
+
+                    <div class="form-row">
+
+                        <div class="col-md-3 mb-3">
+
+                            <label for="iNombrePaciente">Nombre</label><input type="text"
+                                style="text-transform: uppercase;" id="iNombrePaciente" name="iNombrePaciente" autofocus
+                                maxlength="20" class="form-control"  />
+                        </div>
+                        <div class="col-md-3 mb-3">
+
+                            <label for="iApellidos">Apellidos</label><input type="text"
+                                style="text-transform: uppercase;" id="iApellidos" name="iApellidos"
+                                maxlength="30" class="form-control" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+
+                            <label for="iCorreoPaciente">Correo:</label><input type="email" id="iCorreoPaciente"
+                                name="iCorreo" maxlength="100" class="form-control" />
+
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-3 mb-3">
+                            <label for="iFechaNacimiento">Fecha de Nacimiento</label>
+                            <input type="date" class="form-control"  name="iFechaNacimientoPaciente" placeholder="" id="iFechaNacimientoPaciente" onfocusout="calculaEdad();" />
+                        </div>
+                        <div class="col-md-2 mb-3">
+
+                            <label for="iEdad">Edad</label>
+                                <input type="number"  class="form-control"  name="iEdad" id="iEdad" maxlength="2" />
+
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <label for="sSexo">Sexo</label>
+                            <select id="sSexo" class="form-control" >
+                                <option value="M">Masculino</option>
+                                <option value="F">Femenino</option>
+                                <option value="N">No definido</option>
+
+                            </select>
+
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="iOcupacion">Ocupación</label>
+                            <input class="form-control" type="text" maxlength="200" id="iOcupacion" />
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <label for="iCp">CP</label>
+                            <input id="iCp"  clasS="form-control" name="iCp" type="number" />
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-4 mb-4">
+                            <label for="iCalle">Calle y Número</label> <input
+                                class="form-control" type="text" maxlength="30" id="iCalle" />
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <label for="iColonia">Colonia</label> <input class="form-control"
+                                type="text" maxlength="30" id="iColonia" />
+                        </div>
+
+                        <div class="col-md-2 mb-2">
+                            <label>Teléfono:</label><input type="text" id="iTelefono"
+                                name="iTelefono" maxlength="20" class="form-control" />
+                        </div>
+                        <div class="col-md-2 mb-2">
+                            <label>Celular:</label><input type="text" id="iCelular"
+                                name="iCelular" maxlength="20" class="form-control" />
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-3 mb-3">
+                            <label for="iCelular2">Celular 2:</label><input type="text" id="iCelular2"
+                                name="iCelular2" maxlength="20" class="form-control" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="iEstado">Estado</label> <input class="form-control"
+                                value="Jalisco" type="text" maxlength="30" id="iEstado" />
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="iPais">País</label> <input class="form-control"
+                                value="México" type="text" maxlength="30" id="iPais" />
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="input-field col-md-12">
+                            <label for="iComentario">Observaciones:</label>
+                            <textarea id="iComentario" name="iComentario" rows="6" class="form-control "></textarea>
+
+                        </div>
+                    </div>
+                    </form>
+             	</div>
+             	<div class="card-footer">
+                    <button type="submit" class="btn btn-outline-success" onclick="">Limpiar</button>
+             		<button type="submit" class="btn btn-outline-danger" onclick="">Cancel</button>
+                  	<button type="submit" onclick="guardaPacientes();" class="btn btn-outline-info">Guardar</button>
+
+                </div>
+            </div>
+      </div>
+    </section>
+ </div>
+<div class="modal fade" id="tomarFotoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLongTitle">Foto</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row" >
+
+            <div class="col4">
+                <video width=240 height=180
+                    style="outline: #9e9e9e solid 1px; padding-bottom: 3px;"
+                    id="monitor" controls autoplay></video>
+                <p>
+                    <button type="submit" class="btn btn-secondary" id="snap">
+                        <span class="fa fa-play"></span>
+                    </button>
+                    &nbsp;
+                    <button class="btn btn-secondary" id="stopCamara">
+                        <span class="fa fa-stop"></span>
+                    </button>
+                    <button class="btn btn-secondary" id="dispara1">
+                        <span class="fa fa-camera"></span>1
+                    </button>
+                    <button class="btn btn-secondary" id="dispara2">
+                        <span class="fa fa-camera"></span>2
+                    </button>
+                    <button class="btn btn-secondary" id="dispara3">
+                        <span class="fa fa-camera"></span>3
+                    </button>
+                </p>
+            </div>
+            <div class="col2">
+                <canvas width=240 height=180 id="foto1"></canvas>
+                <p>Foto1</p>
+            </div>
+            <div class="col2">
+                <canvas width=240 height=180 id="foto2"></canvas>
+            </div>
+            <div class="col2">
+                <canvas width=240 height=180 id="foto3"></canvas>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-outline-primary" >Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

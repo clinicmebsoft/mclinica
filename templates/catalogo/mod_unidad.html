@@ -1,0 +1,49 @@
+<div class="modal fade" id="modalCatalogoUnidad" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #2980b9; color:#fff; ">
+        <h5 class="modal-title" id="exampleModalLongTitle">Unidad</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <div class="container">
+                <table id="tCataUnidad" class="tabla" >
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Unidad de Medida</th>
+                            <th>Estatus</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+                <div class="form-group">
+                    <label for="iIdUnidad">Id</label>
+                    <input type="text" id="iIdUnidad" maxlength="60" readonly class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="iCataUnidad">Unidad de Medida</label>
+                    <input type="text" id="iCataUnidad" maxlength="60" class="form-control">
+                </div>
+
+                <div class=" pull-right flex-row">
+                    <button type="button" class="btn btn-outline-primary" id="btnCatCateGuardar" onclick="guardaCatalogos('G','Unidades','iIdUnidad')">Guardar</button>
+                    <button type="button" class="btn btn-outline-secondary"  onclick="guardaCatalogos('M','Unidades','iIdUnidad')">Editar</button>
+                    <button type="button" class="btn btn-outline-info" onclick="guardaCatalogos('C','Unidades','iIdUnidad')">Cancelar</button>
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+
+
+      </div>
+    </div>
+  </div>
+</div>

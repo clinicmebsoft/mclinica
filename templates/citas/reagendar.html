@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es_MX" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="comun/layout :: head"> 
+ 
+</head>
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+  <!-- Navbar -->
+ <div th:replace="comun/layout :: estructura"></div> 
+
+  <!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper"> 
+  	<section class="content">
+      <div class="container-fluid">
+      	<div class="card ">
+           <div class="card-header">
+           		<div class="mensajes"></div>
+           		
+				<div id="mensaje"></div>
+				
+           		<div class="row" >
+           			<img src="/dist/images/reagendar.svg" class="tamImagen"/>
+           			<h5 class="card-title" style="font-size: 30px;">Reagendar</h5>	
+           		</div>
+				
+                <div class="card-tools">
+                  
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
+                      <i class="fas fa-wrench" style="color: #1682BB;"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" role="menu">
+                    	<a href="citas" class="dropdown-item">Nueva</a>
+                      	<a href="buscar" class="dropdown-item">Buscar</a>
+                      	<a href="eliminar" class="dropdown-item">Eliminar</a>
+                      	<a href="reagendar" class="dropdown-item">Reagendar</a>
+                      	<a class="dropdown-divider"></a>
+                      	<a href="listacitas" class="dropdown-item">Lista Citas</a>
+                    </div>
+                  </div>
+                 
+                 </div>
+              </div>
+      			<div class="card-body">
+      				<form action="#" th:action="@{/reagendarcita/{id}}" th:object="${cita}" method="post">
+	                	<div class="row">
+	                		<div class="col-md-6">
+	                			<div class="form-group row">
+			                    <label for="iNombreCitas" class="col-sm-4 col-form-label">Nombre</label>
+			                    <div class="col-sm-10">
+			                      <input type="text" class="form-control" maxlength="30" id="iNombreCitas" autofocus="autofocus" placeholder="Nombre">
+			                    </div>
+			                  </div>
+	                		</div>
+	                		<div class="col-md-6">
+	                			<div class="form-group">
+			                    <label for="iApellidosCitas" class="col-sm-4 col-form-label">Apellidos</label>
+			                    <div class="col-sm-10">
+			                      <input type="text" class="form-control" maxlength="50" id="iApellidosCitas" placeholder="Apellidos">
+			                    </div>
+			                  </div>
+	                		</div>
+	                	</div>
+	                	<div class="row">
+	                		<div class="col-md-6">
+	                			<div class="form-group row">
+			                    <label for="iCorreoCitas" class="col-sm-4 col-form-label">Correo</label>
+			                    <div class="col-sm-10">
+			                      <input type="email" class="form-control" maxlength="60" id="iCorreoCitas"  placeholder="Correo">
+			                    </div>
+			                  </div>
+	                		</div>
+	                		<div class="col-md-3">
+	                			<div class="form-group row">
+			                    <label for="iApellidosCitas" class="col-sm-4 col-form-label">Fecha</label>
+			                    <div class="col-sm-10">
+			                      <input type="date" class="form-control" maxlength="10" id="iApellidosCitas" >
+			                    </div>
+			                  </div>
+	                		</div>
+	                		<div class="col-md-3">
+	                			<div class="form-group row">
+			                    <label for="iHoraCitas" class="col-sm-4 col-form-label">Hora</label>
+			                    <div class="col-sm-10">
+			                      <input type="time" class="form-control" maxlength="10"  id="iHoraCitas" >
+			                    </div>
+			                  </div>
+	                		</div>
+	                	</div>
+	                	<div class="row">
+	                		<div class="col-md-3">
+	                			<div class="form-group row">
+			                    <label for="iTelefonoOficinaCitas" class="col-sm-8 col-form-label">Teléfono Oficina</label>
+			                    <div class="col-sm-10">
+			                      <input type="text" class="form-control" maxlength="14" pattern="[0-9]{10}" placeholder="(999) 999-9999" id ="iTelefonoOficinaCitas">
+			                    </div>
+			                  </div>
+	                		</div>
+	                		<div class="col-md-3">
+	                			<div class="form-group row">
+			                    <label for="iCelularCitas" class="col-sm-4 col-form-label">Celular</label>
+			                    <div class="col-sm-10">
+			                      <input type="text" class="form-control" maxlength="10" pattern="[0-9]{10}" placeholder="(999) 999-9999" id="iCelularCitas" >
+			                      
+			                    </div>
+			                  </div>
+	                		</div>
+	                		<div class="col-md-6">
+	                			<div class="form-group row">
+			                    <label for="iComentariosCitas" class="col-sm-6 col-form-label">Comentarios</label>
+			                    <div class="col-sm-10">
+			                      <textarea type="text" class="form-control" maxlength="255" id="iComentariosCitas"></textarea>
+			                    </div>
+			                  </div>
+	                		</div>
+	                	</div>
+                	</form>
+             	</div>
+             	<div class="card-footer">
+             		<button type="submit" class="btn btn-outline-danger" onclick="mensaje('Cancelando..')">Cancel</button>
+                  	<button type="submit" onclick="guardarCita();" class="btn btn-outline-info float-right">Guardar</button>
+                  
+                </div>
+           </div>
+                
+      </div>
+    </section>
+ </div>
+				
+        <!-- Info boxes -->
+     
+</div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+
+  <!-- Main Footer -->
+  <footer th:replace="comun/layout :: footer" class="main-footer">
+
+  </footer>
+</div>
+
+</body>
+</html>
