@@ -13,6 +13,8 @@ urlpatterns = [
     path('ajax_catalogo_marca' , views.ajax_catalogo_marca, name='ajax_catalogo_marca'),
     path('ajax_catalogo_fabricante' , views.ajax_catalogo_fabricante, name='ajax_catalogo_fabricante'),
     path('ajax_catalogo_impuesto' , views.ajax_catalogo_impuesto, name='ajax_catalogo_impuesto'),
+    path('ajax_catalogo_proveedores' , views.ajax_catalogo_proveedores, name='ajax_catalogo_proveedores'),
+
 
     ]
 

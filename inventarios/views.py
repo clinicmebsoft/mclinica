@@ -1,6 +1,7 @@
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 from inventarios.models import *
+from proveedores.models import Proveedores
 import json
 from decimal import Decimal
 from django.core import serializers
@@ -31,7 +32,7 @@ def ajax_abcGuardarCatalogos(request):
         descripcion = desc
         tipo = json_data['tipo']
 
-        if tipo=="Categorias":
+        if tipo == "Categorias":
             cate = Categorias()
             cate.descripcion = descripcion
             if Categorias.objects.filter(id=id).first():
@@ -124,7 +125,7 @@ def ajax_abcGuardarCatalogos(request):
                 if que == 'M':
                     mod = Impuestos.objects.filter(id=id).first()
                     mod.descripcion = desc
-                    mod.pocentaje=porcentaje
+                    mod.pocentaje = porcentaje
                     mod.save()
                     salida = "Registro {" + tipo + "} " + desc + " Modificado..."
 
@@ -139,6 +140,28 @@ def ajax_abcGuardarCatalogos(request):
             else:
 
                 impuesto.save()
+                salida = "Registro {" + tipo + "} " + descripcion + " Guardado..."
+        if tipo == "Proveedor":
+            proveedor = Proveedores()
+            proveedor.descripcion = descripcion
+            if Proveedores.objects.filter(id=id).first():
+                if que == 'M':
+                    mod = Proveedores.objects.filter(id=id).first()
+                    mod.descripcion = desc
+                    mod.save()
+                    salida = "Registro {" + tipo + "} " + desc + " Modificado..."
+
+                else:
+                    if que == 'C':
+                        mod = Impuestos.objects.filter(id=id).first()
+                        mod.estatus = 'C'
+                        mod.save()
+                        salida = "Registro {" + tipo + "} " + descripcion + " Se Canceló..."
+                    else:
+                        salida = "Error: Ya existe un registro similar"
+            else:
+
+                proveedor.save()
                 salida = "Registro {" + tipo + "} " + descripcion + " Guardado..."
     else:
         salida = 'Error al guardar el registro'
@@ -161,21 +184,40 @@ def ajax_catalogo_unidad(request):
     data = json.dumps({"data": list(unidades)})
     return HttpResponse(data)
 
+
 def ajax_catalogo_marca(request):
     marcas = Marcas.objects.filter(estatus='A').all().values('id', 'descripcion', 'estatus')
     data = json.dumps({"data": list(marcas)})
     return HttpResponse(data)
+
 
 def ajax_catalogo_fabricante(request):
     fabricante = Fabricantes.objects.filter(estatus='A').all().values('id', 'descripcion', 'estatus')
     data = json.dumps({"data": list(fabricante)})
     return HttpResponse(data)
 
+
 def ajax_catalogo_impuesto(request):
-    impuesto = Impuestos.objects.filter(estatus='A').all().values('id', 'descripcion', 'porcentaje','estatus')
+    impuesto = Impuestos.objects.filter(estatus='A').all().values('id', 'descripcion', 'porcentaje', 'estatus')
     data = json.dumps({"data": list(impuesto)})
     return HttpResponse(data)
 
+
+def ajax_catalogo_proveedores(request):
+    data_prov = []
+    proveedor = Proveedores.objects.filter(estatus='A').all().values('id', 'razon_social', 'nombre', 'apellidos',
+                                                                     'estatus')
+    for prov in proveedor:
+        dic = {}
+        dic['id'] = prov['id']
+        if prov['razon_social'] == '':
+            dic['descripcion'] = prov['nombre'] + " " + prov['apellidos']
+        else:
+            dic['descripcion'] = prov['razon_social']
+        data_prov.append(dic)
+
+    data = json.dumps({"data": list(data_prov)})
+    return HttpResponse(data)
 
 
 def ajax_catalogo_lista_articulos(request):
@@ -183,3 +225,47 @@ def ajax_catalogo_lista_articulos(request):
                                                                    'estatus')
     data = json.dumps({"data": list(articulos)})
     return HttpResponse(data)
+
+
+def ax_guardarArticulos(request):
+    salida = ""
+    json_data = json.loads(request.body)
+    articulo = Articulos()
+    if request.is_ajax():
+        que = json_data['que']
+        id = json_data['id']
+
+        if que != 'C':
+            if que == 'M':
+                Articulos.objects.filter(id=id).first()
+            articulo.tipo = json_data['tipo']
+            articulo.codigo = json_data['codigo']
+            articulo.descripcion = json_data['descripcion']
+            articulo.codigobarras = json_data['codigobarras']
+            articulo.id_categoria = json_data['id_categoria']
+            articulo.id_unidades = json_data['id_unidades']
+            articulo.id_marcas = json_data['id_marcas']
+            articulo.id_fabricantes = json_data['id_fabricantes']
+            articulo.precioventa = json_data['precioventa']
+            articulo.costo = json_data['costo']
+            articulo.stock_max = json_data['stock_max']
+            articulo.reorden = json_data['reorden']
+            articulo.cantidad = json_data['cantidad']
+            articulo.id_impuestos = json_data['id_impuestos']
+            articulo.id_proveedores = json_data['id_proveedores']
+            articulo.compuesto = json_data['compuesto']
+            articulo.id_compuesto = json_data['id_compuesto']
+            articulo.save()
+        else:
+            Articulos.objects.filter(id=id).first()
+            articulo.estatus = 'C'
+            articulo.save()
+
+    else:
+        salida = 'Error al guardar el registro'
+
+    return JsonResponse({
+        'respuesta': {
+            'mensaje': salida
+        }
+    })

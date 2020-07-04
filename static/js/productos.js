@@ -4,6 +4,7 @@ function initProductos(){
 	iSelect("#sMarca","ajax_catalogo_marca");
 	iSelect("#sFabricante","ajax_catalogo_fabricante");
 	iSelect("#sImpuesto","ajax_catalogo_impuesto");
+	iSelect("#sProveedor","ajax_catalogo_proveedores");
 }
 
 function iSelect(idSelect,ajaxLink){
@@ -19,6 +20,7 @@ function iSelect(idSelect,ajaxLink){
                     $(idSelect).append( '<option value="'+resp.data[i].id+'">'+
                                     resp.data[i].descripcion+'</option>' );
                 }
+                $(idSelect).append( '<option value="0" selected> No Aplica </option>' );
             }else{console.log('No data '+idSelect)}
         }
     });
@@ -27,3 +29,4 @@ function iSelect(idSelect,ajaxLink){
 function configurarProd(){
     alert("Configurar producto");
 }
+

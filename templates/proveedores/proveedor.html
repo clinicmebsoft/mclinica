@@ -48,16 +48,13 @@
                     <div class="row">
                         <div class="col-md-4">
                             <label for="iProvNombre">Nombres</label>
-                            <input class="form-control" type="text" id="iProvNombre" name="iProvNombre" maxlength="40">
+                            <input class="form-control" type="text" id="iProvNombre" name="iProvNombre" maxlength="50">
                         </div>
-                        <div class="col-md-4">
-                            <label for="iProvApellidoPat">Apellido Paterno</label>
-                            <input class="form-control" type="text" id="iProvApellidoPat" name="iProvApellidoPat" maxlength="40">
+                        <div class="col-md-8">
+                            <label for="iProvApellidos">Apellidos</label>
+                            <input class="form-control" type="text" id="iProvApellidos" name="iProvApellidos" maxlength="50">
                         </div>
-                        <div class="col-md-4">
-                            <label for="iProvApellidoMat">Apellido Materno</label>
-                            <input class="form-control" type="text" id="iProvApellidoMat" name="iProvApellidoMat" maxlength="40">
-                        </div>
+
                     </div>
                     <div class="row">
                         <div class="col-md-4">
@@ -121,10 +118,10 @@
                     </div>
                 </div>
             <div class="card-footer">
-                <button  class="btn btn-outline-success" onclick="limpiaProveedor()">Limpiar</button>
+                <button  class="btn btn-outline-success" onclick="guardaProveedor('M')">Edit</button>
                 <button  class="btn btn-outline-danger" onclick="guardaProveedor('C')">Cancel</button>
                 <button  class="btn btn-outline-info" onclick="guardaProveedor('G')">Guardar</button>
-
+                <button  class="btn btn-outline-danger pull-right" onclick="guardaProveedor('C')">Cancel</button>
             </div>
         </div>
       </div>
