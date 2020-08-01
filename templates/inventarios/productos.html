@@ -31,7 +31,7 @@
                             <a href="/citas/eliminar" class="dropdown-item">Lista de Precios</a>
                             <a href="/citas/reagendar" class="dropdown-item"></a>
                             <a class="dropdown-divider"></a>
-                            <a href="/inventarios/lista_articulos" class="dropdown-item">Lista Artículos</a>
+                            <a href="#" onclick="listaArticulos();" class="dropdown-item">Lista Artículos</a>
                         </div>
                       </div>
 
@@ -66,7 +66,7 @@
                             <div class="row">
                                 <div class="col-md-12 ">
                                     <label for="iDescripcionProducto">Descripción</label>
-                                     <textarea type="text" id="iDescripcionProducto" name="iDescripcionProducto" maxlength="50" class="form-control" ></textarea>
+                                     <textarea type="text" id="iDescripcionProducto" name="iDescripcionProducto" maxlength="120" class="form-control" ></textarea>
                                 </div>
                             </div>
                         </div>
@@ -101,7 +101,6 @@
                                 <div class="col-md-9">
                                     <select id="sUnidad" class="form-control">
                                         <option value="NA">No Aplica</option>
-
                                       </select>
                                 </div>
                                 <div class="col-md-3">
@@ -146,7 +145,6 @@
                             <div class="row">
                                 <div class="col-md-9">
                                     <select id="sImpuesto" class="form-control">
-
                                       </select>
                                 </div>
                                 <div class="col-md-3">
@@ -164,7 +162,6 @@
                                 <div class="col-md-9">
                                     <select id="sProveedor" class="form-control">
                                         <option selected>Selecciona</option>
-
                                       </select>
                                 </div>
                                 <div class="col-md-3">
@@ -172,17 +169,16 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <div class="form-row">
 
                         <div class="col-md-3 mb-6">
                             <label for="iStock">Stock mín</label>
-                            <input type="number" id="iStock" name="iStock" class="form-control">
+                            <input type="number" id="iStockMin" name="iStock" class="form-control">
                         </div>
                         <div class="col-md-3 mb-6">
                             <label for="iStock">Stock máx</label>
-                            <input type="number" id="iStock" name="iStock" class="form-control">
+                            <input type="number" id="iStockMax" name="iStock" class="form-control">
                         </div>
                         <div class="col-md-3 mb-6">
                             <label for="iReorden">Reorden</label>
@@ -194,30 +190,22 @@
                         </div>
                     </div>
                      <div class="form-row">
-
                         <div class="row-line mt-2">
                             <input style="margin-left: 2px;margin-top: 5px;font-style: italic;" type="checkbox" onclick="configurarProd();" value="Compuesto" id="cCompuesto" name="cCompuesto">
                             <label  for="cCompuesto">Compuesto</label>
                         </div>
-
                     </div>
                     <div class="flex-row " >
-                            <button type="button" class="btn btn-outline-primary"> Guardar </button>
+                            <button type="button" class="btn btn-outline-primary" onclick="guardarArticulo('G');"> Guardar </button>
                             <button type="button" class="btn btn-outline-secondary"> Editar </button>
                             <button type="button" class="btn btn-outline-info"> Cancelar </button>
                     </div>
-
-
                 </div>
             </div>
              <div class="modal-footer">
-
-
               </div>
         </div>
       </div>
-
-
 
     </section>
 </div>
@@ -226,4 +214,6 @@
     {% include 'catalogo/mod_marca.html' %}
     {% include 'catalogo/mod_fabricante.html' %}
     {% include 'catalogo/mod_impuestos.html' %}
+    {% include 'catalogo/mod_compuesto.html' %}
+    {% include 'inventarios/mod_listaArticulos.html' %}
 {% endblock content %}

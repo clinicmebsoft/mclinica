@@ -1,44 +1,79 @@
 
-let datos={}
-let pasa=true;
-function tomaValoresFormulario(que){
+//let datos={}
+//let pasa=true;
+
+let doc = document;
+let compues = 'False';
+if (doc.getElementById("cCompuesto").checked==true)
+   compues = 'True';
+
+function tomaValoresFormularioArt(que,tipo){
+
     datos={
-        "tipo" : $('#iProvRazonSocial').val(),
-        "codigo" : $('#iProvNombre').val(),
-        "descripcion" : $('#iProvApellidos').val(),
-        "codigobarras": $('#iProvCP').val(),
-        "id_categoria": $('#iProvCP').val(),
-        "id_unidades": $('#iProvCiudad').val(),
-        "id_marcas": $('#iProvMunicipio').val(),
-        "id_fabricantes": $('#iProvColonia option:selected').text(),
-        "precioventa": $('#iProvCalle').val(),
-        "costo": $('#iProvTelefono').val(),
-        "stock_min": $('#iProvCelular').val(),
-        "stock_max": $('#iProvEmail').val(),
-        "reorden": $('#iProvPaginaWeb').val(),
-        "cantidad": $('#iProvObservaciones').val(),
-        "id_impuestos" : $('#sImpuesto'),
-        "id_proveedores" : $('#sProveedor'),
-        "compuesto" : $('#cCompuesto'),
-        //"id_compuesto" : $('#')
-
-
-        "tipo" : que
+        "id" : 0,
+        "tipoMov" : que,
+        "tipo"  : $("input:checked").val(),
+        "clave" : $('#iClaveProducto').val(),
+        "descripcion" : $('#iDescripcionProducto').val(),
+        "codigobarras": $('#iCodigoBarras').val(),
+        "id_categoria": parseInt(doc.getElementById("sCategoria").value),
+        "id_unidades": parseInt(doc.getElementById('sUnidad').value),
+        "id_marcas": parseInt(doc.getElementById('sMarca').value),
+        "id_fabricantes": parseInt(doc.getElementById('sFabricante').value),
+        "precioventa": $('#iPrecioVenta').val(),
+        "costo": $('#iPrecioCosto').val(),
+        "stock_min": $('#iStockMin').val(),
+        "stock_max": $('#iStockMax').val(),
+        "reorden": $('#iReorden').val(),
+        "cantidad": $('#iCantidad').val(),
+        "id_impuestos" : parseInt(doc.getElementById('sImpuesto').value),
+        "id_proveedores" : parseInt(doc.getElementById('sProveedor').value),
+        "compuesto" : compues
     }
 
-    if(datos.nombre===""){$('#iProvNombre').focus();toastr.warning('Falta Nombre...');pasa=false;return;}
-    if(datos.apellidoPat===""){$('#apellidos').focus();toastr.warning('Faltan Apellidos...');pasa=false;return;}
-    if(datos.cp===""){$('#iProvCP').focus();toastr.warning('Falta Código Postal...');pasa=false;return;}
-    if(datos.calle===""){$('#iProvCalle').focus();toastr.warning('Falta Calle...');pasa=false;return;}
-    if(datos.telefono===""){$('#iProvTelefono').focus();toastr.warning('Falta Teléfono...');pasa=false;return;}
-    if(datos.email===""){$('#iProvEmail').focus();toastr.warning('Falta email...');pasa=false;return;}
+    if(datos.clave===""){$('#iClaveProducto').focus();toastr.warning('Falta Clave de Producto...');pasa=false;return;}
+    if(datos.codigobarras===""){$('#iCodigoBarras').focus();toastr.warning('Falta Código de Barras...');pasa=false;return;}
+    if(datos.precioventa===""){$('#iPrecioVenta').focus();toastr.warning('Falta Precio de Venta...');pasa=false;return;}
+    if(datos.costo===""){$('#iPrecioCosto').focus();toastr.warning('Falta Costo...');pasa=false;return;}
+    if(datos.stock_max===""){$('#iStockMax').focus();toastr.warning('Falta Stock Máximo...');pasa=false;return;}
+    if(datos.stock_min===""){$('#iStockMin').focus();toastr.warning('Falta Stock Mínimo...');pasa=false;return;}
+    if(datos.reorden===""){$('#iReorden').focus();toastr.warning('Punto de reorden...');pasa=false;return;}
+    if(datos.cantidad===""){$('#iCantidad').focus();toastr.warning('Falta Cantidad...');pasa=false;return;}
     //if (datos['razonSocial'])
 
 }
 
-function guardarArticulo(){
-    tomaValoresFormulario(que);
+function guardarArticulo(que){
+    let tipo = "S"
+    //alert(doc.getElementById("cCompuesto").checked);
+
+    //alert(que);
+    tomaValoresFormularioArt(que,"P");
     if (pasa===true)
     {
-    }
+        let csrftoken = $("[name=csrfmiddlewaretoken]").val();
+        $.ajax({
+            type: 'POST',
+            processData: false,
+            contentType: "application/json",
+            dataType : 'json',
+            headers:{
+                "X-CSRFToken": csrftoken,
+                "X-Requested-With": "XMLHttpRequest"
+            },
+            async: false,
+            data : JSON.stringify(datos),
+            url : 'ax_guardarArticulos',
+            success : function(resultado) {
+                if (resultado.respuesta.mensaje.includes("Error") ){
+                    toastr.error(resultado.respuesta.mensaje)
+                    }
+                else{
+                    toastr.success(resultado.respuesta.mensaje);
+                    limpiarProveedores();
+                }
+            }
+          })
+
+   }
 }

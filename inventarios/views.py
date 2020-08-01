@@ -180,7 +180,7 @@ def ajax_catalogo_listcategoria(request):
 
 
 def ajax_catalogo_unidad(request):
-    unidades = Unidades.objects.filter(estatus='A').all().values('id', 'descripcion', 'estatus')
+    unidades = Unidades.objects.filter().all().values('id', 'descripcion', 'estatus')
     data = json.dumps({"data": list(unidades)})
     return HttpResponse(data)
 
@@ -232,35 +232,35 @@ def ax_guardarArticulos(request):
     json_data = json.loads(request.body)
     articulo = Articulos()
     if request.is_ajax():
-        que = json_data['que']
+        que = json_data['tipoMov']
         id = json_data['id']
-
         if que != 'C':
             if que == 'M':
                 Articulos.objects.filter(id=id).first()
             articulo.tipo = json_data['tipo']
-            articulo.codigo = json_data['codigo']
+            articulo.clave = json_data['clave']
             articulo.descripcion = json_data['descripcion']
             articulo.codigobarras = json_data['codigobarras']
-            articulo.id_categoria = json_data['id_categoria']
-            articulo.id_unidades = json_data['id_unidades']
-            articulo.id_marcas = json_data['id_marcas']
-            articulo.id_fabricantes = json_data['id_fabricantes']
+            articulo.id_categoria = Categorias.objects.get(id=int(json_data['id_categoria']))
+            articulo.id_unidades = Unidades.objects.get(id=int(json_data['id_unidades']))
+            articulo.id_marcas = Marcas.objects.get(id=int(json_data['id_marcas']))
+            articulo.id_fabricantes = Fabricantes(id=int(json_data['id_fabricantes']))
             articulo.precioventa = json_data['precioventa']
             articulo.costo = json_data['costo']
             articulo.stock_max = json_data['stock_max']
             articulo.reorden = json_data['reorden']
             articulo.cantidad = json_data['cantidad']
-            articulo.id_impuestos = json_data['id_impuestos']
-            articulo.id_proveedores = json_data['id_proveedores']
+            articulo.id_impuestos = Impuestos(id=int(json_data['id_impuestos']))
+            articulo.id_proveedores = Proveedores(id=int(json_data['id_proveedores']))
             articulo.compuesto = json_data['compuesto']
-            articulo.id_compuesto = json_data['id_compuesto']
+            # articulo.id_compuesto = Compuesto.objects.get(id=int(json_data['id_compuesto']))
             articulo.save()
+            salida = 'Se guardó artículo '+json_data['descripcion']
         else:
             Articulos.objects.filter(id=id).first()
             articulo.estatus = 'C'
             articulo.save()
-
+            salida = 'Se mordificó artículo ' + json_data['descripcion']
     else:
         salida = 'Error al guardar el registro'
 

@@ -1,0 +1,137 @@
+<div class="modal fade" id="modalCompuesto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #2980b9; color:#fff; ">
+        <h5 class="modal-title" id="exampleModalLongTitle">Compuesto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <div class="container">
+            <div clas="row">
+                <table id="tListaProductos" class="table-bordered table-hover dataTable dtr-inline" >
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Código</th>
+                            <th>Producto</th>
+                            <th>Descripción</th>
+                            <th>Unidad de Medida</th>
+                            <th>Cantidad</th>
+                            <th>Estatus</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <h6>Productos Seleccionados</h6>
+                     <div class="card-body p-0">
+                        <div class="table-responsive">
+                          <table class="table m-0">
+                            <thead>
+                            <tr>
+                              <th>Id</th>
+                              <th>Código</th>
+                              <th>Producto</th>
+                              <th>Cantidad</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                              <td><a href="pages/examples/invoice.html">OR9842</a></td>
+                              <td>Call of Duty IV</td>
+                              <td><span class="badge badge-success">Shipped</span></td>
+                              <td>
+                                <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td><a href="pages/examples/invoice.html">OR1848</a></td>
+                              <td>Samsung Smart TV</td>
+                              <td><span class="badge badge-warning">Pending</span></td>
+                              <td>
+                                <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td><a href="pages/examples/invoice.html">OR7429</a></td>
+                              <td>iPhone 6 Plus</td>
+                              <td><span class="badge badge-danger">Delivered</span></td>
+                              <td>
+                                <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td><a href="pages/examples/invoice.html">OR7429</a></td>
+                              <td>Samsung Smart TV</td>
+                              <td><span class="badge badge-info">Processing</span></td>
+                              <td>
+                                <div class="sparkbar" data-color="#00c0ef" data-height="20">90,80,-90,70,-61,83,63</div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td><a href="pages/examples/invoice.html">OR1848</a></td>
+                              <td>Samsung Smart TV</td>
+                              <td><span class="badge badge-warning">Pending</span></td>
+                              <td>
+                                <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td><a href="pages/examples/invoice.html">OR7429</a></td>
+                              <td>iPhone 6 Plus</td>
+                              <td><span class="badge badge-danger">Delivered</span></td>
+                              <td>
+                                <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td><a href="pages/examples/invoice.html">OR9842</a></td>
+                              <td>Call of Duty IV</td>
+                              <td><span class="badge badge-success">Shipped</span></td>
+                              <td>
+                                <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
+                              </td>
+                            </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <!-- /.table-responsive -->
+                      </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="iCataImpuesto">Id</label>
+                            <label id="iCataImpuesto" maxlength="8" class="form-control"></label>
+                        </div>
+                        <div class="form-group">
+                            <label for="iCataImpuesto">Código</label>
+                            <label id="iCataImpuesto" maxlength="8" class="form-control"></label>
+                        </div>
+                        <div class="form-group">
+                            <label for="iCompuestoCantidad">Cantidad</label>
+                            <input type="number" id="iCompuestoCantidad" maxlength="4" class="form-control">
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+            <div class=" pull-right flex-row">
+                    <button type="button" class="btn btn-outline-primary" id="btnCatCateGuardar" onclick="guardaCatalogos('G','Impuestos','iIdImpuesto')">Guardar</button>
+                    <button type="button" class="btn btn-outline-secondary"  onclick="guardaCatalogos('M','Impuestos','iIdImpuesto')">Editar</button>
+                    <button type="button" class="btn btn-outline-info" onclick="guardaCatalogos('C','Impuestos','iIdImpuesto')">Cancelar</button>
+                </div>
+
+      </div>
+    </div>
+  </div>
+</div>

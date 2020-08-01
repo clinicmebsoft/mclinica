@@ -6,8 +6,9 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>{% block titulo %}Clínica {% endblock %}</title>
     <meta name="description" content="{% block descripcion %}Principal {% endblock %}">
-    {% load static %}
 
+    {% load static %}
+    <link rel="shortcut icon" href="{% static '/dist/images/favicon.ico' %}" />
 
   <!-- Font Awesome Icons -->
     <link  href="{% static 'plugins/fontawesome-free-5.13.0-web/css/all.css' %}" type="text/css">
@@ -624,7 +625,7 @@
        <script src="{% static 'js/catalogos.js' %}"></script>
        <script src="{% static 'js/presupuesto.js' %}"></script>
         <script src="{% static 'js/proveedores.js' %}"></script>
-
+        <script src="{% static 'js/inventario.js' %}"></script>
        <script src="{% static 'js/meb.js' %}"></script>
   </footer>
 </div>

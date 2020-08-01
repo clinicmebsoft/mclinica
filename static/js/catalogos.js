@@ -1,4 +1,4 @@
-let espanol={
+let esp={
             paginate: {
                 first: " |< ",
                 previous: "Ant.",
@@ -21,9 +21,6 @@ let espanol={
                 rows: "%d Registros Seleccionados"
             }
         }
-
-
-
 /* se tiene que incluir en producto.html {% include 'catalogo/mod_unidad.html' %}*/
 
 document.getElementById("btnCategoria").addEventListener("click",function(){
@@ -89,7 +86,7 @@ function cargaTablas(pTabla, pUrl, pCampoDescrip,pCampoId){
         autoFill: {
             columns: ':not(:first-child)'
         },
-        language : espanol,
+        language : esp,
         "scrollY": "200px",
         "ajax" : {
             url : pUrl,
@@ -166,10 +163,10 @@ function tipoCatalogo(cual){
 }
 
 function guardaCatalogos(que,tipo,id){
-    //alert(que + " "+tipo);
+    alert(que + " "+tipo);
     let dTipo = $(tipoCatalogo(tipo)).val();
     id = $('#'+id).val();
-    if (que=='G'){id=0;}
+    if (que=='G'){id=-1;}
     if (tipo!="Impuestos"){
         datos = {
             'descripcion' : dTipo,
@@ -214,32 +211,27 @@ function guardaCatalogos(que,tipo,id){
                 switch(tipo)
                 {
                     case 'Unidades':
-                        //cargaTablas('#tCataUnidad','ajax_catalogo_unidad','iCataUnidad','iIdUnidad');
                         $('#tCataUnidad').DataTable().ajax.reload();
                         limpiaUnidad();
                         iSelect("#sUnidad","ajax_catalogo_unidad");
                         break;
                     case 'Categorias':
-                        //cargaTablas('#tCataCategoria','ajax_catalogo_listcategoria','iCataCategoria','iIdCate');
                         $('#tCataCategoria').DataTable().ajax.reload();
                         limpiaCategorias();
                         iSelect("#sCategoria","ajax_catalogo_listcategoria"); //carga en select option
                         break;
                     case 'Marcas':
-                        //cargaTablas('#tCataMarca','ajax_catalogo_marca','iCataMarca','iIdMarca');
                         $('#tCataMarca').DataTable().ajax.reload();
                         limpiaMarcas();
                         iSelect("#sMarcas","ajax_catalogo_marca"); //carga en select option
                         break;
                      case 'Fabricantes':
                         $('#tCataFabricante').DataTable().ajax.reload();
-                       // cargaTablas('#tCataFabricante','ajax_catalogo_fabricante','iCataFabricante','iIdFabricante');
                         limpiaFabricantes();
                         iSelect("#sFabricante","ajax_catalogo_fabricante"); //carga en select option
                         break;
                      case 'Impuestos':
                         $('#tCataImpuesto').DataTable().ajax.reload();
-                       // cargaTablas('#tCataImpuesto','ajax_catalogo_impuesto','iCataImpuesto','iIdImpuesto');
                         limpiaFabricantes();
                         iSelect("#sImpuessto","ajax_catalogo_impuesto"); //carga en select option
                         break;
