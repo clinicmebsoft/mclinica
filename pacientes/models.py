@@ -1,5 +1,6 @@
 from django.db import models
 import datetime
+from djrichtextfield.models import RichTextField
 # python manage.py makemigrations
 # python manage.py migrate
 
@@ -26,6 +27,14 @@ class Paciente(models.Model):
 
     def _str__(self):
         return self.nombre
+
+class Consentimiento(models.Model):
+    paciente = models.ForeignKey(Paciente,on_delete=models.PROTECT)
+    documento = RichTextField(blank=True)
+    obervaciones = models.TextField()
+    fecha_modificacion = models.DateTimeField(auto_now=True)
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    estatus = models.CharField(max_length=2, default='A')
 
 class HistoriaClinica(models.Model):
     id = models.AutoField(primary_key=True)

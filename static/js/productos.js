@@ -38,7 +38,7 @@ function iSelect(idSelect,ajaxLink){
         type: 'get',
         success: function(resp){
             //alert(resp.data);
-            if (resp.data != 'undefined'){
+            if (resp.data !== 'undefined'){
                 $(idSelect).empty();
                 for (let i=0 ; i< resp.data.length;i++) {
                     $(idSelect).append( '<option value="'+resp.data[i].id+'">'+
@@ -59,16 +59,15 @@ function configurarProd(){
     //alert("Configurar producto");
     $('#modalCompuesto').modal('show');
     //cargaTablaArticulos();
-    'id', 'codigo', 'codigobarras', 'descripcion',
-                                                                   'estatus')
-    col = ['id','codigo','codigobarras','descripcion',]
+    //'id', 'codigo', 'codigobarras', 'descripcion', 'estatus')
+    col = ['id','codigo','codigobarras','descripcion']
     cargaTablas('tproductos','ajax_catalogo_lista_articulos',col,'id','codigo');
 }
 function cargaTablaArticulos(){
-   alert('carga tabla');
+   //alert('carga tabla');
 }
 
-function cargaTablas(pTabla, pUrlAjax,columnas[], pCampoDescrip,pCampoId){
+function cargaTablas(pTabla, pUrlAjax,columnas, pCampoDescrip,pCampoId){
     $(document).ready(function() {
     let tabla= $(pTabla).DataTable({
        destroy: true,
@@ -117,7 +116,7 @@ function cargaTablas(pTabla, pUrlAjax,columnas[], pCampoDescrip,pCampoId){
                 let row = tabla.row( $(this) ).data();
             id.value = row['id'];
             icat.value = row['descripcion'];
-            if (pUrl=="ajax_catalogo_impuesto"){
+            if (pUrl==="ajax_catalogo_impuesto"){
                 porcen.value = row['porcentaje'];
             }
         }

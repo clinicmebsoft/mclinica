@@ -21,7 +21,7 @@ let esp={
                 rows: "%d Registros Seleccionados"
             }
         }
-/* se tiene que incluir en producto.html {% include 'catalogo/mod_unidad.html' %}*/
+/* se tiene que incluir en producto.html { % include 'catalogo/mod_unidad.html' %}*/
 
 document.getElementById("btnCategoria").addEventListener("click",function(){
     $('#modalCatalogoCategorias').modal('show');

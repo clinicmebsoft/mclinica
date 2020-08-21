@@ -2,6 +2,7 @@ from django.db import models
 from datetime import datetime
 from proveedores.models import Proveedores
 
+
 class Categorias(models.Model):  # Ejemplos Insumos Odontología, Insumos , Medicamentos, etc
     id = models.AutoField(primary_key=True)
     descripcion = models.TextField(max_length=60)
@@ -12,6 +13,7 @@ class Categorias(models.Model):  # Ejemplos Insumos Odontología, Insumos , Medi
 
     class Meta:
         ordering = ['id']
+
 
 class Unidades(models.Model):  # kilos, gramos, 24 , 100, etc
     id = models.AutoField(primary_key=True)
@@ -52,7 +54,7 @@ class Fabricantes(models.Model):  # Ford Company, GMC
 class Impuestos(models.Model):  # Ford Company, GMC
     id = models.AutoField(primary_key=True)
     descripcion = models.TextField(max_length=30)
-    porcentaje = models.FloatField(null=True,max_length=4, blank=True)
+    porcentaje = models.FloatField(null=True, max_length=4, blank=True)
     estatus = models.CharField(max_length=2, default='A')
 
     def _str__(self):
@@ -60,9 +62,6 @@ class Impuestos(models.Model):  # Ford Company, GMC
 
     class Meta:
         ordering = ['id']
-
-
-
 
 
 class Compuesto(models.Model):
@@ -80,7 +79,8 @@ class Compuesto(models.Model):
 class Articulos(models.Model):
     id = models.AutoField(primary_key=True)
     tipo = models.CharField(null=False, blank=False, max_length=10)  # S=servicio P=Producto
-    clave = models.CharField(null=False, blank=False, max_length=10,default='0')
+    clave = models.CharField(null=False, blank=False, max_length=10, default='0')
+    image = models.ImageField(blank=True, upload_to='images/')
     descripcion = models.CharField(null=False, blank=False, max_length=120)
     codigobarras = models.CharField(max_length=30)
     id_categoria = models.ForeignKey(Categorias, on_delete=models.PROTECT)
@@ -95,10 +95,11 @@ class Articulos(models.Model):
     cantidad = models.IntegerField(default=0)
     id_impuestos = models.ForeignKey(Impuestos, on_delete=models.PROTECT)
     id_proveedores = models.ForeignKey(Proveedores, on_delete=models.PROTECT)
-    compuesto = models.BooleanField(default=False)  # Si compuesto TRUE afectar inventarios de los artículos de compuesto
-    id_compuesto = models.ForeignKey(Compuesto, on_delete=models.PROTECT,default=0)
-    creado = models.DateTimeField(auto_created=True, blank=True, null=True)
-    actualizado = models.DateTimeField(auto_now_add=datetime.now(), blank=True, null=True)
+    compuesto = models.BooleanField(
+        default=False)  # Si compuesto TRUE afectar inventarios de los artículos de compuesto
+    id_compuesto = models.ForeignKey(Compuesto, on_delete=models.PROTECT, default=0)
+    creado = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    actualizado = models.DateTimeField(auto_now=datetime.now(), blank=True, null=True)
     estatus = models.CharField(max_length=2, default='A')
 
     def __str__(self):

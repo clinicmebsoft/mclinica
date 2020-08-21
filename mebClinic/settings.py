@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'herramientas.apps.HerramientasConfig',
     'caja.apps.CajaConfig',
     'proveedores.apps.ProveedoresConfig',
+    'djrichtextfield',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -135,3 +136,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR,"static")
 
 ]
+
+MEDIA_URL = '/uploads/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'uploads')

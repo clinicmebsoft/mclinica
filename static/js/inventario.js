@@ -2,30 +2,30 @@
 //let datos={}
 //let pasa=true;
 
-let doc = document;
-let compues = 'False';
-if (doc.getElementById("cCompuesto").checked==true)
-   compues = 'True';
+var doc = document;
+var compues = 'False';
+
 
 function tomaValoresFormularioArt(que,tipo){
-
+    if (doc.getElementById("cCompuesto").checked === true)
+        compues = 'True';
     datos={
         "id" : 0,
         "tipoMov" : que,
         "tipo"  : $("input:checked").val(),
-        "clave" : $('#iClaveProducto').val(),
+        "clave" : $("#iClaveProducto").val(),
         "descripcion" : $('#iDescripcionProducto').val(),
-        "codigobarras": $('#iCodigoBarras').val(),
+        "codigobarras": $("#iCodigoBarras").val(),
         "id_categoria": parseInt(doc.getElementById("sCategoria").value),
         "id_unidades": parseInt(doc.getElementById('sUnidad').value),
         "id_marcas": parseInt(doc.getElementById('sMarca').value),
         "id_fabricantes": parseInt(doc.getElementById('sFabricante').value),
-        "precioventa": $('#iPrecioVenta').val(),
-        "costo": $('#iPrecioCosto').val(),
-        "stock_min": $('#iStockMin').val(),
-        "stock_max": $('#iStockMax').val(),
-        "reorden": $('#iReorden').val(),
-        "cantidad": $('#iCantidad').val(),
+        "precioventa": $("#iPrecioVenta").val(),
+        "costo": $("#iPrecioCosto").val(),
+        "stock_min": $("#iStockMin").val(),
+        "stock_max": $("#iStockMax").val(),
+        "reorden": $("#iReorden").val(),
+        "cantidad": $("#iCantidad").val(),
         "id_impuestos" : parseInt(doc.getElementById('sImpuesto').value),
         "id_proveedores" : parseInt(doc.getElementById('sProveedor').value),
         "compuesto" : compues
@@ -40,9 +40,7 @@ function tomaValoresFormularioArt(que,tipo){
     if(datos.reorden===""){$('#iReorden').focus();toastr.warning('Punto de reorden...');pasa=false;return;}
     if(datos.cantidad===""){$('#iCantidad').focus();toastr.warning('Falta Cantidad...');pasa=false;return;}
     //if (datos['razonSocial'])
-
 }
-
 function guardarArticulo(que){
     let tipo = "S"
     //alert(doc.getElementById("cCompuesto").checked);

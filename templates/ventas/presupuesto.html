@@ -33,60 +33,29 @@
               </div>
       			<div class="card-body">
                     <div class="row">
-                      <div class="col-12 col-sm-6 col-md-3">
-                        <div onclick="suma_carrito();" class="info-box">
-                          <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
-                          <div class="info-box-content">
-                            <span class="info-box-text">Producto 1</span>
-                            <span class="info-box-number">1300</span>
+                        <div class="col-md-5">
+                            <div class="form-group row">
+                            <label for="iNombreCitas" class="col-sm-4 col-form-label">Nombre</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" maxlength="30" id="iNombreCitas" autofocus="autofocus" autocomplete="nope" placeholder="Nombre">
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <!-- /.col -->
-                      <div class="col-12 col-sm-6 col-md-3">
-                        <div class="info-box mb-3">
-                          <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
-
-                          <div class="info-box-content">
-                            <span class="info-box-text">Producto 1</span>
-                            <span class="info-box-number">41,410</span>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                            <label for="iApellidosCitas" class="col-sm-4 col-form-label">Apellidos</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" maxlength="50" id="iApellidosCitas" placeholder="Apellidos">
+                            </div>
                           </div>
-                          <!-- /.info-box-content -->
+                            <div id="match-list"></div>
                         </div>
-                        <!-- /.info-box -->
-                      </div>
-                      <!-- /.col -->
-
-                      <!-- fix for small devices only -->
-                      <div class="clearfix hidden-md-up"></div>
-
-                      <div class="col-12 col-sm-6 col-md-3">
-                        <div class="info-box mb-3">
-                          <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
-
-                          <div class="info-box-content">
-                            <span class="info-box-text">Producto 1</span>
-                            <span class="info-box-number">760</span>
-                          </div>
-                          <!-- /.info-box-content -->
+                        <div class="col-md-2">
+                            <button class="btn btn-outline-primary" id="btnListaArticulos" name="btnListaArticulos" onclick="bListaArticulo()"><i class="fa fa-search" aria-hidden="true"></i> Servicios</button>
                         </div>
-                        <!-- /.info-box -->
-                      </div>
-                      <!-- /.col -->
-                      <div class="col-12 col-sm-6 col-md-3">
-                        <div class="info-box mb-3">
-                          <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
 
-                          <div class="info-box-content">
-                            <span class="info-box-text">Producto 1</span>
-                            <span class="info-box-number">2,000</span>
-                          </div>
-                          <!-- /.info-box-content -->
-                        </div>
-                        <!-- /.info-box -->
-                      </div>
-                      <!-- /.col -->
                     </div>
+
                 	<div class="row">
 
                 		<table id="ttratamientos"
@@ -116,5 +85,5 @@
       </div>
     </section>
  </div>
-				
+    {% include 'ventas/mod_lista_prod.html' %}
 {% endblock content %}

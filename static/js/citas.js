@@ -13,7 +13,7 @@ $('#iNombreCitas').on('keyup', function() {
         $(this).removeData('wcount');
         return true;
     }
-    // if word count data equals the count of the input, return
+    // if word count d the input, return
     if(typeof $(this).data('wcount') !== "undefined" && ($(this).data('wcount') == words.length)){
         return true;
     }
