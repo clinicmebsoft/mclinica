@@ -1,13 +1,19 @@
 /**
  * 
  */
+
 function EsVacio(campo){
 	alert(campo);
 	return campo == null || campo === "";
 }
-var datosPaciente={};
-var edad = 0;
+
+let edad = 0;
 function tomaValoresFormulario(){
+    if (datosPaciente.nombre===""){
+		toastr.info("Nombre vacío");
+		return
+	}
+    alert($('#iNombrePaciente').val().toUpperCase());
 	datosPaciente = {
 		"nombre": $('#iNombrePaciente').val().toUpperCase(),
 		"apellidos": $('#iApellidos').val().toUpperCase(),
@@ -26,10 +32,8 @@ function tomaValoresFormulario(){
 		"estado":$('#iEstado').val(),
 		"pais":$('#iPais').val()
 	}
-	if (datosPaciente.nombre===""){
-		toastr.info("Nombre vacío");
-		return
-	}
+	alert($('#iNombrePaciente').val().toUpperCase());
+
 }
 
 function limpia(){
@@ -90,10 +94,36 @@ function calculaPorcentaje(){
 	
 }
 
-function guardaPacientes(){	
-	tomaValoresFormulario();
+function guardaPacientes(){
+        datosPaciente= {
+            "nombre": $('#iNombrePaciente').val().toUpperCase(),
+            "apellidos": $('#iApellidos').val().toUpperCase(),
+            "correo": $('#iCorreoPaciente').val(),
+            "fechanacimiento": $('#iFechaNacimientoPaciente').val(),
+            "edad": $('#iEdad').val(),
+            "sexo": $('#sSexo').val(),
+            "ocupacion": $('#iOcupacion').val(),
+            "cp": $('#iCp').val(),
+            "telefono": $('#iTelefono').val(),
+            "celular": $('#iCelular').val(),
+            "calle": $('#iCalle').val(),
+            "colonia": $('#iColonia').val(),
+            "comentario": $('#iComentario').val(),
+            "ciudad": $('#iCiudadPaciente').val(),
+            "estado": $('#iEstado').val(),
+            "pais": $('#iPais').val()
+        }
 
-	//alert(datos.nombre)
+    if (datosPaciente.nombre===''){
+        toastr.error('Falta nombre de paciente');return }
+    if (datosPaciente.apellidos===''){
+        toastr.error('Falta apellidos paciente');return }
+     if (datosPaciente.correo===''){
+        toastr.error('Falta correo ');return }
+     if (datosPaciente.fechanacimiento===''){
+        toastr.error('Falta fecha nacimiento ');return }
+
+
 	var csrftoken = $("[name=csrfmiddlewaretoken]").val();
 	$.ajax({
 		type: 'POST',    

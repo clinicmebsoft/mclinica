@@ -53,7 +53,7 @@ def ajax_guardapaciente(request):
     if request.method == "POST" and request.is_ajax():
         json_data = json.loads(request.body)
         # print(json_data)
-
+        print(json_data['nombre'])
         nombre =  json_data['nombre']
         apellidos = json_data['apellidos']
         correo = json_data['correo']

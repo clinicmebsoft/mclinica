@@ -35,7 +35,8 @@
                  </div>
               </div>
       			<div class="card-body">
-                    <form action="post">
+                    {% csrf_token %}
+
 
                     <div class="form-row">
 
@@ -132,7 +133,7 @@
 
                         </div>
                     </div>
-                    </form>
+
              	</div>
              	<div class="card-footer">
                     <button type="submit" class="btn btn-outline-success" onclick="">Limpiar</button>
