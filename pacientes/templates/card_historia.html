@@ -1,0 +1,265 @@
+<div class="card-body">
+    <div class="row">
+        <h5 style="color:grey;font-weight: bold;">Datos Personales</h5>
+    </div>
+    <div class="form-row">
+        <div class="col-md-3 mb-3">
+            <label for="iOriginario">Originario</label>
+            <input type="text" id="iOriginario" name="iOriginario" autofocus
+                maxlength="30" class="form-control"  />
+        </div>
+        <div class="col-md-3 mb-3">
+            <label for="iMedico">Médico Particular</label>
+            <input type="text" id="iMedico" name="iMedico"
+                maxlength="30" class="form-control"  />
+        </div>
+        <div class="col-md-2 mb2">
+            <label for="iTelefonoMedico">Teléfono Médico</label>
+
+              <input type="text" class="form-control" maxlength="14" value=""
+                     pattern="[0-9]{10}" name="iTelefonoMedico" placeholder="(999) 999-9999" id ="iTelefonoMedico" />
+
+        </div>
+        <div class="col-md-4 mb4">
+            <label for="iMotivo">Motivo Cita</label>
+
+            <textarea type="text"  class="form-control" maxlength="256" id="iMotivo"
+                      name="iMotivo"></textarea>
+
+        </div>
+    </div>
+    <div class="row"><h5 style="color:grey;font-weight: bold;">Antecedentes Patológicos</h5></div>
+    <div class="form-row">
+
+        <div class="col-md-4 mb-6">
+            <label for="iEnfermedadUltimosAnos">Enfermedad en los últimos años</label>
+            <textarea type="text" id="iEnfermedadUltimosAnos" name="iEnfermedadUltimosAnos"  autofocus
+                      maxlength="128" class="form-control" ></textarea>
+        </div>
+        <div class="col-md-4 mb-6">
+            <label for="iEnfermedadGrave">Enfermedad Grave</label>
+            <textarea type="text" id="iEnfermedadGrave" name="iEnfermedadGrave"
+                      maxlength="128" class="form-control"></textarea>
+        </div>
+        <div class="col-md-4 mb-6">
+            <label for="iCirugia">Cirugías</label>
+            <textarea type="text" class="form-control" maxlength="128"  id ="iCirugia" name="iCirugia" ></textarea>
+        </div>
+    </div>
+
+      <div class="form-row">
+        <div class="col-md-4 mb-6">
+            <label for="iTraumatismoSecuelas">Traumatismos/Secuelas</label>
+            <textarea type="text" id="iTraumatismoSecuelas" name="iTraumatismoSecuelas" autofocus
+                      maxlength="128" class="form-control" ></textarea>
+        </div>
+        <div class="col-md-4 mb-6">
+            <label for="iTransfusiones">Transfusiones</label>
+            <textarea type="text" id="iTransfusiones" name="iTransfusiones"
+                      maxlength="128" class="form-control" ></textarea>
+        </div>
+        <div class="col-md-4 mb-6">
+            <label for="iHemorragias">Hemorragias</label>
+            <textarea type="text" class="form-control" maxlength="128"  id ="iHemorragias" name="iHemorragias"></textarea>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-4 mb-6">
+            <label for="iDonadorSangre">Donador de Sangre</label>
+            <textarea type="text" id="iDonadorSangre" name="iDonadorSangre" autofocus
+                      maxlength="128" class="form-control" ></textarea>
+        </div>
+        <div class="col-md-4 mb-6">
+            <label for="iAccidenteTratamientos">Accidentes Tratamientos</label>
+            <textarea type="text" id="iAccidenteTratamientos" name="iAccidenteTratamientos"
+                      maxlength="128" class="form-control" ></textarea>
+        </div>
+        <div class="col-md-4 mb-6">
+            <label for="iTratamientoPadecimiento">Tratamiento Médico/Padecimiento</label>
+            <textarea type="text" class="form-control" maxlength="128"  name="tratamiento_medico_padecimientos" id ="iTratamientoPadecimiento"></textarea>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-4 mb-6">
+            <label for="iTomaMedicamento">Toma Algún Médicamento/Cuáles</label>
+            <textarea type="text" id="iTomaMedicamento" name="iTomaMedicamento" autofocus
+                      maxlength="128" class="form-control" ></textarea>
+        </div>
+        <div class="col-md-8 mb-6">
+            <label for="iEnfermedades">Enfermedades</label>
+            <textarea type="text" id="iEnfermedades"
+                      placeholder="Reumatismo/Anemia/Artritis/Asma/FiebreReumatica/Epilepsia/Tiroides/Hipertensión/CirrosisHepática/EndocarditisBacteriana/Sinusitis/Hepatitis/Herpes/Cancer/Cardiopatias/Hemofilias/Malformaciones/Trastornosauditivos/InfectoContagiosos/VIH/Tuberculosis/Venereas/Hipotensión"
+                      name="iEnfermedades"
+                      maxlength="128" class="form-control" ></textarea>
+        </div>
+
+    </div>
+    <div class="row">
+        <h5 style="color:grey;font-weight: bold;">Antecedentes Hereditarios</h5>
+    </div>
+    <div class="form-row">
+        <div class="col-md-4 mb-6">
+            <label for="iFamiliar">Familiar Con Alguna Enfermedad</label>
+            <textarea type="text" id="iFamiliar" name="iFamiliar" autofocus
+                      placeholder="Diabetes/Cancer/Infarto/Otro"
+                      maxlength="128" class="form-control" ></textarea>
+        </div>
+        <div class="col-md-4 mb-6">
+            <label for="iAlguienEnfermo">Actualmente alguien está enfermo</label>
+            <textarea type="text" id="iAlguienEnfermo" name="iAlguienEnfermo"
+                      maxlength="128" class="form-control" ></textarea>
+        </div>
+        <div class="col-md-4 mb-6">
+            <label for="iEmbarazada">Embarazada</label>
+            <textarea type="text" class="form-control" maxlength="128"  id ="iEmbarazada" name="iEmbarazada"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <h5 style="color:grey;font-weight: bold;">Antecedentes Salud Bucal</h5>
+    </div>
+     <div class="form-row">
+        <div class="col-md-4 mb-6">
+            <label for="iDonadorSangre">Higiene</label><br>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" checked id="iHigiene" name="iHigiene" value="Buena">
+                  <label class="form-check-label" for="iHigiene">Buena</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="iHigiene" name="iHigiene" value="Regular">
+                  <label class="form-check-label" for="iHigiene">Regular</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="iHigiene" name="iHigiene" value="Supervisar">
+                  <label class="form-check-label" for="iHigiene">Supervisar</label>
+                </div>
+
+        </div>
+        <div class="col-md-4 mb-6">
+            <label for="iCepilladosDia">Número de Cepillados al día</label>
+            <input type="number" value="0" id="iCepilladosDia" name="iCepilladosDia"
+                      maxlength="2" class="form-control" />
+        </div>
+        <div class="col-md-4 mb-6">
+            <label for="iTratamientoPadecimiento">Alimentación</label><br>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="iAlimentacion" checked name="iAlimentacion" value="Buena">
+              <label class="form-check-label" for="iAlimentacion">Buena</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="iAlimentacion" name="iAlimentacion" value="Regular">
+              <label class="form-check-label" for="iAlimentacion">Regular</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="iAlimentacion" name="iAlimentacion" value="Mala">
+              <label class="form-check-label" for="iAlimentacion">Mala</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-4 mb-6">
+            <label for="iIntegrantes">Integrantes en Casa</label><br>
+             <input type="number" value="2" id="iIntegrantes" name="iIntegrantes"
+                      maxlength="2" class="form-control" >
+        </div>
+        <div class="col-md-4 mb-6">
+            <label for="iDeporte">Practicas algún deporte</label>
+            <input type="text" id="iDeporte" name="iDeporte"
+                      maxlength="100" class="form-control" >
+        </div>
+        <div class="col-md-4 mb-6">
+            <label for="iHabito">Algún Hábito o Adicción</label>
+            <input type="text" id="iHabito" name="iHabito"
+                      maxlength="100" class="form-control" >
+        </div>
+    </div>
+    <div class="row">
+        <h5 style="color:grey;font-weight: bold;">Signos Vitales</h5>
+    </div>
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+            <label for="iTemperatura">Temperatura</label>
+            <input type="number" value="36" id="iTemperatura" name="iTemperatura" autofocus
+                maxlength="30" class="form-control"  />
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="iPresion">Presión</label>
+            <input type="text"  id="iPresion" name="iPresion"
+                maxlength="30" class="form-control" />
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="iPulso">Pulso</label>
+            <input type="number" value=60 id="iPulso" name="iPulso"
+                maxlength="5" class="form-control" />
+        </div>
+    </div>
+    <div class="row">
+        <h5 style="color:grey;font-weight: bold;">Antecedentes Odontológicos</h5>
+    </div>
+    <div class="form-row">
+        <div class="col-md-4 mb-6">
+            <label for="iTratamientoReciente">Tratamiento Odontológico Reciente</label>
+            <textarea type="text" id="iTratamientoReciente" name="iTratamientoReciente"
+                      placeholder="Extracciones/Profilaxis/Amalgamas/Endodoncia/Protesis"
+                      maxlength="128" class="form-control" ></textarea>
+        </div>
+        <div class="col-md-4 mb-6">
+            <label for="iAlergico">Alergico a Medicamento o Anestésico</label>
+            <textarea type="text" id="iAlergico" name="iAlergico"
+                      maxlength="128" class="form-control" ></textarea>
+        </div>
+        <div class="col-md-4 mb-6">
+            <label for="iExperiencia">Experiencia</label>
+            <textarea type="text" id="iExperiencia" name="iExperiencia"
+                      maxlength="128" class="form-control" ></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <h5 style="color:grey;font-weight: bold;">Extra Oral</h5>
+    </div>
+    <div class="form-row">
+        <div class="col-md-4 mb-6">
+            <label for="iArticulacionTemporoMandibular">Articulación Temporo/Mandibular</label>
+            <textarea type="text" id="iArticulacionTemporoMandibular" name="iArticulacionTemporoMandibular"
+                      maxlength="128" class="form-control" ></textarea>
+        </div>
+        <div class="col-md-4 mb-6" style="top:22px;">
+            <div class="form-check-inline">
+              <input class="form-check-input" type="checkbox" id="cDolorArticulacion" name="cDolorArticulacion" value="false">
+              <label class="form-check-label" for="cDolorArticulacion">Dolor Articulación</label>
+            </div>
+            <div class="form-check-inline">
+              <input class="form-check-input" type="checkbox" id="cChasquidosRuidos" name="cChasquidosRuidos" value="false">
+              <label class="form-check-label" for="cChasquidosRuidos">Chasquidos o Ruidos Articulares</label>
+            </div>
+            <div class="form-check-inline">
+              <input class="form-check-input" type="checkbox" id="cLimitacionApertura" name="cLimitacionApertura" value="false">
+              <label class="form-check-label" for="cLimitacionApertura">Limitación de la Apertura</label>
+            </div>
+        </div>
+        <div class="col-md-4 mb-6" style="top:22px;">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="cLimitacionMovimientos" name="cLimitacionMovimientos" value="false">
+              <label class="form-check-label" for="cLimitacionMovimientos">Limitación de Movimientos</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="cBruxismo" name="cBruxismo" value="false">
+              <label class="form-check-label" for="cBruxismo">Bruxismo</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <h5 style="color:grey;font-weight: bold;">Observaciones</h5>
+    </div>
+    <div class="form-row">
+        <textarea type="text" id="tObservaciones" name="tObservaciones"
+                      maxlength="128" class="form-control" ></textarea>
+    </div>
+    <div class="row fa-pull-right" style="padding: 5px 5px;">
+        {% ifequal existeHC 0 %}
+             <button type="submit" class="btn btn-outline-primary" onclick="guardaHistoria({{ id }});"> Guardar </button>
+         {% else %}
+             <button type="submit" class="btn btn-outline-primary" onclick="modificaHistoria({{ id }});"> Modificar </button>
+         {% endifequal %}
+    </div>
+</div>
+

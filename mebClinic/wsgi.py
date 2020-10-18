@@ -12,7 +12,7 @@ import django
 from django.core.handlers.wsgi import WSGIHandler
 
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mebClinic.settings.production")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mebClinic.settings")
 django.setup(set_prefix=False)
 
 application = WSGIHandler()

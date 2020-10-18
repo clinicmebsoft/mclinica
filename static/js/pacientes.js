@@ -7,6 +7,7 @@ function EsVacio(campo){
 	return campo == null || campo === "";
 }
 
+
 let edad = 0;
 function tomaValoresFormulario(){
     if (datosPaciente.nombre===""){
@@ -57,7 +58,8 @@ function limpia(){
 }
 
 function calculaEdad(){
-	var fecha = $('#iFechaNacimientoPaciente').val();
+
+	var fecha = $('#id_fecha_nacimiento').val();
 	var hoy = new Date();
     var cumpleanos = new Date(fecha);
     var edadCal = hoy.getFullYear() - cumpleanos.getFullYear();
@@ -66,7 +68,8 @@ function calculaEdad(){
     if (m < 0 || (m === 0 && hoy.getDate() < cumpleanos.getDate())) {
         edadCal--;
     }
-    $('#iEdad').val(edadCal);
+ 
+    $('#id_edad').val(edadCal);
     	edad=edadCal;
     return edad;
 }
@@ -91,27 +94,57 @@ function obtenFoto(){
 function calculaPorcentaje(){
 	var costo = $('#txtCosto').val();
 	var descuento = $('#txtDescuento').val();
-	
 }
 
+
+function guardaPacientesValida(){
+        alert("hola");
+      datosPaciente= {
+            "nombre": $('#id_nombre').val().toUpperCase(),
+            "apellidos": $('#id_apelidos').val().toUpperCase(),
+            "correo": $('#id_correo').val(),
+            "fechanacimiento": $('#id_fecha_nacimiento').val(),
+            "edad": $('#id_edad').val(),
+            "sexo": document.getElementById('id_sexo').value,
+            "ocupacion": $('#id_ocupacion').val(),
+            "cp": $('#id_cp').val(),
+            "telefono": document.getElementById('id_telefono').value,
+            "celular": document.getElementById('id_celular').value,
+            "calle": $('#id_calle').val(),
+            "colonia": $('#id_colonia').val(),
+            "comentario": $('#id_observaciones').val(),
+            "ciudad": $('#id_ciudad').val(),
+            "estado": $('#id_estado').val(),
+            "pais": $('#id_pais').val()
+        }
+
+    if (datosPaciente.nombre===''){
+        toastr.error('Falta nombre de paciente');return }
+    if (datosPaciente.apellidos===''){
+        toastr.error('Falta apellidos paciente');return }
+     if (datosPaciente.correo===''){
+        toastr.error('Falta correo ');return }
+     if (datosPaciente.fechanacimiento===''){
+        toastr.error('Falta fecha nacimiento ');return }
+}
 function guardaPacientes(){
         datosPaciente= {
-            "nombre": $('#iNombrePaciente').val().toUpperCase(),
-            "apellidos": $('#iApellidos').val().toUpperCase(),
-            "correo": $('#iCorreoPaciente').val(),
-            "fechanacimiento": $('#iFechaNacimientoPaciente').val(),
-            "edad": $('#iEdad').val(),
-            "sexo": $('#sSexo').val(),
-            "ocupacion": $('#iOcupacion').val(),
-            "cp": $('#iCp').val(),
-            "telefono": $('#iTelefono').val(),
-            "celular": $('#iCelular').val(),
-            "calle": $('#iCalle').val(),
-            "colonia": $('#iColonia').val(),
-            "comentario": $('#iComentario').val(),
-            "ciudad": $('#iCiudadPaciente').val(),
-            "estado": $('#iEstado').val(),
-            "pais": $('#iPais').val()
+           "nombre": $('#id_nombre').val().toUpperCase(),
+            "apellidos": $('#id_apelidos').val().toUpperCase(),
+            "correo": $('#id_correo').val(),
+            "fechanacimiento": $('#id_fecha_nacimiento').val(),
+            "edad": $('#id_edad').val(),
+            "sexo":  document.getElementById('id_sexo').value,
+            "ocupacion": $('#id_ocupacion').val(),
+            "cp": $('#id_cp').val(),
+            "telefono": $('#id_telefono').val(),
+            "celular": $('#id_celular').val(),
+            "calle": $('#id_calle').val(),
+            "colonia": document.getElementById('id_colonia').value,
+            "comentario": document.getElementById('id_observaciones').value,
+            "ciudad": $('#id_ciudad').val(),
+            "estado": $('#id_estado').val(),
+            "pais": $('#id_pais').val()
         }
 
     if (datosPaciente.nombre===''){
@@ -147,7 +180,9 @@ function guardaPacientes(){
         	toastr.success(resultado.respuesta.mensaje);
         	if (resultado.respuesta.mensaje.search("Error")<1 ){
         		cargaTpacientes();
+
         		limpia();
+        		location.href='/pacientes/listapacientes';
         		}
         	else{
         	}
@@ -287,7 +322,7 @@ $(document).ready(function() {
    
    $('#tpacientes').on('click','tbody tr',function(){
         let row = tabla.row(this).data();
-        
+        editaPAciente(row);
         alert(row['id']);
    })
 } );
@@ -531,4 +566,145 @@ function registroPacientesHC(){
     	    alert('Error: ' + jqXHR.responseText);
     	  }
     	});	
+}
+
+
+function CargaHC(id){
+    alert('Cargando historia clínica' + id);
+}
+
+function guardaHistoria(id){
+    //alert("Guarda Historia");
+    const origin = $('#iOriginario').val();
+    const medi = $('#iMedico').val();
+    const telmed = $('#iTelefonoMedico').val();
+    const cirugia  = $('#iCirugia').val();
+
+
+    const higi = document.querySelectorAll('input[name="iHigiene"]');
+    let higiene='';
+    for (const h of higi) {
+        if (h.checked) {
+            higiene = h.value;
+            break;
+        }
+    }
+    const alimen = document.querySelectorAll('input[name="iAlimentacion"]');
+    let alimentacion='';
+    for (const a of alimen) {
+        if (a.checked) {
+            alimentacion = a.value;
+            break;
+        }
+    }
+    let dolorarticula = false;
+    const dolora = document.getElementById('cDolorArticulacion').value;
+    if (dolora=='on') {
+        dolorarticula = true;
+    }
+    let chasquido = false;
+    const chas = document.getElementById('cChasquidosRuidos').value;
+    if (chasquido=='on'){
+        chasquido = true;
+    }
+   let limiteapertura = false;
+    const lim = document.getElementById('cLimitacionApertura').value;
+    if (lim=='on'){
+        limiteapertura = true;
+    }
+    let limitemovi = false;
+    const limm = document.getElementById('cLimitacionMovimientos').value;
+    if (limm=='on'){
+        limitemovi = true;
+    }
+    let bruxismo = false;
+    const bru = document.getElementById('cBruxismo').value;
+    if (bru=='on'){
+        bruxismo = true;
+    }
+
+    //alert(dolorarticula);
+
+
+    //alert($('#EnfermedadGrave').val());
+    datos = {
+        id : id,
+        origin : origin,
+        medi : medi,
+        telmed : telmed,
+        cirugia : cirugia,
+        motivo : $('#iMotivo').val(),
+        enfermedadUiltimosA : $('#iEnfermedadUltimosAnos').val(),
+        EnfermedadGrave : $('#iEnfermedadGrave').val(),
+        Cirugia : $('#iCirugia').val(),
+        TraumatismoSecuelas : $('#iTraumatismoSecuelas').val(),
+        Transfusiones : $('#iTransfusiones').val(),
+        Hemorragias : $('#iHemorragias').val(),
+        DonadorSangre : $('#iDonadorSangre').val(),
+        AccidenteTratamientos : $('#iAccidenteTratamientos').val(),
+        TomaMedicamento : $('#iTomaMedicamento').val(),
+        Enfermedades : $('#iEnfermedades').val(),
+        Familiar : $('#iFamiliar').val(),
+         AlguienEnfermo    : $('#iAlguienEnfermo').val(),
+         Embarazada        : $('#iEmbarazada').val(),
+         Higiene           : higiene,
+         CepilladosDia     : $('#iCepilladosDia').val(),
+         Alimentacion      : alimentacion,
+         Integrantes       : $('#iIntegrantes').val(),
+         Deporte           : $('#iDeporte').val(),
+         Habito            : $('#iHabito').val(),
+         Temperatura       : $('#iTemperatura').val(),
+         Presion           : $('#iPresion').val(),
+         Pulso                        : $('#iPulso').val(),
+         TratamientoReciente          : $('#iTratamientoReciente').val(),
+         Alergico                     : $('#iAlergico').val(),
+         Experiencia                  : $('#iExperiencia').val(),
+         ArticulacionTemporoMandibular: $('#iArticulacionTemporoMandibular').val(),
+         DolorArticulacion            : dolorarticula,
+         ChasquidosRuidos             : chasquido,
+         LimitacionApertura           : limiteapertura,
+         LimitacionMovimientos        : limitemovi,
+         Bruxismo                     : bruxismo,
+
+         Observaciones                : $('#tObservaciones').val(),
+
+    }
+    var csrftoken = $("[name=csrfmiddlewaretoken]").val();
+    $.ajax({
+		type: 'POST',
+		processData: false,
+        contentType: "application/json",
+        dataType : 'json',
+        headers:{
+        	"X-CSRFToken": csrftoken,
+			"X-Requested-With": "XMLHttpRequest"
+    	},
+        url : '/pacientes/ajx_guarda_historia',
+        data : JSON.stringify(datos),
+        success : function(resultado) {
+        	//alert(resultado.respuesta.mensaje);
+             if (resultado.respuesta.mensaje.includes('Error')){
+                 toastr.error(resultado.respuesta.mensaje);
+             }else {
+                 toastr.success(resultado.respuesta.mensaje);
+             }
+        },
+
+    }).fail( function( jqXHR, textStatus, errorThrown ) {
+    	  if (jqXHR.status === 0) {
+    		  toastr.error({html:'No estás conectado, verifica red.'});
+    	  } else if (jqXHR.status === 404) {
+    		  toastr.error({html:'Página no encontrada [404]...'});
+    	    //alert('Requested page not found [404]');
+    	  } else if (jqXHR.status === 500) {
+    		  toastr.error({html:'Interno del Servidor [500].'});
+    	  } else if (textStatus === 'parsererror') {
+    		  toastr.error({html:'JSON error de parseo.'});
+    	  } else if (textStatus === 'timeout') {
+    		  toastr.error({html:'Error Time out.'});
+    	  } else if (textStatus === 'abort') {
+    		  toastr.error({html:'Ajax respuesta abortada.'});
+    	  }
+    	});
+
 }

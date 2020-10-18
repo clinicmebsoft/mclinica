@@ -1,0 +1,197 @@
+{% extends "genericos/layout.html" %}
+{% block content %}
+    {% load static %}
+    {% csrf_token %}
+  <!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  	<section class="content">
+      <div class="container-fluid">
+      	<div class="card ">
+           <div class="card-header">
+           	<div class="row" >
+                <div class="col-md-6">
+                    <img src="{% static '/dist/images/paciente.svg' %}" class="tamImagen "/>
+           			<h5 class="card-title" style="font-size: 30px;">Pacientes</h5>
+                </div>
+                <div class="col-md-6 text-right">
+                    <div class="card-tools">
+                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#tomarFotoModal">
+                            Tomar Foto
+                        </button>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-outline-primary" data-toggle="dropdown">
+                      <i class="fas fa-wrench" style="color: #1682BB;"></i>
+                    </button>
+                   {% include 'panel_paciente.html' %}
+                  </div>
+                </div>
+            </div>
+            </div>
+      			<div class="card-body">
+                    <form action="/pacientes/edit_paciente/{{ paciente.id }}" method="post">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="col-md-3 mb-3">
+                            <label for="id_nombre">Nombre</label><input type="text" value="{{ paciente.nombre }}"
+                                style="text-transform: uppercase;" id="id_nombre" name="nombre" autofocus
+                                maxlength="20" class="form-control"  />
+                        </div>
+                        <div class="col-md-3 mb-3">
+
+                            <label for="id_apelidos">Apellidos</label><input type="text" value="{{ paciente.apellidos }}"
+                                style="text-transform: uppercase;" id="id_apelidos" name="apellidos"
+                                maxlength="30" class="form-control" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+
+                            <label for="id_correo">Correo:</label>
+                            <input type="email" id="id_correo" value="{{ paciente.correo }}"
+                                name="correo" maxlength="100" class="form-control" />
+
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-3 mb-3">
+                            <label for="id_fecha_nacimiento">Fecha de Nacimiento</label>
+                            <input type="date" class="form-control" value="{{ paciente.fecha_nacimiento |safe  }}"
+                                   name="fecha_nacimiento" placeholder="" id="id_fecha_nacimiento" onfocusout="calculaEdad();" />
+                        </div>
+                        <div class="col-md-2 mb-3">
+
+                            <label for="id_edad">Edad</label>
+                                <input type="number" value="{{ paciente.edad}}"  class="form-control"  name="edad" id="id_edad" maxlength="2" />
+
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <label for="id_sexo">Sexo</label>
+                            <select id="id_sexo"  name="sexo" class="form-control" data-title="Select Sexo" data-style="btn-default btn-block" data-menu-style="dropdown-blue">
+                                <option value="{{ paciente.sexo }}">{{ paciente.sexo }}</option>
+                                {% for x,y in form.fields.sexo.choices %}
+                                   <option value="{{ x }}">{{ y }}</option>
+                                {% endfor %}
+                            </select>
+
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="id_ocupacion">Ocupación</label>
+                            <input class="form-control" type="text" name='ocupacion' value="{{ paciente.ocupacion }}" maxlength="200" id="id_ocupacion" />
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <label for="id_cp">CP</label>
+                            <input id="id_cp"  clasS="form-control" value="{{ paciente.cp }}" name="cp" type="number" />
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-4 mb-4">
+                            <label for="id_calle">Calle y Número</label> <input value="{{ paciente.calle }}"
+                                class="form-control" type="text" name="calle" maxlength="30" id="id_calle" />
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <label for="id_colonia">Colonia</label> <input class="form-control" value="{{ paciente.colonia }}"
+                                type="text" maxlength="30" id="id_colonia" name="colonia"/>
+                        </div>
+
+                        <div class="col-md-2 mb-2">
+                            <label for="id_telefono">Teléfono:</label><input type="text" id="id_telefono" value="{{ paciente.telefono }}"
+                                name="telefono" maxlength="20" class="form-control" />
+                        </div>
+                        <div class="col-md-2 mb-2">
+                            <label for="id_celular">Celular:</label><input type="text" id="id_celular" value="{{ paciente.celular }}"
+                                name="celular" maxlength="20" class="form-control" />
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-3 mb-3">
+                            <label for="celular2">Ciudad:</label><input type="text" id="celular2"
+                                  value="{{ paciente.ciudad }}"  name="celular2" maxlength="20" class="form-control" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="id_estado">Estado</label> <input class="form-control"
+                                value="{{ paciente.estado }}" type="text" name="estado" maxlength="30" id="id_estado" />
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="id_pais">País</label> <input class="form-control"
+                                value="{{ paciente.pais }}" type="text" maxlength="30" name="pais" id="id_pais" />
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="input-field col-md-12">
+                            <label for="id_observaciones">Observaciones:</label>
+                            <textarea id="id_observaciones"  name="observaciones" rows="6" class="form-control ">
+                                {{ paciente.observaciones|safe }}</textarea>
+
+                        </div>
+                    </div>
+
+             	</div>
+             	<div class="card-footer">
+                    <button type="submit" class="btn btn-outline-success" onclick="">Limpiar</button>
+             		<button type="submit" class="btn btn-outline-danger" onclick="">Cancel</button>
+                    <button type="submit" class="btn btn-outline-info">Guardar</button>
+
+                </div>
+            </form>
+            </div>
+      </div>
+    </section>
+ </div>
+<div class="modal fade" id="tomarFotoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLongTitle">Foto</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row" >
+
+            <div class="col4">
+                <video width=240 height=180
+                    style="outline: #9e9e9e solid 1px; padding-bottom: 3px;"
+                    id="monitor" controls autoplay></video>
+                <p>
+                    <button type="submit" class="btn btn-secondary" id="snap">
+                        <span class="fa fa-play"></span>
+                    </button>
+                    &nbsp;
+                    <button class="btn btn-secondary" id="stopCamara">
+                        <span class="fa fa-stop"></span>
+                    </button>
+                    <button class="btn btn-secondary" id="dispara1">
+                        <span class="fa fa-camera"></span>1
+                    </button>
+                    <button class="btn btn-secondary" id="dispara2">
+                        <span class="fa fa-camera"></span>2
+                    </button>
+                    <button class="btn btn-secondary" id="dispara3">
+                        <span class="fa fa-camera"></span>3
+                    </button>
+                </p>
+            </div>
+            <div class="col2">
+                <canvas width=240 height=180 id="foto1"></canvas>
+                <p>Foto1</p>
+            </div>
+            <div class="col2">
+                <canvas width=240 height=180 id="foto2"></canvas>
+            </div>
+            <div class="col2">
+                <canvas width=240 height=180 id="foto3"></canvas>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-outline-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

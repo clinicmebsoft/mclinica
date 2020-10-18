@@ -1,0 +1,77 @@
+{% extends "genericos/layout.html" %}
+{% block content %}
+    {% load static %}
+    {% csrf_token %}
+  <!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  	<section class="content">
+      <div class="container-fluid">
+      	<div class="card ">
+           <div class="card-header">
+                <div class="row" >
+                    <div class="col-md-6">
+                        <img src="{% static '/dist/images/paciente.svg' %}" class="tamImagen"/>
+                        <h4 class="card-title" style="font-size: 20px">Lista Pacientes</h4>
+
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <div class="card-tools">
+
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-outline-primary" data-toggle="dropdown">
+                              <i class="fas fa-wrench" style="color: #1682BB;"></i>
+                            </button>
+                            {% include 'panel_paciente.html' %}
+                          </div>
+
+                         </div>
+                    </div>
+                </div>
+
+           </div>
+            <div class="card-body">
+
+                <table id="tpacientes" class="table table-responsive-md">
+                    <!-- https://divtable.com/table-styler/ -->
+                    <thead>
+                        <tr>
+
+                            <th width="5%">#</th>
+                            <th width="20%">Nombre</th>
+                            <th width="15%">Calle</th>
+                            <th width="10%">Teléfono</th>
+                            <th width="10%">Celular</th>
+                            <th width="10%">Correo</th>
+                            <th width="5%"></th>
+                            <th ></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for rs in lpacientes %}
+                        <tr>
+                            <td>{{ rs.id }}</td>
+                            <td>{{ rs.nombre}} {{ rs.apellidos }}</td>
+                            <td>{{ rs.calle }}</td>
+                            <td>{{ rs.telefono }}</td>
+                            <td>{{ rs.celular }}</td>
+                            <td>{{ rs.correo }}</td>
+                            <td><a class="btn btn-outline-primary btn-sm" href="edit_paciente/{{ rs.id }}"><i class="fas fa-edit"></i></a> </td>
+                            <td width="10%"><a class="btn btn-outline-primary btn-sm" href="historiaclinica/{{ rs.id }}"><i class="fas fa-diagnoses"></i></a> </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+             <div class="modal-footer">
+
+                <!--<button type="button" class="btn btn-outline-secondary" onclick="cargaTpacientes()" >Carga Pacientes</button>
+                <button type="button" class="btn btn-outline-primary"> Guardar </button>-->
+              </div>
+        </div>
+      </div>
+
+
+
+    </section>
+</div>
+{% endblock content %}

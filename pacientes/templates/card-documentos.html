@@ -1,0 +1,53 @@
+<div class="card-body">
+    <div class="row">
+        <h5 style="color:grey;font-weight: bold;">Consentimiento Informado</h5>
+    </div>
+    <div class="form-row">
+        <div class="col-md-3 mb-3">
+            <label for="iOriginario">Consentimiento Informado</label>
+            <input type="text" id="iOriginario" name="iOriginario" autofocus
+                maxlength="30" class="form-control"  />
+        </div>
+        <div class="col-md-3 mb-3">
+            <label for="iMedico">Médico Particular</label>
+            <input type="text" id="iMedico" name="iMedico"
+                maxlength="30" class="form-control"  />
+        </div>
+        <div class="col-md-2 mb2">
+            <label for="iTelefonoMedico">Teléfono Médico</label>
+
+              <input type="text" class="form-control" maxlength="14" value=""
+                     pattern="[0-9]{10}" name="iTelefonoMedico" placeholder="(999) 999-9999" id ="iTelefonoMedico" />
+
+        </div>
+        <div class="col-md-4 mb4">
+            <label for="iMotivo">Motivo Cita</label>
+
+            <textarea type="text"  class="form-control" maxlength="256" id="iMotivo"
+                      name="iMotivo"></textarea>
+
+        </div>
+    </div>
+    <div class="row"><h5 style="color:grey;font-weight: bold;">Estudios</h5></div>
+    <div class="form-row">
+
+
+    </div>
+
+
+
+    <div class="row">
+        <h5 style="color:grey;font-weight: bold;">Observaciones</h5>
+    </div>
+    <div class="form-row">
+        <textarea type="text" id="tPresuObservaciones" name="tObservaciones"
+                      maxlength="128" class="form-control" ></textarea>
+    </div>
+     <div class="row fa-pull-right" style="padding: 5px 5px;">
+        {% ifequal existePre 0 %}
+             <button type="submit" class="btn btn-outline-primary" onclick="guardaDocumentos({{ id }});"> Guardar </button>
+         {% else %}
+             <button type="submit" class="btn btn-outline-primary" onclick="modificaDocumentos({{ id }});"> Modificar </button>
+         {% endifequal %}
+    </div>
+</div>

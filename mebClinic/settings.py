@@ -80,7 +80,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mebClinic.wsgi.application'
 
-
+AUTHENTICATION_BACKENDS = (
+     'django.contrib.auth.backends.RemoteUserBackend',
+     'django.contrib.auth.backends.ModelBackend',
+)
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 

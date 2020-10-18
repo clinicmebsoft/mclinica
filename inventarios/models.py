@@ -95,9 +95,7 @@ class Articulos(models.Model):
     cantidad = models.IntegerField(default=0)
     id_impuestos = models.ForeignKey(Impuestos, on_delete=models.PROTECT)
     id_proveedores = models.ForeignKey(Proveedores, on_delete=models.PROTECT)
-    compuesto = models.BooleanField(
-        default=False)  # Si compuesto TRUE afectar inventarios de los artículos de compuesto
-    id_compuesto = models.ForeignKey(Compuesto, on_delete=models.PROTECT, default=0)
+
     creado = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     actualizado = models.DateTimeField(auto_now=datetime.now(), blank=True, null=True)
     estatus = models.CharField(max_length=2, default='A')

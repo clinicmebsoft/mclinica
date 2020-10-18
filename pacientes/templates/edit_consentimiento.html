@@ -1,0 +1,49 @@
+{% extends "genericos/layout.html" %}
+{% block content %}
+    {% load static %}
+    {% csrf_token %}
+  <!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+      <div class="container-fluid">
+      	<div class="card ">
+           <div class="card-header">
+           	    <div class="row" >
+           			<img src="{% static '/dist/images/paciente.svg' %}" class="tamImagen"/>
+           			<h5 class="card-title" style="font-size: 30px;">Pacientes</h5>
+           		</div>
+
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#tomarFotoModal">
+                            Tomar Foto
+                        </button>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-outline-primary" data-toggle="dropdown">
+                      <i class="fas fa-wrench" style="color: #1682BB;"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" role="menu">
+                        <a href="../citas/citas" class="dropdown-item">Nuevo</a>
+                      	<a href="../citas/buscar" class="dropdown-item">Buscar</a>
+                      	<a href="../citas/eliminar" class="dropdown-item">Eliminar</a>
+                      	<a href="../citas/reagendar" class="dropdown-item">Reagendar</a>
+                      	<a class="dropdown-divider"></a>
+                      	<a href="../citas/listacitas" class="dropdown-item">Lista Citas</a>
+                    </div>
+                  </div>
+
+                 </div>
+              </div>
+      			<div class="card-body">
+
+                </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-outline-primary" >Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

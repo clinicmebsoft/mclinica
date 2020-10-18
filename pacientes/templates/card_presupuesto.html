@@ -1,0 +1,53 @@
+
+<div class="card-body">
+    <div class="row">
+        <h5 style="color:grey;font-weight: bold;">Presupuesto</h5>
+    </div>
+    <div class="row">
+        {% include 'card_odontograma.html' %}
+    </div>
+
+    <div class="form-row">
+
+        <table class="table table-responsive-md">
+            <thead>
+                <th width="5%">Id</th>
+                <th width="35%">Tratamiento</th>
+                <th width="15%">Cantidad</th>
+                <th width="15%">Precio</th>
+                <th width="15%">Descuento</th>
+                <th width="15%">Total</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>Descuento</td>
+                    <td>Total</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div class="row">
+        <h5 style="color:grey;font-weight: bold;">Observaciones</h5>
+    </div>
+    <div class="form-row">
+        <textarea type="text" id="tPresuObservaciones" name="tObservaciones"
+                      maxlength="128" class="form-control" ></textarea>
+    </div>
+     <div class="row fa-pull-right" style="padding: 5px 5px;">
+        {% ifequal existePre 0 %}
+             <button type="submit" class="btn btn-outline-primary" onclick="guardaPresupuesto({{ id }});"> Guardar </button>
+         {% else %}
+             <button type="submit" class="btn btn-outline-primary" onclick="modificaPresupuesto({{ id }});"> Modificar </button>
+         {% endifequal %}
+    </div>
+</div>

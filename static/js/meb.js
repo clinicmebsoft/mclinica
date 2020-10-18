@@ -3,6 +3,18 @@
  */
 //---MENU
 
+function mensajeToast(mensaje) {
+  var x = document.getElementById("mensajetoast");
+  x.innerText = mensaje;
+  if (mensaje.includes('Error')===true)
+  {
+     x.style.backgroundColor='red';
+  }
+
+  x.className = "show";
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+
 function mensaje(enviarmensaje) {
 	document.getElementById("mensaje").innerHTML=enviarmensaje;
     var x = document.getElementById("mensaje");

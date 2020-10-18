@@ -22,11 +22,19 @@ let esp={
             }
         }
 /* se tiene que incluir en producto.html { % include 'catalogo/mod_unidad.html' %}*/
-
+/*
+const bcat = document.querySelector('#btnCategoria');
+bcat.addEventListener('click',cargaCatalogoCategoria);
+function cargaCatalogoCateoria(){
+    $('#modalCatalogoCategorias').modal('show');
+    cargaTablas('#tCataCategoria','ajax_catalogo_listcategoria','iCataCategoria','iIdCate');
+}
+*/
 document.getElementById("btnCategoria").addEventListener("click",function(){
     $('#modalCatalogoCategorias').modal('show');
     cargaTablas('#tCataCategoria','ajax_catalogo_listcategoria','iCataCategoria','iIdCate');
 })
+
 document.getElementById("btnUnidad").addEventListener("click",function(){
     $('#modalCatalogoUnidad').modal('show');
     cargaTablas('#tCataUnidad','ajax_catalogo_unidad','iCataUnidad','iIdUnidad');
