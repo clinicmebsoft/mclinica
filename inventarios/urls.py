@@ -3,10 +3,10 @@ from . import views
 
 
 urlpatterns = [
-    path('inventarios/', views.inventarios, name='inventarios'),
-    path('inventarios/productos', views.productos, name='productos'),
+    path('inventarios', views.inventarios, name='inventarios'),
+    path('productos', views.productos, name='productos'),
     path('ajax_abcGuardarCatalogos' , views.ajax_abcGuardarCatalogos, name='abcGuardarCatalogos'),
-    path('inventarios/lista_articulos', views.lista_articulos, name='lista_articulos'),
+    path('lista_articulos', views.lista_articulos, name='lista_articulos'),
     path('ax_guardarArticulos',views.ax_guardarArticulos,name = 'ax_guardarArticulos'),
 
     path('ajax_catalogo_listcategoria',views.ajax_catalogo_listcategoria, name='catalogo_categorias'),

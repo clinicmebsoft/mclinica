@@ -8,7 +8,14 @@
     </div>
 
     <div class="form-row">
-
+        <label for="sArticulos">Tratamientos:</label>
+        <select class="form-control" id="sArticulos" style="background-color: dodgerblue;color: #f9f9f9;font-size: 20px;">
+            {% for art in articulos %}
+               <option  value="{{art.id}}">
+                   {{art.descripcion}}
+               </option>
+            {% endfor %}
+        </select>
         <table class="table table-responsive-md">
             <thead>
                 <th width="5%">Id</th>

@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib import messages
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
@@ -9,6 +11,9 @@ import json
 
 
 # Create your views here.
+from ventas.models import Presupuesto
+
+
 def index(request):  # usuario no activo mandar al login
     return render(request, "paciente.html")
 
@@ -213,7 +218,7 @@ def ajax_guardapaciente(request):
     if request.method == "POST" and request.is_ajax():
         json_data = json.loads(request.body)
         # print(json_data)
-        print(json_data['nombre'])
+        # print(json_data['nombre'])
         nombre = json_data['nombre']
         apellidos = json_data['apellidos']
         correo = json_data['correo']
@@ -268,3 +273,27 @@ def ajax_obtenDatosPacienteCitas(request):
             return HttpResponse(data, content_type='application/json')
         except:
             return HttpResponse("Error al intentar recuperar datos")
+
+def ax_Presupuesto(request):
+    resp = ""
+    presupuesto = Presupuesto()
+    if request.method == "POST" and request.is_ajax():
+        json_data = json.loads(request.body)
+        id_paciente = json_data['id_paciente']
+        id_doctor = json_data['id_doctor']
+        id_tratamiento = json_data['id_tratamiento']
+        precio = json_data['precio']
+        descuento= json_data['descuento']
+        vence = datetime.datetime.now() + datetime.timedelta(30) # sólo se respetan 30 días del presupuesto
+        estatus  = 'T'  # temporal puede pasar a P = presentado, después a A = aceptado
+        presupuesto.save()
+        print (json_data['id_paciente'])
+
+    else:
+        resp = "Error al guardar registro del presupuesto"
+
+    return JsonResponse({
+        'respuesta': {
+            'mensaje': resp,
+        }
+    })

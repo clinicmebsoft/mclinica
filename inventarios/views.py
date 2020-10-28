@@ -9,15 +9,15 @@ from django.core import serializers
 
 # Create your views here.
 def inventarios(request):
-    return render(request, "inventarios/inventario.html")
+    return render(request, "inventario.html")
 
 
 def productos(request):
-    return render(request, "inventarios/productos.html")
+    return render(request, "productos.html")
 
 
 def lista_articulos(request):
-    return render(request, "inventarios/lista_articulos.html")
+    return render(request, "lista_articulos.html")
 
 
 def ajax_abcGuardarCatalogos(request):
