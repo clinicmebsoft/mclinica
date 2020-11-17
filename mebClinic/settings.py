@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'ventas.apps.VentasConfig',
     'herramientas.apps.HerramientasConfig',
     'caja.apps.CajaConfig',
+    'Personal.apps.PersonalConfig',
     'proveedores.apps.ProveedoresConfig',
     'djrichtextfield',
     'django.contrib.admin',

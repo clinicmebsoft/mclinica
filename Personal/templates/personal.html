@@ -1,0 +1,360 @@
+{% extends "genericos/layout.html" %}
+{% block content %}
+    {% load static %}
+    {% csrf_token %}
+  <!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  	<section class="content">
+      <div class="container-fluid">
+      	<div class="card ">
+           <div class="card-header">
+           	<div class="row" >
+                <div class="col-md-6">
+                    <img src="{% static '/dist/images/personal.svg' %}" class="tamImagen "/>
+           			<h5 class="card-title" style="font-size: 30px;">Personal</h5>
+                </div>
+                <div class="col-md-6 text-right">
+                    <div class="card-tools">
+                    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#tomarFotoModal">
+                            Tomar Foto
+                        </button>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-outline-primary" data-toggle="dropdown">
+                      <i class="fas fa-wrench" style="color: #1682BB;"></i>
+                    </button>
+                    {% include 'panel_paciente.html' %}
+                  </div>
+                </div>
+            </div>
+            </div>
+      			<div class="card-body">
+                    {% csrf_token %}
+                    <div class="row">
+                       <div class="col-md-3 col-sm-6 col-xs-12">
+                           <div style="overflow-y:auto;height: 600px;">
+                              <div class="info-box">
+                                <span class="info-box-icon bg-cyan">AMT</span>
+
+                                <div class="info-box-content">
+                                  <span class="info-box-text">Messages</span>
+                                  <span class="info-box-number">1,410</span>
+                                </div>
+                                <!-- /.info-box-content -->
+                              </div>
+                               <div class="info-box">
+                                <span class="info-box-icon bg-cyan">AM</span>
+
+                                <div class="info-box-content">
+                                  <span class="info-box-text">Messages</span>
+                                  <span class="info-box-number">1,410</span>
+                                </div>
+                                <!-- /.info-box-content -->
+                              </div>
+                               <div class="info-box">
+                                <span class="info-box-icon bg-cyan">AMT</span>
+
+                                <div class="info-box-content">
+                                  <span class="info-box-text">Messages</span>
+                                  <span class="info-box-number">1,410</span>
+                                </div>
+                                <!-- /.info-box-content -->
+                              </div>
+                               <div class="info-box">
+                                <span class="info-box-icon bg-cyan">AMT</span>
+
+                                <div class="info-box-content">
+                                  <span class="info-box-text">Messages</span>
+                                  <span class="info-box-number">1,410</span>
+                                </div>
+                                <!-- /.info-box-content -->
+                              </div>
+                               <div class="info-box">
+                                <span class="info-box-icon bg-cyan">AMT</span>
+
+                                <div class="info-box-content">
+                                  <span class="info-box-text">Messages</span>
+                                  <span class="info-box-number">1,410</span>
+                                </div>
+                                <!-- /.info-box-content -->
+                              </div>
+                                <div class="info-box">
+                                <span class="info-box-icon bg-cyan">AMT</span>
+
+                                <div class="info-box-content">
+                                  <span class="info-box-text">Messages</span>
+                                  <span class="info-box-number">1,410</span>
+                                </div>
+                                <!-- /.info-box-content -->
+                              </div>
+                                <div class="info-box">
+                                <span class="info-box-icon bg-cyan">AMT</span>
+
+                                <div class="info-box-content">
+                                  <span class="info-box-text">Messages</span>
+                                  <span class="info-box-number">1,410</span>
+                                </div>
+                                <!-- /.info-box-content -->
+                              </div>
+
+                          <!-- /.info-box -->
+                           </div>
+                        </div>
+                        <div class="col-md-9 col-sm-6">
+                            <div class="card-body bg-light">
+                                <div class="form-row">
+                            <div class="col-md-3 mb-3">
+                                <label for="id_personal_nombre">Nombre</label><input type="text" value=""
+                                    style="text-transform: uppercase;" id="id_personal_nombre" name="id_personal_nombre" autofocus
+                                    maxlength="20" class="form-control"  />
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="id_personal_apelidos">Apellidos</label><input type="text" value=""
+                                    style="text-transform: uppercase;" id="id_personal_apelidos" name="id_personal_apelidos"
+                                    maxlength="30" class="form-control" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+
+                                <label for="id_personal_correo">Correo:</label>
+                                <input type="email" id="id_personal_correo" value=""
+                                    name="id_personal_correo" maxlength="100" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-3 mb-3">
+                                        <label for="id_personal_fecha_nacimiento">Fecha de Nacimiento</label>
+                                        <input type="date" class="form-control" value=""
+                                               name="id_personal_fecha_nacimiento" placeholder="" id="id_fpersonal_echa_nacimiento" onfocusout="calculaEdad();" />
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="id_personal_sexo">Sexo</label>
+                                        <select id="id_personal_sexo"  name="id_personal_sexo" class="form-control" data-title="Select Sexo" data-style="btn-default btn-block" data-menu-style="dropdown-blue">
+                                           <option value="Femenino">Femenino</option>
+                                            <option value="Masculino">Masculino</option>
+                                            <option value="No Definido">No Definido</option>
+                                        </select>
+
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="id_personal_especialidad">Especialidad</label>
+
+                                         <div class="input-group">
+                                            <select id="id_personal_especialidad" class="form-control">
+                                                <option></option>
+                                            </select>
+                                            <button class="btn btn-outline-primary " for="id_personal_ocupacion" onclick="especialidades()"><i class="fas fa-question"></i></button>
+                                         </div>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label for="id_personal_cp">CP</label>
+                                        <input id="id_personal_cp"  clasS="form-control" value="" name="id_personal_cp"  type="number" />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-4">
+
+                                        <label for="id_personal_calle">Calle y Número</label> <input value=""
+                                            class="form-control" type="text" name="id_personal_calle" maxlength="30" id="id_personal_calle" />
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <label for="id_personal_colonia">Colonia</label> <input class="form-control" value=""
+                                            type="text" maxlength="30" id="id_personal_colonia" name="id_personal_colonia"/>
+                                    </div>
+                                    <div class="col-md-2 mb-2">
+                                        <label for="id_personal_telefono">Teléfono:</label><input type="text" id="id_personal_telefono" value=""
+                                            name="id_personal_telefono" maxlength="20" class="form-control" />
+                                    </div>
+                                    <div class="col-md-2 mb-2">
+                                        <label for="id_personal_celular">Celular:</label><input type="text" id="id_personal_celular" value=""
+                                            name="id_personal_celular" maxlength="20" class="form-control" />
+                                    </div>
+
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-3 mb-3">
+                                        <label for="id_personal_ciudad">Ciudad :</label><input type="text" id="id_personal_ciudad"
+                                          value="Guadalajara"  name="id_personal_ciudad" maxlength="20" class="form-control" />
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="id_personal_estado">Estado</label> <input class="form-control"
+                                            value="Jalisco" type="text" name="id_personal_personal_estado" maxlength="30" id="id_estado" />
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="id_personal_pais">País</label> <input class="form-control"
+                                            value="Méxco" type="text" maxlength="30" name="id_personal_pais" id="id_personal_pais" />
+                                    </div>
+
+                                </div>
+                                <div class="form-row">
+                                    <div class="input-field col-md-12">
+                                        <label for="id_personal_observaciones">Observaciones:</label>
+                                        <textarea id="id_personal_observaciones"  name="id_personal_observaciones" rows="6" class="form-control ">
+                                            </textarea>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             	<div class="card-footer text-right">
+                    <button class="btn btn-outline-info bg-cyan" onclick="guardaPersonal();"><i class="fas fa-user-tie"></i> Agregar</button>
+                </div>
+
+           </div>
+        </div>
+      </div>
+    </section>
+
+ </div>
+    <script>
+        function  especialidades(){
+            insertarEspecialidad();
+            $('#formEspecialidad').modal({keyboard: false})
+            $('#formEspecialidad').modal();
+        }
+        function guardaPersonal(){
+            alert('Hola');
+
+        }
+        function fguardaEspeci(esp) {
+            var csrftoken = $("[name=csrfmiddlewaretoken]").val();
+            return fetch('/ax_guardaespecialidad',
+                {
+                    method: "POST",
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                        'X-CSRFToken': csrftoken,
+                    },
+                    body: JSON.stringify({'esp': esp}) //JavaScript object of data to POST
+                })
+                .then((response) => response.json())
+                .then((responseData) => {
+                    return responseData;
+                })
+                .catch(error => console.warn(error));
+        }
+        function insertarEspecialidad(){
+            var values = ["dog", "cat", "parrot", "rabbit"];
+          var select = document.createElement("select");
+          select.name = "sEspecialidades";
+          select.id = "sEspecialidades";
+          select.className='form-control'
+
+            for (const val of values) {
+                var option = document.createElement("option");
+                option.value = val;
+                option.text = val.charAt(0).toUpperCase() + val.slice(1);
+                select.appendChild(option);
+              }
+            var label = document.createElement("label");
+          label.innerHTML = "Selecciona Especialidad: "
+          label.htmlFor = "Especialidades";
+            document.getElementById("divSelect").appendChild(label).appendChild(select);
+        }
+        function guardaEspecialidad(){
+            //alert('Hola');
+            let esp = document.getElementById('txt_descrip_especialidad');
+            if (esp.value == ''){
+                toastr.warning('Falta especialidad...');
+            }else{
+                alert(esp.value);
+                fguardaEspeci(esp.value).then(respuesta=>{
+                    let mensaje = respuesta['respuesta'];
+                    if (mensaje.indexOf('Error')!=-1)
+                    {toastr.error(mensaje)}
+                    else{toastr.success(mensaje);}
+                });
+            }
+        }
+    </script>
+
+<div class="modal fade" id="formEspecialidad" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document" style="width: 500px;">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #006cfa;height: 40px;padding: 3px 3px;color: aliceblue;">
+        <h5 class="modal-title" id="exampleModalLongTitle">Especialidades</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+            <div class="row">
+                <div class="col-md-6" id="divSelect">
+
+                </div>
+                <div class="col-md-6" >
+                    <label for="id_especialidad">Id</label>
+                    <input type="number" id="id_especialidad" readonly="readonly" maxlength="3" class="form-control"/>
+                    <label for="txt_descrip_especialidad">Especialidad</label>
+                    <input type="text" id="txt_descrip_especialidad" maxlength="40" class="form-control"/>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-outline-primary" onclick="guardaEspecialidad()" >Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="tomarFotoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLongTitle">Foto</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row" >
+
+            <div class="col4">
+                <video width=240 height=180
+                    style="outline: #9e9e9e solid 1px; padding-bottom: 3px;"
+                    id="monitor" controls autoplay></video>
+                <p>
+                    <button type="submit" class="btn btn-secondary" id="snap">
+                        <span class="fa fa-play"></span>
+                    </button>
+                    &nbsp;
+                    <button class="btn btn-secondary" id="stopCamara">
+                        <span class="fa fa-stop"></span>
+                    </button>
+                    <button class="btn btn-secondary" id="dispara1">
+                        <span class="fa fa-camera"></span>1
+                    </button>
+                    <button class="btn btn-secondary" id="dispara2">
+                        <span class="fa fa-camera"></span>2
+                    </button>
+                    <button class="btn btn-secondary" id="dispara3">
+                        <span class="fa fa-camera"></span>3
+                    </button>
+                </p>
+            </div>
+            <div class="col2">
+                <canvas width=240 height=180 id="foto1"></canvas>
+                <p>Foto1</p>
+            </div>
+            <div class="col2">
+                <canvas width=240 height=180 id="foto2"></canvas>
+            </div>
+            <div class="col2">
+                <canvas width=240 height=180 id="foto3"></canvas>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-outline-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

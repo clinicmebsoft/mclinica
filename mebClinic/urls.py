@@ -47,5 +47,8 @@ urlpatterns = [
     path('', include('caja.urls')),
     path('caja/', include('caja.urls')),
 
+    path('',include('Personal.urls')),
+    path('personal/',include('Personal.urls')),
+
     path('admin/', admin.site.urls)
 ]

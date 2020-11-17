@@ -20,6 +20,14 @@ def lista_articulos(request):
     return render(request, "lista_articulos.html")
 
 
+def lista_precios(request):
+    lista_precios = Articulos.objects.filter()
+    contexto = {
+        'listaprecios' : lista_precios,
+    }
+    return render(request, "lista_precios.html",contexto)
+
+
 def ajax_abcGuardarCatalogos(request):
     salida = []
 
@@ -255,7 +263,7 @@ def ax_guardarArticulos(request):
             articulo.compuesto = json_data['compuesto']
             # articulo.id_compuesto = Compuesto.objects.get(id=int(json_data['id_compuesto']))
             articulo.save()
-            salida = 'Se guardó artículo '+json_data['descripcion']
+            salida = 'Se guardó artículo ' + json_data['descripcion']
         else:
             Articulos.objects.filter(id=id).first()
             articulo.estatus = 'C'

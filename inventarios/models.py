@@ -103,5 +103,8 @@ class Articulos(models.Model):
     def __str__(self):
         return self.id
 
+    def __float__(self):
+        return self.precioventa
+
     class Meta:
         ordering = ['id']

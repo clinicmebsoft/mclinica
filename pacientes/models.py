@@ -7,11 +7,14 @@ from django.db.models import CharField
 from django.forms import ModelForm
 from djrichtextfield.models import RichTextField
 
-
 # python manage.py makemigrations
 # python manage.py migrate
 
 # Create your models here.
+from Personal.models import Doctores
+from inventarios.models import Articulos
+
+
 class Paciente(models.Model):
     SEXO = (
         ('Masculino', 'Masculino'),
@@ -161,20 +164,7 @@ class HistoriaClinicaForm(forms.ModelForm):
                   ]
 
 
-class Especialidad(models.Model):
-    especialidad = models.CharField(max_length=80)
-    estatus = CharField(max_length=1, default='A')
-    fecha = models.DateTimeField(auto_now_add=True)
 
-
-class Doctores(models.Model):
-    nombre = models.CharField(max_length=30, )
-    apellidos = models.CharField(max_length=50)
-    direccion = models.CharField(max_length=80)
-    telefono_partucular = models.CharField(max_length=20)
-    celular = models.CharField(max_length=20)
-    id_especialidad = models.ForeignKey(Especialidad, on_delete=models.CASCADE)
-    fecha = models.DateTimeField(auto_now_add=True)
 
 
 class ListaTratamientos(models.Model):
@@ -188,13 +178,30 @@ class Tratamientos(models.Model):
     fecha = models.DateTimeField(auto_now_add=True)
 
 
-class Presupuesto(models.Model):
+class PresuPaciente(models.Model):
     id_doctor = models.ForeignKey(Doctores, on_delete=models.CASCADE)
-    id_paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE,related_name='id_paciente')
-    id_tratamiento = models.ForeignKey(ListaTratamientos, on_delete=models.CASCADE)
+    id_paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, related_name='id_paciente')
+    subtotal = models.FloatField(default=0)
+    descuento = models.FloatField(default=0)
+    total = models.FloatField(default=0)
+    vence = models.DateField(default=datetime.datetime.now() + datetime.timedelta(days=30))
+    obervaciones = models.TextField(blank=True, default='')
+    fecha = models.DateTimeField(auto_now_add=True)
+    fecha_modificacion = models.DateTimeField(auto_now=True)
+    estatus = models.CharField(max_length=1, default='A')
+
+
+class PresuPacienteDetalle(models.Model):
+    id_presupuesto = models.ForeignKey(PresuPaciente, on_delete=models.CASCADE)
+    id_tratamiento = models.ForeignKey(Articulos, on_delete=models.CASCADE)
     precio = models.FloatField(default=0)
     descuento = models.FloatField(default=0)
-    vence = models.DateField(blank=True)
+
+
+class Odontograma(models.Model):
+    id_paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
+    pieza = models.IntegerField(blank=True, default=0)
+    caras = models.CharField(max_length=5)
     fecha = models.DateTimeField(auto_now_add=True)
     fecha_modificacion = models.DateTimeField(auto_now=True)
     estatus = models.CharField(max_length=1, default='A')

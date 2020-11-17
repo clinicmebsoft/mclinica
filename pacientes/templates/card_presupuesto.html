@@ -6,9 +6,9 @@
     <div class="row">
         {% include 'card_odontograma.html' %}
     </div>
-
-    <div class="form-row">
-        <label for="sArticulos">Tratamientos:</label>
+    <hr>
+    <div class="row">
+        <label for="sArticulos">Tratamientos:</label><br>
         <select class="form-control" id="sArticulos" style="background-color: dodgerblue;color: #f9f9f9;font-size: 20px;">
             {% for art in articulos %}
                <option  value="{{art.id}}">
@@ -16,14 +16,15 @@
                </option>
             {% endfor %}
         </select>
-        <table class="table table-responsive-md">
+        <table class="table table-responsive-md" id="tpresupuesto">
             <thead>
-                <th width="5%">Id</th>
-                <th width="35%">Tratamiento</th>
-                <th width="15%">Cantidad</th>
-                <th width="15%">Precio</th>
-                <th width="15%">Descuento</th>
-                <th width="15%">Total</th>
+                <th width="3%">Id</th>
+                <th width="30%">Tratamiento</th>
+                <th width="10%">Precio</th>
+                <th width="15%">% Descuento</th>
+                <th width="17%">Descuento</th>
+                <th width="10%">Total</th>
+                <th width="15%">Eliminar</th>
             </thead>
             <tbody>
                 <tr>
@@ -35,14 +36,21 @@
                     <td></td>
                 </tr>
             </tbody>
-            <tfoot>
-                <tr>
-                    <td>Descuento</td>
-                    <td>Total</td>
-                </tr>
-            </tfoot>
         </table>
+
     </div>
+    <div class="row mt-0" style="padding: 3px;margin-top: 2px;">
+        <div class="col-md-2" style="font-size: 20px;color: #006cfa;">
+            Suma:<br> <label id="lblPrecio">$ 0</label>
+        </div>
+        <div class="col-md-2" style="font-size: 20px;color: #006cfa;">
+            Descuento:<br> <label id="lblDescuento">$ 0</label>
+        </div>
+        <div class="col-md-2" style="font-size: 20px;color: #006cfa;">
+            Total:<br> <label id="lblTotal">$ 0</label>
+        </div>
+    </div>
+    <hr>
     <div class="row">
         <h5 style="color:grey;font-weight: bold;">Observaciones</h5>
     </div>
@@ -51,10 +59,6 @@
                       maxlength="128" class="form-control" ></textarea>
     </div>
      <div class="row fa-pull-right" style="padding: 5px 5px;">
-        {% ifequal existePre 0 %}
-             <button type="submit" class="btn btn-outline-primary" onclick="guardaPresupuesto({{ id }});"> Guardar </button>
-         {% else %}
-             <button type="submit" class="btn btn-outline-primary" onclick="modificaPresupuesto({{ id }});"> Modificar </button>
-         {% endifequal %}
+         <button type="submit" class="btn btn-outline-primary" onclick="guardaPresupuesto({{ id }});"> Guardar </button>
     </div>
 </div>

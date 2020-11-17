@@ -1,17 +1,21 @@
 import datetime
 
 from django.contrib import messages
-from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
+from django.db import transaction
+from django.http import JsonResponse, HttpResponse, HttpResponseRedirect, response
 from django.shortcuts import render, get_object_or_404
-from pacientes.models import Paciente, PacienteForm, HistoriaClinicaForm,HistoriaClinica
+from django.views.decorators.http import require_POST
+
+from Personal.models import Doctores,Especialidad
+from pacientes.models import Paciente, PacienteForm, HistoriaClinicaForm, HistoriaClinica, \
+     ListaTratamientos, PresuPaciente, PresuPacienteDetalle
 
 from django.core import serializers
 from inventarios.models import Articulos
 import json
 
-
 # Create your views here.
-from ventas.models import Presupuesto
+
 
 
 def index(request):  # usuario no activo mandar al login
@@ -61,9 +65,6 @@ def edit_paciente(request, id):
         return render(request, 'edit_paciente.html', context)
 
 
-
-
-
 def edit_historiaclinica(request, id):
     url = request.META.get('HTTP_REFERER')
     paciente = Paciente.objects.get(id=id)
@@ -73,7 +74,6 @@ def edit_historiaclinica(request, id):
         form_hc = HistoriaClinicaForm(request.POST, instance=paciente)
         if form_hc.is_valid():
             form_hc.cleaned_data['id_paciente'] = id
-
 
             form_hc.save()
             messages.success(request, 'Registro Guardado')
@@ -88,12 +88,12 @@ def edit_historiaclinica(request, id):
     return render(request, "edit_historiaclinica.html", context)
 
 
-def historiaclinica(request,id):
+def historiaclinica(request, id):
     url = request.META.get('HTTP_REFERER')
 
     paciente = Paciente.objects.filter(id=id)
-    nombrepaciente=paciente[0].nombre+" "+paciente[0].apellidos
-    articulos  = Articulos.objects.filter(tipo='Servicio')
+    nombrepaciente = paciente[0].nombre + " " + paciente[0].apellidos
+    articulos = Articulos.objects.filter(tipo='Servicio')
     try:
         hc = HistoriaClinica.objects.get(id_paciente=id)
         existeHC = 1
@@ -101,7 +101,7 @@ def historiaclinica(request,id):
             'id': id,
             'nombre': nombrepaciente,
             'existeHC': existeHC,
-            'articulos' :articulos,
+            'articulos': articulos,
             'hc': hc,
         }
     except HistoriaClinica.DoesNotExist:
@@ -110,28 +110,28 @@ def historiaclinica(request,id):
             'id': id,
             'nombre': nombrepaciente,
             'existeHC': existeHC,
-            'articulos' : articulos,
+            'articulos': articulos,
 
         }
 
+    return render(request, "historiaclinica.html", context)
 
-    return render(request, "historiaclinica.html",context)
 
 # https://pytutorial.com/how-to-make-a-pagination-with-django-and-ajaxjquery
 def ajx_guarda_historia(request):
-    resp=""
+    resp = ""
     if request.is_ajax():
         try:
             json_data = json.loads(request.body)
             paciente = Paciente.objects.get(id=json_data['id'])
             HC = HistoriaClinica()
             HC.id_paciente = paciente
-            
+
             originario = json_data['origin']
             medi = json_data['medi']
             telmed = json_data['telmed']
             cirugia = json_data['cirugia']
-            
+
             HC.originario = originario
             HC.medico_particular = medi
             HC.telefono_medico = telmed
@@ -139,22 +139,22 @@ def ajx_guarda_historia(request):
             HC.motivo_cita = json_data['motivo']
             HC.enfermedad_ultimo_anos = json_data['enfermedadUiltimosA']
             HC.enfermedad_grave = json_data['EnfermedadGrave']
-            HC.Cirugia =json_data['Cirugia']
+            HC.Cirugia = json_data['Cirugia']
             HC.traumatismos_secuelas = json_data['TraumatismoSecuelas']
-            HC.transfusiones= json_data['Transfusiones']
-            HC.hemorragias=json_data['Hemorragias']
-            HC.donador_sangre=json_data['DonadorSangre']
-            HC.accidentes_tratamientos=json_data['AccidenteTratamientos']
-            HC.toma_medicamento=json_data['TomaMedicamento']
-            HC.enfermedades=json_data['Enfermedades']
+            HC.transfusiones = json_data['Transfusiones']
+            HC.hemorragias = json_data['Hemorragias']
+            HC.donador_sangre = json_data['DonadorSangre']
+            HC.accidentes_tratamientos = json_data['AccidenteTratamientos']
+            HC.toma_medicamento = json_data['TomaMedicamento']
+            HC.enfermedades = json_data['Enfermedades']
             HC.familiar_enfermedad = json_data['Familiar']
-            #HC. json_data['AlguienEnfermo']
-            HC.embarazada=json_data['Embarazada']
-            HC.higiene=json_data['Higiene']
-            HC.numero_cepillados= json_data['CepilladosDia']
-            HC.alimentacion=json_data['Alimentacion']
-            HC.integrantes_casa=json_data['Integrantes']
-            HC.practica_deportes    = json_data['Deporte']
+            # HC. json_data['AlguienEnfermo']
+            HC.embarazada = json_data['Embarazada']
+            HC.higiene = json_data['Higiene']
+            HC.numero_cepillados = json_data['CepilladosDia']
+            HC.alimentacion = json_data['Alimentacion']
+            HC.integrantes_casa = json_data['Integrantes']
+            HC.practica_deportes = json_data['Deporte']
             HC.habito_adiccion = json_data['Habito']
             HC.temperatura = int(json_data['Temperatura'])
             HC.presion = json_data['Presion']
@@ -173,12 +173,14 @@ def ajx_guarda_historia(request):
             HC.save()
             resp = "Se guardó con éxito..."
         except Exception as e:
-            resp = 'Error: '+e.__str__()
+            resp = 'Error: ' + e.__str__()
     return JsonResponse({
         'respuesta': {
             'mensaje': resp
         }
     })
+
+
 def ajax_buscapacientes(request):
     busca = request.GET.get('empieza')
     if request.is_ajax():
@@ -202,15 +204,17 @@ def ajax_buscapacientes(request):
         }
     })
 
-def pacientes(request,id):
+
+def pacientes(request, id):
     paciente = Paciente.objects.filter(id=id)
-    existePac=0
+    existePac = 0
     if (paciente):
-        existePac=1
+        existePac = 1
     context = {
-        'existePac':existePac,
+        'existePac': existePac,
     }
-    return render(request, 'paciente.html',context)
+    return render(request, 'paciente.html', context)
+
 
 def ajax_guardapaciente(request):
     resp = ""
@@ -274,20 +278,22 @@ def ajax_obtenDatosPacienteCitas(request):
         except:
             return HttpResponse("Error al intentar recuperar datos")
 
+
 def ax_Presupuesto(request):
     resp = ""
-    presupuesto = Presupuesto()
+    presupuesto = PresuPaciente()
     if request.method == "POST" and request.is_ajax():
         json_data = json.loads(request.body)
         id_paciente = json_data['id_paciente']
         id_doctor = json_data['id_doctor']
         id_tratamiento = json_data['id_tratamiento']
+
         precio = json_data['precio']
-        descuento= json_data['descuento']
-        vence = datetime.datetime.now() + datetime.timedelta(30) # sólo se respetan 30 días del presupuesto
-        estatus  = 'T'  # temporal puede pasar a P = presentado, después a A = aceptado
+        descuento = json_data['descuento']
+        vence = datetime.datetime.now() + datetime.timedelta(30)  # sólo se respetan 30 días del presupuesto
+        estatus = 'T'  # temporal puede pasar a P = presentado, después a A = aceptado
         presupuesto.save()
-        print (json_data['id_paciente'])
+        print(json_data['id_paciente'])
 
     else:
         resp = "Error al guardar registro del presupuesto"
@@ -296,4 +302,64 @@ def ax_Presupuesto(request):
         'respuesta': {
             'mensaje': resp,
         }
+    })
+
+
+def ax_obtenPrecioTratamiento(request):
+    resp = ""
+    #presupuesto = Presupuesto()
+    # articulos = Articulos()
+    if request.method == "POST" and request.is_ajax():
+        json_data = json.loads(request.body)
+        idTratamiento = json_data['id_tratamiento']
+        articulos = Articulos.objects.get(id=idTratamiento)
+        resp = articulos.precioventa
+    else:
+        resp = "Error al Obtener PrecioTratamiento"
+
+    return JsonResponse({
+        'respuesta': resp,
+
+    })
+
+@require_POST
+def ax_guardaPresupuesto(request):
+    if request.method=='POST' and request.is_ajax:
+        rows = json.loads(request.body)
+
+        try:
+            with transaction.atomic():
+                presupuesto = PresuPaciente()
+                idpaciente=  rows['presu_data'][0]['id_paciente']
+                idDoctor = rows['presu_data'][0]['id_doctor']
+                presupuesto.id_paciente = Paciente.objects.get(id=idpaciente)
+                presupuesto.id_doctor = Doctores.objects.get(id=idDoctor)
+                presupuesto.descuento =0
+                presupuesto.subtotal= 0
+                presupuesto.total = rows['presu_data'][0]['total']
+                presupuesto.vence = datetime.datetime.now() + datetime.timedelta(30)  # sólo se respetan 30 días del presupuesto
+                presupuesto.estatus = 'T'  # temporal puede pasar a P = presentado, después a A = aceptado
+                presupuesto.save()
+                for datos in rows['presu_data']:
+                    # print(value['id'])
+                    presupuesto_detalle = PresuPacienteDetalle()
+                    presupuesto_detalle.id_presupuesto=presupuesto.id
+                    trata = Articulos.objects.get(id=datos['id'])
+                    #presupuesto.id_paciente = paciente
+                    #presupuesto.id_doctor = dr
+                    presupuesto_detalle.id_tratamiento =trata
+                    presupuesto_detalle.precio = datos['precio']
+                    presupuesto_detalle.descuento = datos['descuento']
+
+
+                    presupuesto.save()
+                resp = 'Presupuesto Guardado'
+
+        except Exception as e:
+            transaction.rollback()
+            resp = "Error al intentar guardar el presupuesto..."
+
+    return JsonResponse({
+        'respuesta': resp,
+
     })

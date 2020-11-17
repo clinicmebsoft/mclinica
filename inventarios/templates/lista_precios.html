@@ -1,0 +1,93 @@
+{% extends "genericos/layout.html" %}
+{% block content %}
+    {% load static %}
+    {% csrf_token %}
+  <!-- Content Wrapper. Contains page content -->
+    <style>
+        .currSign:before {
+            content: '$ ';
+        }
+    </style>
+<div class="content-wrapper">
+  	<section class="content">
+      <div class="container-fluid">
+      	<div class="card ">
+           <div class="card-header">
+                <div class="row" >
+                    <div class="col-md-6">
+                        <img src="{% static '/dist/images/listprecios.svg' %}" class="tamImagen"/>
+                        <h4 class="card-title" style="font-size: 20px">Lista Precios</h4>
+
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <div class="card-tools">
+
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-outline-primary" data-toggle="dropdown">
+                              <i class="fas fa-wrench" style="color: #1682BB;"></i>
+                            </button>
+                            {% include 'panel_inventarios.html' %}
+                          </div>
+
+                         </div>
+                    </div>
+                </div>
+
+           </div>
+            <div class="card-body">
+
+                <table id="tprecios" class="table table-responsive-md">
+                    <!-- https://divtable.com/table-styler/ -->
+                    <thead>
+                        <tr>
+
+                            <th width="5%">id</th>
+                            <th width="5%">Tipo</th>
+                            <th width="10%">Código Barras</th>
+                            <th width=5%">Clave</th>
+                            <th width="40%">Descripción</th>
+                            <th width="10%">Precio</th>
+                            <th width="5%">Cantidad</th>
+                            <th width="5%"></th>
+                            <th ></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for rs in listaprecios %}
+                        <tr>
+                            <td>{{ rs.id }}</td>
+                            <td>{{ rs.tipo}}</td>
+                            <td>{{ rs.codigobarras }}</td>
+                            <td>{{ rs.clave }}</td>
+                            <td>{{ rs.descripcion }}</td>
+                            <td><div class="divMoneda">{{ rs.precioventa}}</div></td>
+                            <td>{{ rs.cantidad }}</td>
+                            <td><a class="btn btn-outline-primary btn-sm" href="edit_paciente/{{ rs.id }}"><i class="fas fa-edit"></i></a> </td>
+
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+             <div class="modal-footer">
+
+                <!--<button type="button" class="btn btn-outline-secondary" onclick="cargaTpacientes()" >Carga Pacientes</button>
+                <button type="button" class="btn btn-outline-primary"> Guardar </button>-->
+              </div>
+        </div>
+      </div>
+
+
+
+    </section>
+</div>
+<script>
+    let x = document.querySelectorAll(".divMoneda");
+    for (let i = 0, len = x.length; i < len; i++) {
+        let num = Number(x[i].innerHTML)
+                  .toLocaleString('en');
+        x[i].innerHTML = num;
+        x[i].classList.add("currSign");
+    }
+</script>
+{% endblock content %}

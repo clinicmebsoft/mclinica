@@ -13,8 +13,12 @@ urlpatterns = [
     path('ajax_guardapaciente',views.ajax_guardapaciente,name='guardapacientes'),
     path('ax_CargaTpacientes',views.ax_CargaTpacientes,name='listapacientes'),
     path('ax_Presupuesto', views.ax_Presupuesto, name='guardapresupuesto'),
+    path('ax_obtenPrecioTratamiento',views.ax_obtenPrecioTratamiento,name='ax_obtenPrecioTratamiento'),
+    path('ax_guardaPresupuesto',views.ax_guardaPresupuesto,name='ax_guardaPresupuesto'),
+
 
     path('edit_paciente/<int:id>',views.edit_paciente,name='edit_paciente'),
     path('pacientes/<int:id>',views.pacientes,name='pacientes'),
+
 
 ]

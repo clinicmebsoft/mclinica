@@ -5,9 +5,11 @@ from . import views
 urlpatterns = [
     path('inventarios', views.inventarios, name='inventarios'),
     path('productos', views.productos, name='productos'),
+    path('lista_precios', views.lista_precios, name='lista_precios'),
     path('ajax_abcGuardarCatalogos' , views.ajax_abcGuardarCatalogos, name='abcGuardarCatalogos'),
     path('lista_articulos', views.lista_articulos, name='lista_articulos'),
     path('ax_guardarArticulos',views.ax_guardarArticulos,name = 'ax_guardarArticulos'),
+
 
     path('ajax_catalogo_listcategoria',views.ajax_catalogo_listcategoria, name='catalogo_categorias'),
     path('ajax_catalogo_unidad',views.ajax_catalogo_unidad, name = "catalogo_unidad"),
