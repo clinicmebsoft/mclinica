@@ -7,8 +7,9 @@
         {% include 'card_odontograma.html' %}
     </div>
     <hr>
-    <div class="row">
-        <label for="sArticulos">Tratamientos:</label><br>
+    <label for="sArticulos">Tratamientos:</label><br>
+    <div class="row col-4 mb-3 input-group">
+
         <select class="form-control" id="sArticulos" style="background-color: dodgerblue;color: #f9f9f9;font-size: 20px;">
             {% for art in articulos %}
                <option  value="{{art.id}}">
@@ -16,6 +17,11 @@
                </option>
             {% endfor %}
         </select>
+        <button class="btn btn-outline-primary ml-2" id="tbnInsertarT" onclick="agregatratamiento()"><i class="fas fa-plus mr-2"></i>Agregar</button>
+    </div>
+
+    <div class="row">
+
         <table class="table table-responsive-md" id="tpresupuesto">
             <thead>
                 <th width="3%">Id</th>

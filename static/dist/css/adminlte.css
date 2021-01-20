@@ -11059,6 +11059,7 @@ body:not(.layout-fixed).layout-navbar-fixed.text-sm .wrapper .main-sidebar .side
   left: 0;
   position: fixed;
   right: 0;
+
   z-index: 1032;
 }
 

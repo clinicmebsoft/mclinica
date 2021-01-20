@@ -15,6 +15,9 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+#para el manejo de acentos y eñes
+os.environ["PYTHONIOENCODING"] = "utf-8"
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -40,9 +43,10 @@ INSTALLED_APPS = [
     'ventas.apps.VentasConfig',
     'herramientas.apps.HerramientasConfig',
     'caja.apps.CajaConfig',
-    'Personal.apps.PersonalConfig',
+    'personal.apps.PersonalConfig',
     'proveedores.apps.ProveedoresConfig',
     'djrichtextfield',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

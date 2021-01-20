@@ -33,7 +33,8 @@ function tiempo_progress(){
 }
 // tiempo_progress();
 
-function busca_cp(cp,est,mun,ciu,call){
+function busca_cp(cp,est,mun,ciu,col,call){
+        //alert('hola');
         datos = {
             'cp' : cp.value
         }
@@ -42,20 +43,20 @@ function busca_cp(cp,est,mun,ciu,call){
             type: 'POST',
             processData: false,
             headers:{
-        	"X-CSRFToken": csrftoken,
-			"X-Requested-With": "XMLHttpRequest"
+        	    "X-CSRFToken": csrftoken,
+			    "X-Requested-With": "XMLHttpRequest"
     		},
     		data : JSON.stringify(datos),
     		dataType: 'json',
-            url : 'busca_cp',
+            url : '/ax_buscar_cp',
             success : function(respuesta) {
-                $('#iProvColonia').empty();
+                $('#'+col).empty();
                 if (respuesta.data_cp.length >0){
                     $('#'+est).val(respuesta.data_cp[0].d_estado);
                     $('#'+ciu).val(respuesta.data_cp[0].d_ciudad);
                     $('#'+mun).val(respuesta.data_cp[0].d_mnpio);
                     for (let i=0 ; i< respuesta.data_cp.length;i++) {
-                        $('#iProvColonia').append( '<option value="'+respuesta.data_cp[i].d_asenta+'">'+
+                        $('#'+col).append( '<option value="'+respuesta.data_cp[i].d_asenta+'">'+
                                         respuesta.data_cp[i].d_asenta+'</option>' );
                     }
                     $('#'+call).focus();

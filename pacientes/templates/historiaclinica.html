@@ -36,7 +36,14 @@
                 </div>
             </div>
 
-
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-link active"  href="#histori" id="histori-tab" data-toggle="tab"  role="tab" aria-controls="histori" aria-selected="true"><i class="fas fa-file-contract"></i> Historia Clínica</a>
+                <a class="nav-link" href="#presu" id="presu-tab" data-toggle="tab"  role="tab" aria-controls="presu" aria-selected="false"><i class="fas fa-file-invoice-dollar"></i> Presupuesto</a>
+                <a class="nav-link" href="#docu" id="docu-tab" data-toggle="tab"  role="tab" aria-controls="docu" aria-selected="false"><i class="fas fa-file-medical-alt"></i> Documentos</a>
+              </div>
+            </nav>
+               <!--
             <ul class="nav nav-tabs" id="hcTabs" role="tablist">
 
               <li class="nav-item">
@@ -50,6 +57,8 @@
               </li>
 
             </ul>
+            -->
+
             <div class="tab-content">
                <!-- <div class="overlay"><i class="fas fa-3x fa-sync-alt fa-spin"></i><div class="text-bold pt-2">Cargando...</div></div>-->
               <div class="tab-pane active" id="histori" role="tabpanel" aria-labelledby="histori-tab">
@@ -66,9 +75,11 @@
 
             </div>
             <script>
+
                $(function () {
                 $('#hcTabs li:last-child a').tab('show')
               })
+
             </script>
 
 

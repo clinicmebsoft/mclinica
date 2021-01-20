@@ -518,7 +518,7 @@
 
 
     }
-    function gdapresu(){
+    function guardaPresupuesto(){
         var csrftoken = $("[name=csrfmiddlewaretoken]").val();
        let  datos = [
        ]
@@ -540,7 +540,7 @@
                 datos.push(ren);
             }
         }
-        return fetch('/ax_guardaPresupuesto',
+        fetch('/ax_guardaPresupuesto',
         {
             method: "POST",
             headers: {
@@ -552,21 +552,15 @@
             body: JSON.stringify({'presu_data': datos}) //JavaScript object of data to POST
         })
         .then((response) => response.json())
-        .then((responseData) => {
-            return responseData;
-        })
-        .catch(error => console.warn(error));
-    }
-    function guardaPresupuesto(){
-        gdapresu().then(respuesta=>{
-                let mensaje = respuesta['respuesta'];
+        .then((response) => {
+            let mensaje = response.respuesta['respuesta'];
                 if (mensaje.indexOf('Error')!=-1)
                 {toastr.error(mensaje)}
                 else{toastr.success(mensaje);}
-
-            });
-
+        })
+        .catch(error => console.warn(error));
     }
+
     function getPrecio(idTratamiento) {
         var csrftoken = $("[name=csrfmiddlewaretoken]").val();
         return fetch('/ax_obtenPrecioTratamiento',
@@ -584,6 +578,9 @@
                 return responseData;
             })
             .catch(error => console.warn(error));
+    }
+    function agregatratamiento(){
+        alert('hola');
     }
 
     function insertarTabla(cual,que){
@@ -699,8 +696,6 @@
         calculaTotal();
     }
 
-
-
 </script>
 
 <!-- Modal -->
@@ -758,7 +753,7 @@
                         </table>
                     </div>
                     <div class="col-md-9" style="padding: 10px;">
-                        <button id="bresina" onclick="insertarTabla(9,'Resina');" class="btn btn-outline-secondary buttontrata">Resina
+                        <button id="bresina" onclick="insertarTabla(2,'Resina');" class="btn btn-outline-secondary buttontrata">Resina
                         </button>
                         <button id="bamalgama" onclick="insertarTabla(7,'Amalgama');" class="btn btn-outline-secondary buttontrata">Amalgama</button>
                         <button id="bporcelana" class="btn btn-outline-secondary buttontrata">Porcelana</button>

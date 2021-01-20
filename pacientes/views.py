@@ -6,7 +6,7 @@ from django.http import JsonResponse, HttpResponse, HttpResponseRedirect, respon
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.http import require_POST
 
-from Personal.models import Doctores,Especialidad
+from personal.models import Doctores,Especialidad
 from pacientes.models import Paciente, PacienteForm, HistoriaClinicaForm, HistoriaClinica, \
      ListaTratamientos, PresuPaciente, PresuPacienteDetalle
 
@@ -312,8 +312,11 @@ def ax_obtenPrecioTratamiento(request):
     if request.method == "POST" and request.is_ajax():
         json_data = json.loads(request.body)
         idTratamiento = json_data['id_tratamiento']
-        articulos = Articulos.objects.get(id=idTratamiento)
-        resp = articulos.precioventa
+        if Articulos.objects.filter(id=idTratamiento):
+            articulos = Articulos.objects.get(id=idTratamiento)
+            resp = articulos.precioventa
+        else:
+            resp = "El tratamiento no existe..."
     else:
         resp = "Error al Obtener PrecioTratamiento"
 

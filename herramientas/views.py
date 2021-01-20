@@ -1,14 +1,17 @@
 
 from django.core.serializers.json import DjangoJSONEncoder
-from django.http import HttpResponse
+from django.http import HttpResponse, StreamingHttpResponse, response
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.core import serializers
 import json
-
+import re
+from unicodedata import normalize
+from django.utils.encoding import  smart_str,iri_to_uri
 
 # Create your views here.
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
+from pyparsing import basestring, unicode
 
 from citas.models import Cita
 from herramientas.models import Codigo_postal
@@ -19,9 +22,57 @@ def agenda(request):
     return render(request, "herramientas/agenda.html")
 
 
-def administracion(request):
-    return render(request, "extras/administracion.html")
+def configuracion(request):
+    return render(request,"configuracion.html")
 
+def administracion(request):
+    return render(request, "panelcontrol/administracion.html")
+
+def to_unicode_or_bust(obj, encoding="latin1"):
+    if isinstance(obj, basestring):
+        if not isinstance(obj, unicode):
+            obj=unicode(obj, encoding)
+    return obj
+import codecs
+
+@csrf_exempt
+def cargaCP(reuest):
+    #guarde el archivo en modo utf-8 con el editor
+    filecp = codecs.open('static/text/cp.txt',  'r', 'UTF-8')
+    cp = Codigo_postal()
+    index = 0
+    for line in filecp:
+        fields = line.split('|')
+        #print(fields[0])
+        #s = to_unicode_or_bust(fields[1])
+        #print(s)
+        print(str(index))
+        cp.pk = None
+        cp.d_codigo = fields[0]
+        cp.d_asenta = fields[1]
+        cp.d_tipo_asenta = fields[2]
+        cp.d_mnpio = fields[3]
+        cp.d_estado = fields[4]
+        cp.d_ciudad = fields[5]
+        cp.d_cp = fields[6]
+        cp.c_estado = fields[7]
+        cp.c_oficina = fields[8]
+        cp.c_cp = fields[9]
+        cp.c_tipo_asenta = fields[10]
+        cp.c_mnpio = fields[11]
+        cp.id_asenta_cpcons = fields[12]
+        cp.d_zona = fields[13]
+        cp.c_cve_ciudad = fields[14]
+        cp.save(force_insert=True)
+        cp.clean()
+        index = index+1
+    filecp.close()
+
+    return JsonResponse({
+        'respuesta': {
+            'mensaje': str(index) + ' registros guardados'
+        }
+    })
 
 def ax_agenda(request):
     citas = Cita.objects.filter(estatus='').values('id_paciente', 'id_paciente__nombre', 'fecha', 'hora')

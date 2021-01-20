@@ -73,18 +73,19 @@
                         </div>
                         <div class="col-md-2 mb-3">
                             <label for="id_cp">CP</label>
-                            <input id="id_cp"  clasS="form-control" value="" name="id_cp"  type="number" />
+                            <input id="id_cp"  clasS="form-control" value="" name="id_cp" onfocusout="busca_cp  (this,'id_estado','i_mun','id_ciudad','id_colonia','id_calle');"  type="number" />
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col-md-4 mb-4">
-
                             <label for="id_calle">Calle y Número</label> <input value=""
                                 class="form-control" type="text" name="id_calle" maxlength="30" id="id_calle" />
                         </div>
                         <div class="col-md-4 mb-4">
-                            <label for="id_colonia">Colonia</label> <input class="form-control" value=""
-                                type="text" maxlength="30" id="id_colonia" name="id_colonia"/>
+
+                            <label for="id_colonia">Colonia</label>
+                            <select class="form-control" id="id_colonia" name="id_colonia"></select>
+
                         </div>
                         <div class="col-md-2 mb-2">
                             <label for="id_telefono">Teléfono:</label><input type="text" id="id_telefono" value=""
@@ -99,11 +100,11 @@
                     <div class="form-row">
                         <div class="col-md-3 mb-3">
                             <label for="id_ciudad">Ciudad :</label><input type="text" id="id_ciudad"
-                              value="Guadalajara"  name="id_ciudad" maxlength="20" class="form-control" />
+                               name="id_ciudad" maxlength="20" class="form-control" />
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="id_estado">Estado</label> <input class="form-control"
-                                value="Jalisco" type="text" name="id_estado" maxlength="30" id="id_estado" />
+                                type="text" name="id_estado" maxlength="30" id="id_estado" />
                         </div>
                         <div class="col-md-3 mb-3">
                             <label for="id_pais">País</label> <input class="form-control"

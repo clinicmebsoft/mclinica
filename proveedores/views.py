@@ -8,11 +8,11 @@ import json
 # Create your views here.
 
 def proveedores(request):
-    return render(request, "proveedores/proveedor.html")
+    return render(request, "proveedor.html")
 
 
 def laboratorios(request):
-    return render(request, "proveedores/laboratorios.html")
+    return render(request, "laboratorios.html")
 
 
 def ajax_abcGuardarProveedor(request):

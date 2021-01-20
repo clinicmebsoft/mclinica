@@ -3,7 +3,6 @@ from django.db import models
 # Create your models here.
 from django.db.models import Model
 
-
 class Codigo_postal(models.Model):
     d_codigo = models.CharField(null=True,blank=True, max_length=8)
     d_asenta = models.CharField(null=True,blank=True, max_length=100)

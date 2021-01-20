@@ -11,7 +11,7 @@ from djrichtextfield.models import RichTextField
 # python manage.py migrate
 
 # Create your models here.
-from Personal.models import Doctores
+from personal.models import Doctores
 from inventarios.models import Articulos
 
 
