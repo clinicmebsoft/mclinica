@@ -5,6 +5,7 @@
   <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   	<section class="content">
+        <!--<div class="loader"><h2>Cargando...</h2></div>-->
       <div class="container-fluid">
       	<div class="card ">
            <div class="card-header">
@@ -31,70 +32,9 @@
                     {% csrf_token %}
                     <div class="row">
                        <div class="col-md-3 col-sm-6 col-xs-12">
-                           <div style="overflow-y:auto;height: 600px;">
-                              <div class="info-box">
-                                <span class="info-box-icon bg-cyan">AMT</span>
+                           <div style="overflow-y:auto;height: 600px;" id="listaPersonal">
 
-                                <div class="info-box-content">
-                                  <span class="info-box-text">Messages</span>
-                                  <span class="info-box-number">1,410</span>
-                                </div>
-                                <!-- /.info-box-content -->
-                              </div>
-                               <div class="info-box">
-                                <span class="info-box-icon bg-cyan">AM</span>
-
-                                <div class="info-box-content">
-                                  <span class="info-box-text">Messages</span>
-                                  <span class="info-box-number">1,410</span>
-                                </div>
-                                <!-- /.info-box-content -->
-                              </div>
-                               <div class="info-box">
-                                <span class="info-box-icon bg-cyan">AMT</span>
-
-                                <div class="info-box-content">
-                                  <span class="info-box-text">Messages</span>
-                                  <span class="info-box-number">1,410</span>
-                                </div>
-                                <!-- /.info-box-content -->
-                              </div>
-                               <div class="info-box">
-                                <span class="info-box-icon bg-cyan">AMT</span>
-
-                                <div class="info-box-content">
-                                  <span class="info-box-text">Messages</span>
-                                  <span class="info-box-number">1,410</span>
-                                </div>
-                                <!-- /.info-box-content -->
-                              </div>
-                               <div class="info-box">
-                                <span class="info-box-icon bg-cyan">AMT</span>
-
-                                <div class="info-box-content">
-                                  <span class="info-box-text">Messages</span>
-                                  <span class="info-box-number">1,410</span>
-                                </div>
-                                <!-- /.info-box-content -->
-                              </div>
-                                <div class="info-box">
-                                <span class="info-box-icon bg-cyan">AMT</span>
-
-                                <div class="info-box-content">
-                                  <span class="info-box-text">Messages</span>
-                                  <span class="info-box-number">1,410</span>
-                                </div>
-                                <!-- /.info-box-content -->
-                              </div>
-                                <div class="info-box">
-                                <span class="info-box-icon bg-cyan">AMT</span>
-
-                                <div class="info-box-content">
-                                  <span class="info-box-text">Messages</span>
-                                  <span class="info-box-number">1,410</span>
-                                </div>
-                                <!-- /.info-box-content -->
-                              </div>
+                              <!-- La carga de los info-box en addListaPersonal() -->
 
                           <!-- /.info-box -->
                            </div>
@@ -123,7 +63,7 @@
                                     <div class="col-md-3 mb-3">
                                         <label for="id_personal_fecha_nacimiento">Fecha de Nacimiento</label>
                                         <input type="date" class="form-control" value=""
-                                               name="id_personal_fecha_nacimiento" placeholder="" id="id_fpersonal_echa_nacimiento" onfocusout="calculaEdad();" />
+                                               name="id_personal_fecha_nacimiento" placeholder="" id="id_personal_fecha_nacimiento" onfocusout="calculaEdad();" />
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label for="id_personal_sexo">Sexo</label>
@@ -146,7 +86,7 @@
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label for="id_personal_cp">CP</label>
-                                        <input id="id_personal_cp"  clasS="form-control" value="" name="id_personal_cp"  type="number" />
+                                        <input id="id_personal_cp"  clasS="form-control" value="" name="id_personal_cp" onfocusout="busca_cp(this,'id_personal_estado','i_mun','id_personal_ciudad','id_personal_colonia','id_personal_calle');" type="number" />
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -156,33 +96,44 @@
                                             class="form-control" type="text" name="id_personal_calle" maxlength="30" id="id_personal_calle" />
                                     </div>
                                     <div class="col-md-4 mb-4">
-                                        <label for="id_personal_colonia">Colonia</label> <input class="form-control" value=""
-                                            type="text" maxlength="30" id="id_personal_colonia" name="id_personal_colonia"/>
+                                        <label for="id_personal_colonia">Colonia</label>
+                                        <select id="id_personal_colonia" name="id_personal_colonia" class="form-control"></select>
+
                                     </div>
-                                    <div class="col-md-2 mb-2">
+                                    <div class="col-md-4 mb-4">
                                         <label for="id_personal_telefono">Teléfono:</label><input type="text" id="id_personal_telefono" value=""
                                             name="id_personal_telefono" maxlength="20" class="form-control" />
                                     </div>
-                                    <div class="col-md-2 mb-2">
-                                        <label for="id_personal_celular">Celular:</label><input type="text" id="id_personal_celular" value=""
-                                            name="id_personal_celular" maxlength="20" class="form-control" />
-                                    </div>
+
 
                                 </div>
                                 <div class="form-row">
-                                    <div class="col-md-3 mb-3">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="id_personal_celular">Celular:</label><input type="text" id="id_personal_celular" value=""
+                                            name="id_personal_celular" maxlength="20" class="form-control" />
+                                    </div>
+                                    <div class="col-md-4 mb-3">
                                         <label for="id_personal_ciudad">Ciudad :</label><input type="text" id="id_personal_ciudad"
                                           value="Guadalajara"  name="id_personal_ciudad" maxlength="20" class="form-control" />
                                     </div>
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-4 mb-3">
                                         <label for="id_personal_estado">Estado</label> <input class="form-control"
-                                            value="Jalisco" type="text" name="id_personal_personal_estado" maxlength="30" id="id_estado" />
+                                            value="Jalisco" type="text" name="id_personal_estado" maxlength="30" id="id_personal_estado" />
                                     </div>
+                                </div>
+                                <div class="form-row">
                                     <div class="col-md-3 mb-3">
                                         <label for="id_personal_pais">País</label> <input class="form-control"
-                                            value="Méxco" type="text" maxlength="30" name="id_personal_pais" id="id_personal_pais" />
+                                            value="México"  type="text" maxlength="30" name="id_personal_pais" id="id_personal_pais" />
                                     </div>
-
+                                    <div class="col-md-3 mb-3">
+                                        <label for="id_personal_estatus">Estatus</label>
+                                        <select id="id_personal_estatus" class="form-control">
+                                            <option value="A">Activo</option>
+                                            <option value="S">Suspendido</option>
+                                            <option value="C">Cancelado</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="input-field col-md-12">
@@ -197,24 +148,240 @@
                     </div>
                 </div>
              	<div class="card-footer text-right">
-                    <button class="btn btn-outline-info bg-cyan" onclick="guardaPersonal();"><i class="fas fa-user-tie"></i> Agregar</button>
+                    <button class="btn btn-outline-secondary mr-5" onclick="addListaPersonal();"><i class="fas fa-list"></i> Cargar Lista</button>
+                    <button class="btn btn-outline-primary mr-5" onclick="limpiaForm();"><i class="fas fa-broom"></i> Limpia Formulario</button>
+                    <button id="guardarPersonal" class="btn btn-outline-info bg-cyan" onclick="guardaPersonal('N');"><i class="fas fa-user-tie"></i> Agregar</button>
                 </div>
-
            </div>
         </div>
       </div>
     </section>
-
+    <div id="mensaje"></div>
  </div>
     <script>
+
+        document.addEventListener("DOMContentLoaded", () => {
+          getEspecialidades();
+          addListaPersonal();
+        });
         function  especialidades(){
-            insertarEspecialidad();
+            
             $('#formEspecialidad').modal({keyboard: false})
             $('#formEspecialidad').modal();
         }
-        function guardaPersonal(){
-            alert('Hola');
+        function guardaPersonal(tipo){
+            var csrftoken = $("[name=csrfmiddlewaretoken]").val();
+            const nombre = document.getElementById('id_personal_nombre');
+            const apellidos = document.getElementById('id_personal_apelidos');
+            const correo = document.getElementById('id_personal_correo');
+            const fechaNat  = document.getElementById('id_personal_fecha_nacimiento');
+            const selsexo = document.getElementById('id_personal_sexo');
+            const sexo = selsexo.options[selsexo.selectedIndex].text;
+            const selespecialidad = document.getElementById('id_personal_especialidad');
+            const especialidad=selespecialidad.options[selespecialidad.selectedIndex].value;
+            const cp = document.getElementById('id_personal_cp');
+            const callenum = document.getElementById('id_personal_calle');
+            const colonia = document.getElementById('id_personal_colonia');
+            const telefono = document.getElementById('id_personal_telefono');
+            const celular = document.getElementById('id_personal_celular');
+            const ciudad = document.getElementById('id_personal_ciudad');
+            const estado = document.getElementById('id_personal_estado');
+            const pais = document.getElementById('id_personal_pais');
+            const observaciones = document.getElementById('id_personal_observaciones');
+            const seleestatus  = document.getElementById('id_personal_estatus');
+            const estatus = seleestatus.options[seleestatus.selectedIndex].value;
 
+            if (nombre.value==''){
+                mensaje('El campo nombre está vacío');
+                nombre.focus();
+                return
+            } else if (apellidos.value==''){
+                mensaje('El campo apellidos está vacío');
+                apellidos.focus();
+                return
+            } else if (correo.value==''){
+                mensaje('El campo correo está vacío');
+                correo.focus();
+                return
+            } else {
+               // alert(fechaNat.value);
+                datos = {
+                    tipo: tipo,
+                    nombre : nombre.value,
+                    apellidos : apellidos.value,
+                    correo : correo.value,
+                    fechaNat  : fechaNat.value,
+                    sexo : sexo,
+                    especialidad : especialidad, 
+                    cp : cp.value,
+                    callenum : callenum.value,
+                    colonia : colonia.value,
+                    telefono : telefono.value,
+                    celular : celular.value,
+                    ciudad : ciudad.value,
+                    estado : estado.value,
+                    pais : pais.value,
+                    observaciones: observaciones.value,
+                    estatus : estatus,
+                }
+                //alert(especialidad);
+                fetch('/ax_guardaPersonal',
+                {
+                    method: "POST",
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                        'X-CSRFToken': csrftoken,
+                    },
+                    body: JSON.stringify(datos) //JavaScript object of data to POST
+                })
+                .then((response) => response.json())
+                .then((response) => {
+                    //alert( response.mensaje);
+                    if (response.respuesta.mensaje.includes('Error'))
+                    {
+                        toastr.error(response.respuesta.mensaje);
+                    }
+                    else {
+                        toastr.success(response.respuesta.mensaje);
+                    }
+                    //mensaje(response.respuesta.mensaje);
+                    addListaPersonal();
+                    limpiaForm();
+                })
+            }
+        }
+        function limpiaForm(){
+            let ge= document.getElementById('guardarPersonal');
+                ge.className='btn btn-outline-info bg-cyan';
+                ge.innerHTML = '<i class="fas fa-user-tie mr-2"></i>'+' Guardar';
+                ge.onclick=function (){
+                    guardaPersonal("N");
+                }
+
+          document.getElementById('id_personal_nombre').value="";
+          document.getElementById('id_personal_apelidos').value="";
+          document.getElementById('id_personal_correo').value="";
+          document.getElementById('id_personal_fecha_nacimiento').value="";
+          document.getElementById('id_personal_cp').value="";
+          document.getElementById('id_personal_calle').value="";
+          document.getElementById('id_personal_colonia').value="";
+          document.getElementById('id_personal_telefono').value="";
+          document.getElementById('id_personal_celular').value="";
+          document.getElementById('id_personal_ciudad').value="";
+          document.getElementById('id_personal_estado').value="";
+          document.getElementById('id_personal_pais').value="";
+          document.getElementById('id_personal_observaciones').value="";
+          document.getElementById('id_personal_estatus').value="A";
+          document.getElementById('id_personal_nombre').focus();
+        }
+        function dameDetallePersonal(id){
+            //alert(id.indexOf('_'));
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            let g_id=id.substr(id.indexOf('_')+1,4);
+                fetch('/ax_dameDetallePersonal',
+            {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                    'X-CSRFToken': csrftoken,
+                },
+                body: JSON.stringify({'id': g_id}) //JavaScript object of data to POST
+            })
+            .then((response) => response.json())
+            .then((responseData) => {
+                const campo = responseData.respuesta.detallePersonal[0];
+                document.getElementById('id_personal_nombre').value = campo.nombre;
+                document.getElementById('id_personal_apelidos').value = campo.apellidos;
+                document.getElementById('id_personal_correo').value = campo.correo;
+                document.getElementById('id_personal_sexo').value = campo.sexo;
+                const d = new Date(campo.fechaNat);
+                document.getElementById('id_personal_fecha_nacimiento').value = d.toISOString().split('T')[0];
+                document.getElementById('id_personal_especialidad').value = campo.especialidad;
+                document.getElementById('id_personal_cp').value = campo.cp;
+                document.getElementById('id_personal_calle').value = campo.calle;
+
+                let select = document.getElementById('id_personal_colonia');
+                let op = document.createElement('option');
+                op.value  = campo.colonia;
+                op.innerText = campo.colonia;
+                select.appendChild(op);
+                document.getElementById('id_personal_telefono').value = campo.telefono;
+                document.getElementById('id_personal_celular').value = campo.celular;
+                document.getElementById('id_personal_ciudad').value = campo.ciudad;
+                document.getElementById('id_personal_estado').value = campo.estado;
+                document.getElementById('id_personal_pais').value = campo.pais;
+                document.getElementById('id_personal_observaciones').value = campo.observaciones;
+                document.getElementById('id_personal_estatus').value = campo.estatus;
+
+                let ge= document.getElementById('guardarPersonal');
+                ge.className='btn btn-outline-info bg-gray';
+                ge.innerHTML = '<i class="fas fa-user-tie mr-2"></i>'+' Editar';
+                ge.onclick=function (){
+                    guardaPersonal("E");
+                }
+
+            })
+            .catch(error => console.warn(error));
+
+        }
+        function addListaPersonal(){
+            var csrftoken = $("[name=csrfmiddlewaretoken]").val();
+                fetch('/ax_getListaPersonal', {
+                  headers:{
+                      'Accept': 'application/json',
+                      'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                      'X-CSRFToken': csrftoken,
+                  },
+              })
+              .then(response => {
+                  return response.json() //Convert response to JSON
+              })
+              .then(data => {
+                  removerItems();
+                  for (var i = 0; i < data.respuesta.listaPersonal.length; i++) {
+                      let nombre = data.respuesta.listaPersonal[i].nombre;
+                      let apellidos = data.respuesta.listaPersonal[i].apellidos;
+                      //const  nombreCompleto = nombre+" "+apellidos;
+                      let iniciales = nombre.toString().substring(0,1)+apellidos.toString().substring(0,1);
+                      let especialidad = data.respuesta.listaPersonal[i].especialidad;
+
+                      let div = document.createElement('div');
+                      div.id = 'divInfoBox_'+data.respuesta.listaPersonal[i].id;
+                      div.onclick = function(){
+                        //alert('hola '+div.id);
+                        dameDetallePersonal(div.id);
+                        return false;
+                      };
+                      div.className = 'info-box';
+                      div.innerHTML = '<span class="info-box-icon bg-cyan">'+iniciales+'</span>' +
+                          '<div class="info-box-content">' +
+                          '<span class="info-box-text">'+nombre+'</span>' +
+                          '<span class="info-box-text">'+apellidos+'</span>' +
+                          '<span class="info-box-number">'+especialidad+'</span>' +
+                          '</div>';
+                      let lista = document.getElementById('listaPersonal');
+                      lista.appendChild(div);
+                  }
+
+              })
+        }
+        function clickPersonal(quien){
+            alert(quien);
+        }
+        function removerItems()
+        {
+            let lista = document.getElementById('listaPersonal');
+                  //alert(lista.childElementCount);
+          if (lista.childElementCount > 0) {
+              while(true){
+                    lista.removeChild(lista.childNodes.item(i));
+                   if (lista.childElementCount==0){
+                       break;
+                   }
+              }
+            }
         }
         function fguardaEspeci(esp) {
             var csrftoken = $("[name=csrfmiddlewaretoken]").val();
@@ -230,26 +397,75 @@
                 })
                 .then((response) => response.json())
                 .then((responseData) => {
+                    getEspecialidades();
                     return responseData;
                 })
                 .catch(error => console.warn(error));
         }
+        function limpiaSelect(sele){
+          var select = document.getElementById(sele),
+              length = select.options.length;
+          while(length--){
+            select.remove(length);
+          }
+        }
+        function getEspecialidades() {
+            //alert('trae especialidades');
+            var csrftoken = $("[name=csrfmiddlewaretoken]").val();
+                fetch('/ax_getespecialidad', {
+                  headers:{
+                      'Accept': 'application/json',
+                      'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                      'X-CSRFToken': csrftoken,
+                  },
+              })
+              .then(response => {
+                  return response.json() //Convert response to JSON
+              })
+              .then(data => {
+                  limpiaSelect("id_personal_especialidad");
+                  if (data!='') {
+                      for (var i = 0; i < data.respuesta.esp.length; i++) {
+                        var select = document.getElementById("id_personal_especialidad");
+                        var option = document.createElement("option");
+                        select.value = 1;
+                        option.text = data.respuesta.esp[i].especialidad;
+                        option.value = data.respuesta.esp[i].id;
+                        select.add(option);
+}
+                    }
+                  //alert(data.respuesta.esp[1].especialidad);
+                  //Perform actions with the response data from the view
+              })
+        }
         function insertarEspecialidad(){
-            var values = ["dog", "cat", "parrot", "rabbit"];
-          var select = document.createElement("select");
-          select.name = "sEspecialidades";
-          select.id = "sEspecialidades";
-          select.className='form-control'
-
-            for (const val of values) {
-                var option = document.createElement("option");
-                option.value = val;
-                option.text = val.charAt(0).toUpperCase() + val.slice(1);
-                select.appendChild(option);
-              }
+            let values;
+             getEspecialidades().then(response=>{
+                  alert(response);
+                  values=response['data'];
+            });
+            //alert(values);
+            //limpiar div
+            const parent = document.getElementById("divSelect")
+            while (parent.firstChild) {
+                parent.firstChild.remove()
+            }
+            var select = document.createElement("select");
+            select.name = "sEspecialidades";
+            select.id = "sEspecialidades";
+            select.className = 'form-control'
+            if (values!='') {
+                for (const val of values) {
+                    var option = document.createElement("option");
+                    option.value = val;
+                    option.text = val.charAt(0).toUpperCase() + val.slice(1);
+                    select.appendChild(option);
+                }
+            }
+            //alert("llegué");
             var label = document.createElement("label");
-          label.innerHTML = "Selecciona Especialidad: "
-          label.htmlFor = "Especialidades";
+            label.innerHTML = "Selecciona Especialidad: "
+            label.htmlFor = "Especialidades";
             document.getElementById("divSelect").appendChild(label).appendChild(select);
         }
         function guardaEspecialidad(){
@@ -258,7 +474,7 @@
             if (esp.value == ''){
                 toastr.warning('Falta especialidad...');
             }else{
-                alert(esp.value);
+                //alert(esp.value);
                 fguardaEspeci(esp.value).then(respuesta=>{
                     let mensaje = respuesta['respuesta'];
                     if (mensaje.indexOf('Error')!=-1)
@@ -279,17 +495,15 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="form-row">
+        <div class="form-row" style="padding: 10px 50px;">
             <div class="row">
-                <div class="col-md-6" id="divSelect">
-
-                </div>
-                <div class="col-md-6" >
-                    <label for="id_especialidad">Id</label>
-                    <input type="number" id="id_especialidad" readonly="readonly" maxlength="3" class="form-control"/>
-                    <label for="txt_descrip_especialidad">Especialidad</label>
-                    <input type="text" id="txt_descrip_especialidad" maxlength="40" class="form-control"/>
-                </div>
+              <label for="id_especialidad">Id</label>
+              <input type="number" id="id_especialidad" readonly="readonly" maxlength="3" class="form-control"/>
+            </div>  
+            <div class="row ">
+              <label for="txt_descrip_especialidad">Especialidad</label>
+              <input type="text" id="txt_descrip_especialidad" maxlength="40" class="form-control"/>
+                
             </div>
         </div>
       </div>
