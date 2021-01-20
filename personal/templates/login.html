@@ -1,0 +1,102 @@
+{% extends "genericos/layout.html" %}
+{% block content %}
+    {% load static %}
+    {% csrf_token %}
+  <!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="forms-container">
+        <section class="content">
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="signin-signup">
+                                <form action="" class="sign-in-form">
+                                    <h2 class="title">Login</h2>
+                                    <div class="row">
+                                        <i class="fas fa-envelope"></i>
+                                        <input type="text" class="form-control" placeholder="Correo Electrónico">
+                                    </div>
+                                    <div class="input-field">
+                                        <i class="fas fa-lock"></i>
+                                        <input type="password" class="form-control" placeholder="Contraseña">
+                                    </div>
+                                    <input type="submit" value="Entrar" id='btn_login' class="btn btn-outline-primary">
+                                    <p class="social-text">Ingresa con cuentas de redes sociales</p>
+                                    <div class="social-media">
+                                        <a href="#" class="social-icon">
+                                            <i class="fab fa-facebook"></i>
+                                        </a>
+                                        <a href="#" class="social-icon">
+                                            <i class="fab fa-twitter"></i>
+                                        </a>
+
+                                        <a href="#" class="social-icon">
+                                            <i class="fab fa-google"></i>
+                                        </a>
+                                        <a href="#" class="social-icon">
+                                            <i class="fab fa-linkedin-in"></i>
+                                        </a>
+
+                                    </div>
+                                </form>
+                                <form action="" class="sign-up-form">
+                                    <h2 class="title">Registro PLAi</h2>
+                                    <div class="input-field">
+                                        <i class="fas fa-user"></i>
+                                        <input type="text" placeholder="Nombres" maxlength="30">
+                                    </div>
+                                    <div class="input-field">
+                                        <i class="fas fa-user"></i>
+                                        <input type="text" placeholder="Apellidos" maxlength="30">
+                                    </div>
+                                    <div class="input-field">
+                                        <i class="fas fa-phone"></i>
+                                        <input type="text" placeholder="Teléfono">
+                                    </div>
+                                    <div class="input-field">
+                                        <i class="fas fa-envelope"></i>
+                                        <input type="text" placeholder="Correo">
+                                    </div>
+
+                                    <div class="input-field">
+                                        <i class="fas fa-lock"></i>
+                                        <input type="password" placeholder="Contraseña">
+                                    </div>
+                                    <div class="input-field">
+                                        <i class="fas fa-lock"></i>
+                                        <input type="password" placeholder="Repetir Contraseña">
+                                    </div>
+                                    <input type="submit" value="Guardar" class="btn solid">
+                                    <p class="social-text">Registro con cuentas de redes sociales</p>
+                                    <div class="social-media">
+                                        <a href="#" class="social-icon">
+                                            <i class="fab fa-facebook"></i>
+                                        </a>
+                                        <a href="#" class="social-icon">
+                                            <i class="fab fa-twitter"></i>
+                                        </a>
+
+                                        <a href="#" class="social-icon">
+                                            <i class="fab fa-google"></i>
+                                        </a>
+                                        <a href="#" class="social-icon">
+                                            <i class="fab fa-linkedin-in"></i>
+                                        </a>
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+</div>
+
+
+
+{% endblock content %}
