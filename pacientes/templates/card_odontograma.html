@@ -451,12 +451,13 @@
     }
 
     function agregarPiezaPresupusto() {
-        //alert("Agrega");
+        //Para agregar la pieza y sus caras
         let hayCaras = dameCaras();
 
-            let lbl = 'l' + document.getElementById('lblOdonto').innerText;
-            document.getElementById(lbl).style.backgroundColor = "#0069d9";
-            document.getElementById(lbl).style.color = '#ffffff';
+        let lbl = 'l' + document.getElementById('lblOdonto').innerText;
+        document.getElementById(lbl).style.backgroundColor = "#0069d9";
+        document.getElementById(lbl).style.color = '#ffffff';
+           // alert("Agrega");
     }
 
     function cerrarModal() {
@@ -518,48 +519,7 @@
 
 
     }
-    function guardaPresupuesto(){
-        var csrftoken = $("[name=csrfmiddlewaretoken]").val();
-       let  datos = [
-       ]
-        const id_paciente = {{ id }};
-        const id_doctor = '2';
-        var tabla = document.getElementById("tpresupuesto");
-       let ren={};
-        for (var i = 1; i < tabla.rows.length-1; i++) {
-            if (tabla.rows[i].cells.length) {
-                //alert(tabla.rows[i].cells[0].innerText);
-                ren = { id_paciente:id_paciente,
-                        id_doctor:id_doctor,
-                        id:tabla.rows[i].cells[0].innerText,
-                        tratamiento:tabla.rows[i].cells[1].innerText,
-                        precio : limpiaCadena(tabla.rows[i].cells[2].innerText),
-                        descuento:limpiaCadena(tabla.rows[i].cells[4].innerText),
-                        total: limpiaCadena(tabla.rows[i].cells[5].innerText)
-                }
-                datos.push(ren);
-            }
-        }
-        fetch('/ax_guardaPresupuesto',
-        {
-            method: "POST",
-            headers: {
-                'Content-type' : "text/html; charset=utf-8",
-                'Accept': 'application/json',
-                'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
-                'X-CSRFToken': csrftoken,
-            },
-            body: JSON.stringify({'presu_data': datos}) //JavaScript object of data to POST
-        })
-        .then((response) => response.json())
-        .then((response) => {
-            let mensaje = response.respuesta['respuesta'];
-                if (mensaje.indexOf('Error')!=-1)
-                {toastr.error(mensaje)}
-                else{toastr.success(mensaje);}
-        })
-        .catch(error => console.warn(error));
-    }
+
 
     function getPrecio(idTratamiento) {
         var csrftoken = $("[name=csrfmiddlewaretoken]").val();
@@ -580,13 +540,24 @@
             .catch(error => console.warn(error));
     }
     function agregatratamiento(){
-        alert('hola');
+        //alert('hola');  //agregar tratamientos
+        let tra = document.getElementById('sArticulos');
+        let option = tra.options[tra.selectedIndex].value;
+        let optionText = tra.options[tra.selectedIndex].text;
+
+        getPrecio(option).then(response => {
+
+            insertarTratamiento(option, optionText, response['respuesta'],);
+
+        });
+
     }
 
     function insertarTabla(cual,que){
         getPrecio(cual).then(response => {
-            insertarTratamiento(cual, que+'-'+damePieza(), response['respuesta'],);
+            insertarTratamiento(cual, que+'-'+damePieza(), response['respuesta'],1);
         });
+        agregarPiezaPresupusto();
         cerrarModal();
     }
     function damePieza(){
@@ -614,10 +585,12 @@
         calculaTotal();
     }
     function calculaTotal(){
+
         var table = document.getElementById('tpresupuesto');
         let sum_precio=0;
         let sum_descuento=0;
         let sum_total=0;
+
         for (var i = 1; i < table.rows.length-1; i++) {
           if (table.rows[i].cells.length) {
             var precio = (table.rows[i].cells[2].textContent.trim().substring(1,30));
@@ -634,16 +607,21 @@
             sum_total = sum_total + parseFloat(total);
           }
         }
+
         let total_descuento = sum_precio - sum_descuento;
         document.getElementById('lblPrecio').innerText='$ '+sum_precio;
         document.getElementById('lblDescuento').innerText = '$ '+sum_descuento;
         document.getElementById('lblTotal').innerText = '$ '+total_descuento;
     }
-    function insertarTratamiento(id_tratamiento, desc_tratam, precio) {
-        let caras = dameCaras();
-        let _caras = "";
-        if (caras.length>0)
-            {_caras='('+caras+")"}
+    function insertarTratamiento(id_tratamiento, desc_tratam, precio,sincaras=0) {
+       let _caras = "";
+        if (sincaras== 1) {
+            let caras = dameCaras();
+
+            if (caras.length > 0) {
+                _caras = '(' + caras + ")"
+            }
+        }
         var tableRef = document.getElementById('tpresupuesto');
         var newRow = tableRef.insertRow(1);
         var newCell = newRow.insertCell(-1);
@@ -691,11 +669,74 @@
         input.value = "X";
         input.setAttribute('onclick','borraRow(this)');
         newCell.appendChild(input);
-        agregarPiezaPresupusto();
+
 
         calculaTotal();
     }
+    function guardaPresupuesto(){
+        alert("hola es este");
+        var csrftoken = $("[name=csrfmiddlewaretoken]").val();
+        const id_paciente = {{ id }};
+        const id_doctor = '2';
+        let tablaTratamientos = document.getElementById('tpresupuesto');
+        let  datos = [
+        ]
+        let ren={};
+        for (var i = 1; i < tabla.rows.length-1; i++) {
+            if (tabla.rows[i].cells.length) {
+                //alert(tabla.rows[i].cells[0].innerText);
+                ren = { id_paciente:id_paciente,
+                        id_doctor:id_doctor,
+                        id:tabla.rows[i].cells[0].innerText,
+                        tratamiento:tabla.rows[i].cells[1].innerText,
+                        precio : limpiaCadena(tabla.rows[i].cells[2].innerText),
+                        descuento:limpiaCadena(tabla.rows[i].cells[4].innerText),
+                        total: limpiaCadena(tabla.rows[i].cells[5].innerText)
+                }
+                datos.push(ren);
+            }
+        }
+    }
+      function dguardaPresupuesto(){
 
+       let  datos = [
+       ]
+
+       let ren={};
+        for (var i = 1; i < tabla.rows.length-1; i++) {
+            if (tabla.rows[i].cells.length) {
+                //alert(tabla.rows[i].cells[0].innerText);
+                ren = { id_paciente:id_paciente,
+                        id_doctor:id_doctor,
+                        id:tabla.rows[i].cells[0].innerText,
+                        tratamiento:tabla.rows[i].cells[1].innerText,
+                        precio : limpiaCadena(tabla.rows[i].cells[2].innerText),
+                        descuento:limpiaCadena(tabla.rows[i].cells[4].innerText),
+                        total: limpiaCadena(tabla.rows[i].cells[5].innerText)
+                }
+                datos.push(ren);
+            }
+        }
+        fetch('/ax_guardaPresupuesto',
+        {
+            method: "POST",
+            headers: {
+                'Content-type' : "text/html; charset=utf-8",
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                'X-CSRFToken': csrftoken,
+            },
+            body: JSON.stringify({'presu_data': datos}) //JavaScript object of data to POST
+        })
+        .then((response) => response.json())
+        .then((response) => {
+            let mensaje = response.respuesta['respuesta'];
+                if (mensaje.indexOf('Error')!=-1)
+                {toastr.error(mensaje)}
+                else{toastr.success(mensaje);}
+        })
+        .catch(error => console.warn(error));
+    }
 </script>
 
 <!-- Modal -->

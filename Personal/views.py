@@ -1,18 +1,72 @@
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
 from django.core import serializers
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 import json
 # Create your views here.
 from django.views.decorators.csrf import csrf_protect
 
-from personal.models import Especialidad,Doctores
+
+from personal.models import Especialidad, Doctores, UsuarioForm
+
+
+def logout(request):
+    logout(request)
+    return HttpResponseRedirect('/')
+
+def loginform(request):
+    if request.method == 'POST':
+        nombreusuario = request.POST['id_login_usuario']
+        contra = request.POST['id_login_contra']
+        usuario = authenticate(request, username=nombreusuario, password=contra)
+        if usuario is not None:
+            login(request, usuario)
+            current_user = request.user
+            #request.session['userimagen'] = perfilusuario.imagen.url
+            return HttpResponseRedirect('/')
+        else:
+            messages.error(request, "Error Usuario o Contraseña")
+
+            return HttpResponseRedirect('/loginform')
+
+
+    return render(request, 'login.html')
 
 
 def personal(request):  # usuario no activo mandar al login
     return render(request, "personal.html")
 
-def login(request):  # usuario no activo mandar al login
-    return render(request, "login.html")
+
+
+
+def ax_login(request):  # usuario no activo mandar al login
+    resp = ''
+    if request.method == 'POST' and request.is_ajax:
+        row = json.loads(request.body)
+        usuario = row['usuario']
+        contra = row['contra']
+        usurio = authenticate(request,username=usuario, password=contra)
+        if usurio is None:
+            resp='Credenciales no válidas'
+            print(resp)
+        elif usurio is not None and not usurio.is_active:
+            resp = 'La cuenta ya está activa'
+            print(resp)
+        elif usurio:
+            login(request, usuario,backend='django.contrib.auth.backends.ModelBackend')
+            resp='Usuario logeoado'
+            print(resp)
+            return HttpResponseRedirect('/')
+        else:
+            resp = 'Credenciales no válidas'
+            print(resp)
+
+    return JsonResponse({
+        'respuesta': {
+            'mensaje': resp
+        }
+    })
 
 
 @csrf_protect

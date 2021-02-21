@@ -1,102 +1,97 @@
 {% extends "genericos/layout.html" %}
 {% block content %}
-    {% load static %}
-    {% csrf_token %}
+{% load static %}
+
   <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    <div class="forms-container">
-        <section class="content">
-            <div class="container-fluid">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="signin-signup">
-                                <form action="" class="sign-in-form">
-                                    <h2 class="title">Login</h2>
-                                    <div class="row">
-                                        <i class="fas fa-envelope"></i>
-                                        <input type="text" class="form-control" placeholder="Correo Electrónico">
-                                    </div>
-                                    <div class="input-field">
-                                        <i class="fas fa-lock"></i>
-                                        <input type="password" class="form-control" placeholder="Contraseña">
-                                    </div>
-                                    <input type="submit" value="Entrar" id='btn_login' class="btn btn-outline-primary">
-                                    <p class="social-text">Ingresa con cuentas de redes sociales</p>
-                                    <div class="social-media">
-                                        <a href="#" class="social-icon">
-                                            <i class="fab fa-facebook"></i>
-                                        </a>
-                                        <a href="#" class="social-icon">
-                                            <i class="fab fa-twitter"></i>
-                                        </a>
+  	<section class="content">
 
-                                        <a href="#" class="social-icon">
-                                            <i class="fab fa-google"></i>
-                                        </a>
-                                        <a href="#" class="social-icon">
-                                            <i class="fab fa-linkedin-in"></i>
-                                        </a>
+        <div class="container h-100">
 
-                                    </div>
-                                </form>
-                                <form action="" class="sign-up-form">
-                                    <h2 class="title">Registro PLAi</h2>
-                                    <div class="input-field">
-                                        <i class="fas fa-user"></i>
-                                        <input type="text" placeholder="Nombres" maxlength="30">
-                                    </div>
-                                    <div class="input-field">
-                                        <i class="fas fa-user"></i>
-                                        <input type="text" placeholder="Apellidos" maxlength="30">
-                                    </div>
-                                    <div class="input-field">
-                                        <i class="fas fa-phone"></i>
-                                        <input type="text" placeholder="Teléfono">
-                                    </div>
-                                    <div class="input-field">
-                                        <i class="fas fa-envelope"></i>
-                                        <input type="text" placeholder="Correo">
-                                    </div>
+            <div class="d-flex justify-content-center ">
 
-                                    <div class="input-field">
-                                        <i class="fas fa-lock"></i>
-                                        <input type="password" placeholder="Contraseña">
-                                    </div>
-                                    <div class="input-field">
-                                        <i class="fas fa-lock"></i>
-                                        <input type="password" placeholder="Repetir Contraseña">
-                                    </div>
-                                    <input type="submit" value="Guardar" class="btn solid">
-                                    <p class="social-text">Registro con cuentas de redes sociales</p>
-                                    <div class="social-media">
-                                        <a href="#" class="social-icon">
-                                            <i class="fab fa-facebook"></i>
-                                        </a>
-                                        <a href="#" class="social-icon">
-                                            <i class="fab fa-twitter"></i>
-                                        </a>
+                <div class="user_card">
 
-                                        <a href="#" class="social-icon">
-                                            <i class="fab fa-google"></i>
-                                        </a>
-                                        <a href="#" class="social-icon">
-                                            <i class="fab fa-linkedin-in"></i>
-                                        </a>
+                    <div class="d-flex justify-content-center mb-3 mt-3">
+                        <div class="brand_logo_container">
+                            <img src="{% static  '/img/logos/MEB64.png'%}" class="brand_logo" alt="Logo">
+                            <h3>Login</h3>
+                        </div>
+                    </div>
 
+                    <div class="row mt-2" style="width: 300px;">
+
+                        <form action="" method="post">
+                            {% csrf_token %}
+                             {% if messages %}
+                                {% for mensaje in messages %}
+                                    <div class="alert alert-{{ mensaje.tags }}" role="alert">
+                                        {{ mensaje}}
                                     </div>
-                                </form>
+                                {% endfor %}
+                            {% endif %}
+                            <div class="input-group mb-3">
+                                <label for="id_login_usuario" class="input-group-text"><i class="fas fa-user"></i></label>
+                                <input type="text" name="id_login_usuario" id="id_login_usuario" class="form-control input_user" value="" placeholder="Usuario">
                             </div>
+                            <div class="input-group mb-2">
+                                <label for="id_login_contra" class="input-group-text"><i class="fas fa-key"></i></label>
+                                <input type="password" name="id_login_contra" id="id_login_contra" class="form-control input_pass" value="" placeholder="Contraseña">
+
+                            </div>
+                            <button  class="btn btn-outline-primary" >Entrar</button>
+                        </form>
+                    </div>
+
+
+                    <div class="mt-4">
+                        <div class="d-flex justify-content-center links">
+                            ¿No tienes cuenta? <a href="crear_cuenta" class="btn btn-link ml-2">Crear cuenta</a>
+                        </div>
+                        <div class="d-flex justify-content-center links">
+                            <a href="olvidacontra">¿Olvidaste tu contraseña?</a>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-
-    </div>
-
+        </div>
+    </section>
+<!--
+    <script>
+        function login(){
+            const usuario = document.getElementById('id_login_usuario').value;
+            const contra = document.getElementById('id_login_contra').value;
+            if (usuario==''){
+                toastr.error('Falta usuario...');return;
+            } else if (contra==''){
+                toastr.error('Falta contraseña');return;
+            }else{
+                const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+                fetch('/ax_login',
+                    {
+                        method: "POST",
+                        headers: {
+                            'Accept': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                            'X-CSRFToken': csrftoken,
+                        },
+                        body: JSON.stringify({'usuario':usuario,'contra':contra})
+                    })
+                    .then((response) => response.json())
+                    .then((response) => {
+                        //alert( response.mensaje);
+                        if (response.respuesta.mensaje.includes('Error'))
+                        {
+                            toastr.error(response.respuesta.mensaje);
+                        }
+                        else {
+                            toastr.success(response.respuesta.mensaje);
+                        }
+                        //mensaje(response.respuesta.mensaje);
+                    })
+            }
+            //alert("login");
+        }
+    </script>-->
 </div>
-
-
-
 {% endblock content %}

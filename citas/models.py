@@ -29,7 +29,7 @@ python manage.py migrate --fake-initial
 # Create your models here.
 
 class Cita(models.Model):  # las citas de guardan con relacio paciente-cita si no exite el paciente
-    id = models.AutoField(primary_key=True)  # se guardan sólo nombre apellidos correo telefono
+    # se guardan sólo nombre apellidos correo telefono
     id_paciente = models.ForeignKey(Paciente, on_delete=models.PROTECT)
     fecha = models.DateField()
     hora = models.CharField(max_length=10)

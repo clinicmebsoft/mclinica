@@ -134,6 +134,10 @@
                                             <option value="C">Cancelado</option>
                                         </select>
                                     </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="icb_crearUsuario">Crear Usuario</label>
+                                        <input type="checkbox" id="icb_crearUsuario" onclick="ponCreaUsario()">
+                                    </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="input-field col-md-12">
@@ -150,7 +154,7 @@
              	<div class="card-footer text-right">
                     <button class="btn btn-outline-secondary mr-5" onclick="addListaPersonal();"><i class="fas fa-list"></i> Cargar Lista</button>
                     <button class="btn btn-outline-primary mr-5" onclick="limpiaForm();"><i class="fas fa-broom"></i> Limpia Formulario</button>
-                    <button id="guardarPersonal" class="btn btn-outline-info bg-cyan" onclick="guardaPersonal('N');"><i class="fas fa-user-tie"></i> Agregar</button>
+                    <button id="guardarPersonal" class="btn btn-outline-info bg-cyan"><i class="fas fa-user-tie"></i> Agregar</button>
                 </div>
            </div>
         </div>
@@ -159,24 +163,33 @@
     <div id="mensaje"></div>
  </div>
     <script>
+        function ponCreaUsario()
+        {
 
+        }
         document.addEventListener("DOMContentLoaded", () => {
+            let ge= document.getElementById('guardarPersonal');
+                ge.className='btn btn-outline-info bg-cyan';
+                ge.innerHTML = '<i class="fas fa-user-tie mr-2"></i>'+' Guardar';
+                ge.onclick=function (){
+                    guardaPersonal("N");
+                }
           getEspecialidades();
           addListaPersonal();
         });
         function  especialidades(){
-            
             $('#formEspecialidad').modal({keyboard: false})
             $('#formEspecialidad').modal();
         }
         function guardaPersonal(tipo){
+            //alert(tipo);
             var csrftoken = $("[name=csrfmiddlewaretoken]").val();
             const nombre = document.getElementById('id_personal_nombre');
             const apellidos = document.getElementById('id_personal_apelidos');
             const correo = document.getElementById('id_personal_correo');
             const fechaNat  = document.getElementById('id_personal_fecha_nacimiento');
             const selsexo = document.getElementById('id_personal_sexo');
-            const sexo = selsexo.options[selsexo.selectedIndex].text;
+            const sexo = selsexo.options[selsexo.selectedIndex].value;
             const selespecialidad = document.getElementById('id_personal_especialidad');
             const especialidad=selespecialidad.options[selespecialidad.selectedIndex].value;
             const cp = document.getElementById('id_personal_cp');

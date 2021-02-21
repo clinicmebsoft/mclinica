@@ -11,14 +11,20 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-
+from django.contrib.messages import constants as messages
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from rest_framework import authentication
+
+
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 #para el manejo de acentos y eñes
 os.environ["PYTHONIOENCODING"] = "utf-8"
 
-
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+}
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
@@ -47,6 +53,7 @@ INSTALLED_APPS = [
     'proveedores.apps.ProveedoresConfig',
     'djrichtextfield',
     'rest_framework',
+    'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -66,6 +73,12 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'mebClinic.urls'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+      'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
 
 TEMPLATES = [
     {
@@ -102,6 +115,8 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
+
 
 
 # Password validation

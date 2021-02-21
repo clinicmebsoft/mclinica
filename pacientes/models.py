@@ -21,7 +21,7 @@ class Paciente(models.Model):
         ('Femenino', 'Femenino'),
         ('No definido', 'No definido')
     )
-    id = models.AutoField(primary_key=True)
+    doctor = models.ForeignKey(Doctores,models.PROTECT)
     nombre = models.CharField(max_length=30)
     apellidos = models.CharField(max_length=50)
     correo = models.EmailField(max_length=100)
@@ -61,7 +61,7 @@ class PacienteForm(ModelForm):
 
 
 class Consentimiento(models.Model):
-    paciente = models.ForeignKey(Paciente, on_delete=models.PROTECT)
+    id_paciente = models.ForeignKey(Paciente, on_delete=models.PROTECT)
     documento = RichTextField(blank=True)
     obervaciones = models.TextField()
     fecha_modificacion = models.DateTimeField(auto_now=True)
@@ -82,7 +82,6 @@ class HistoriaClinica(models.Model):
         ("Regular", "Regular"),
         ("Pendiente", "Pendiente")
     )
-    id = models.AutoField(primary_key=True)
     id_paciente = models.ForeignKey(Paciente, on_delete=models.PROTECT)
     originario = models.CharField(max_length=50, blank=True, default='')
     medico_particular = models.CharField(max_length=50, blank=True, default='')

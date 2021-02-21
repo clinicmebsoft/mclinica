@@ -1,8 +1,12 @@
 from datetime import datetime
 
+from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
+from django.forms import ModelForm
+
+
 
 class Especialidad(models.Model):
     especialidad = models.CharField(max_length=80)
@@ -18,7 +22,7 @@ class Doctores(models.Model):
     correo = models.CharField(max_length=100,default='')
     fecha_nat = models.DateTimeField(default=datetime.now)
     sexo = models.CharField(max_length=12,default='')
-    especialidad = models.ForeignKey(Especialidad,on_delete=models.CASCADE)
+    especialidad = models.ForeignKey(Especialidad,on_delete=models.PROTECT)
     cp = models.CharField(max_length=6,default='')
     callenum =models.CharField(max_length=50,default='')
     colonia =models.CharField(max_length=40,default='')
@@ -33,3 +37,9 @@ class Doctores(models.Model):
 
     def _str__(self):
         return self.id
+
+class UsuarioForm(ModelForm):
+    class Meta:
+        model = User
+     # estos campos son importantes definirlos para que los procese
+        fields = ['username', 'email', 'password', 'first_name', 'last_name']

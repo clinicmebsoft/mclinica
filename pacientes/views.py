@@ -1,6 +1,7 @@
 import datetime
 
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect, response
 from django.shortcuts import render, get_object_or_404
@@ -17,8 +18,11 @@ import json
 # Create your views here.
 
 
-
 def index(request):  # usuario no activo mandar al login
+    medicos = Doctores.objects.all()
+    context = {
+
+    }
     return render(request, "paciente.html")
 
 
@@ -204,7 +208,7 @@ def ajax_buscapacientes(request):
         }
     })
 
-
+@login_required(login_url='/loginform')
 def pacientes(request, id):
     paciente = Paciente.objects.filter(id=id)
     existePac = 0
@@ -230,6 +234,7 @@ def ajax_guardapaciente(request):
             resp = "Ya existe un paciente con ese nombre y correo"
         else:
             # print('nombre' + str(nombre))
+
             paciente.nombre = str.upper(nombre)
             paciente.apellidos = str.upper(apellidos)
             paciente.correo = correo
