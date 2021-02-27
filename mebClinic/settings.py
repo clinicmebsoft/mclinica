@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'proveedores.apps.ProveedoresConfig',
     'djrichtextfield',
     'rest_framework',
+
     'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
